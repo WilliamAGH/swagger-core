@@ -26,29 +26,32 @@ public class Ticket3365Test extends SwaggerTestBase {
     public void testTicket3365() {
         Schema model = context.resolve(new AnnotatedType(ExampleWithJson.class));
         assertNotNull(model);
-        SerializationMatchers.assertEqualsToYaml(model, "required:\n" +
-                "- param1\n" +
-                "type: object\n" +
-                "properties:\n" +
-                "  param1:\n" +
-                "    title: Cron formatted invoice schedule\n" +
-                "    type: object\n" +
-                "    example:\n" +
-                "      type: array\n" +
-                "      items:\n" +
-                "        type: string\n" +
-                "        format: byte");
+        SerializationMatchers.assertEqualsToYaml(model, """
+                required:
+                - param1
+                type: object
+                properties:
+                  param1:
+                    title: Cron formatted invoice schedule
+                    type: object
+                    example:
+                      type: array
+                      items:
+                        type: string
+                        format: byte""");
 
         model = context.resolve(new AnnotatedType(ExampleStartingWithInteger.class));
         assertNotNull(model);
-        SerializationMatchers.assertEqualsToYaml(model, "required:\n" +
-                "- param1\n" +
-                "type: object\n" +
-                "properties:\n" +
-                "  param1:\n" +
-                "    title: Cron formatted invoice schedule\n" +
-                "    type: string\n" +
-                "    example: 0 0 5 * *\n");
+        SerializationMatchers.assertEqualsToYaml(model, """
+                required:
+                - param1
+                type: object
+                properties:
+                  param1:
+                    title: Cron formatted invoice schedule
+                    type: string
+                    example: 0 0 5 * *
+                """);
     }
 
     static class ExampleStartingWithInteger  {

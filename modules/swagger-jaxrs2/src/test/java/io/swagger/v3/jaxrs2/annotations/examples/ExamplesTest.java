@@ -347,96 +347,97 @@ public class ExamplesTest extends AbstractAnnotationTest {
         int start = openApiYAML.indexOf("/test:");
         int end = openApiYAML.length() - 1;
         String extractedYAML = openApiYAML.substring(start, end);
-        String expectedYAML = "/test:\n" +
-                "    post:\n" +
-                "      description: \"subscribes a client to updates relevant to the requestor's account,\\\n" +
-                "        \\ as identified by the input token.  The supplied url will be used as the\\\n" +
-                "        \\ delivery address for response payloads\"\n" +
-                "      operationId: subscribe\n" +
-                "      parameters:\n" +
-                "      - name: subscriptionId\n" +
-                "        in: path\n" +
-                "        required: true\n" +
-                "        style: simple\n" +
-                "        schema:\n" +
-                "          $ref: \"#/components/schemas/SubscriptionResponse\"\n" +
-                "        examples:\n" +
-                "          subscriptionId_1:\n" +
-                "            summary: Subscription number 12345\n" +
-                "            description: subscriptionId_1\n" +
-                "            value: 12345\n" +
-                "            externalValue: Subscription external value 1\n" +
-                "          subscriptionId_2:\n" +
-                "            summary: Subscription number 54321\n" +
-                "            description: subscriptionId_2\n" +
-                "            value: 54321\n" +
-                "            externalValue: Subscription external value 2\n" +
-                "        example: example\n" +
-                "      requestBody:\n" +
-                "        description: Created user object\n" +
-                "        content:\n" +
-                "          '*/*':\n" +
-                "            schema:\n" +
-                "              type: string\n" +
-                "              description: the generated UUID\n" +
-                "              format: uuid\n" +
-                "              readOnly: true\n" +
-                "              example: Schema example\n" +
-                "            examples:\n" +
-                "              Default Response:\n" +
-                "                summary: Subscription Response Example\n" +
-                "                description: Default Response\n" +
-                "                value: SubscriptionResponse\n" +
-                "                externalValue: Subscription Response value 1\n" +
-                "        required: true\n" +
-                "      responses:\n" +
-                "        default:\n" +
-                "          description: test description\n" +
-                "          content:\n" +
-                "            '*/*':\n" +
-                "              schema:\n" +
-                "                type: string\n" +
-                "                description: the generated UUID\n" +
-                "                format: uuid\n" +
-                "                readOnly: true\n" +
-                "                example: Schema example\n" +
-                "              examples:\n" +
-                "                Default Response:\n" +
-                "                  summary: Subscription Response Example\n" +
-                "                  description: Default Response\n" +
-                "                  value: SubscriptionResponse\n" +
-                "                  externalValue: Subscription Response value 1\n" +
-                "components:\n" +
-                "  schemas:\n" +
-                "    SubscriptionResponse:\n" +
-                "      type: object\n" +
-                "      properties:\n" +
-                "        subscriptionId:\n" +
-                "          type: string\n" +
-                "    User:\n" +
-                "      type: object\n" +
-                "      properties:\n" +
-                "        id:\n" +
-                "          type: integer\n" +
-                "          format: int64\n" +
-                "        username:\n" +
-                "          type: string\n" +
-                "        firstName:\n" +
-                "          type: string\n" +
-                "        lastName:\n" +
-                "          type: string\n" +
-                "        email:\n" +
-                "          type: string\n" +
-                "        password:\n" +
-                "          type: string\n" +
-                "        phone:\n" +
-                "          type: string\n" +
-                "        userStatus:\n" +
-                "          type: integer\n" +
-                "          description: User Status\n" +
-                "          format: int32\n" +
-                "      xml:\n" +
-                "        name: User";
+        String expectedYAML = """
+                /test:
+                    post:
+                      description: "subscribes a client to updates relevant to the requestor's account,\\
+                        \\ as identified by the input token.  The supplied url will be used as the\\
+                        \\ delivery address for response payloads"
+                      operationId: subscribe
+                      parameters:
+                      - name: subscriptionId
+                        in: path
+                        required: true
+                        style: simple
+                        schema:
+                          $ref: "#/components/schemas/SubscriptionResponse"
+                        examples:
+                          subscriptionId_1:
+                            summary: Subscription number 12345
+                            description: subscriptionId_1
+                            value: 12345
+                            externalValue: Subscription external value 1
+                          subscriptionId_2:
+                            summary: Subscription number 54321
+                            description: subscriptionId_2
+                            value: 54321
+                            externalValue: Subscription external value 2
+                        example: example
+                      requestBody:
+                        description: Created user object
+                        content:
+                          '*/*':
+                            schema:
+                              type: string
+                              description: the generated UUID
+                              format: uuid
+                              readOnly: true
+                              example: Schema example
+                            examples:
+                              Default Response:
+                                summary: Subscription Response Example
+                                description: Default Response
+                                value: SubscriptionResponse
+                                externalValue: Subscription Response value 1
+                        required: true
+                      responses:
+                        default:
+                          description: test description
+                          content:
+                            '*/*':
+                              schema:
+                                type: string
+                                description: the generated UUID
+                                format: uuid
+                                readOnly: true
+                                example: Schema example
+                              examples:
+                                Default Response:
+                                  summary: Subscription Response Example
+                                  description: Default Response
+                                  value: SubscriptionResponse
+                                  externalValue: Subscription Response value 1
+                components:
+                  schemas:
+                    SubscriptionResponse:
+                      type: object
+                      properties:
+                        subscriptionId:
+                          type: string
+                    User:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          format: int64
+                        username:
+                          type: string
+                        firstName:
+                          type: string
+                        lastName:
+                          type: string
+                        email:
+                          type: string
+                        password:
+                          type: string
+                        phone:
+                          type: string
+                        userStatus:
+                          type: integer
+                          description: User Status
+                          format: int32
+                      xml:
+                        name: User""";
         assertEquals(extractedYAML, expectedYAML);
     }
 

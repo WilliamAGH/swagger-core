@@ -14,17 +14,18 @@ public class Ticket3900Test extends SwaggerTestBase {
         final ModelResolver modelResolver = new ModelResolver(mapper()).openapi31(true);
         final ModelConverterContextImpl context = new ModelConverterContextImpl(modelResolver);
         io.swagger.v3.oas.models.media.Schema model = context.resolve(new AnnotatedType(Route.class));
-        SerializationMatchers.assertEqualsToYaml31(model, "type: object\n" +
-                "properties:\n" +
-                "  startPoint:\n" +
-                "    $ref: '#/components/schemas/GeoPoint'\n" +
-                "    description: Point where the route begins\n" +
-                "  intermediatePoint:\n" +
-                "    $ref: '#/components/schemas/GeoPoint'\n" +
-                "    description: Intermediate point of the route\n" +
-                "  endPoint:\n" +
-                "    $ref: '#/components/schemas/GeoPoint'\n" +
-                "    description: Point where the route ends");
+        SerializationMatchers.assertEqualsToYaml31(model, """
+                type: object
+                properties:
+                  startPoint:
+                    $ref: '#/components/schemas/GeoPoint'
+                    description: Point where the route begins
+                  intermediatePoint:
+                    $ref: '#/components/schemas/GeoPoint'
+                    description: Intermediate point of the route
+                  endPoint:
+                    $ref: '#/components/schemas/GeoPoint'
+                    description: Point where the route ends""");
     }
 
     private static class GeoPoint {

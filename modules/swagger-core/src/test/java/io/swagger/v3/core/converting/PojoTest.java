@@ -34,12 +34,13 @@ public class PojoTest {
     @Test
     public void testModelWithTitle() {
 
-        String yaml = "ClassWithTitle:\n" +
-                "  type: object\n" +
-                "  title: 'My Pojo'\n" +
-                "  properties:\n" +
-                "    id:\n" +
-                "      type: string";
+        String yaml = """
+                ClassWithTitle:
+                  type: object
+                  title: 'My Pojo'
+                  properties:
+                    id:
+                      type: string""";
         SerializationMatchers.assertEqualsToYaml(read(ClassWithTitle.class), yaml);
 
     }
@@ -59,12 +60,13 @@ public class PojoTest {
 
     @Test(description = "The @Schema annotation will only be adding additional sugar on the property")
     public void testModelWithAnnotatedPrivateMember() {
-        String yaml = "ClassWithAnnotatedProperty:\n" +
-                "  type: object\n" +
-                "  properties:\n" +
-                "    id:\n" +
-                "      description: 'a long description for this property'\n" +
-                "      type: string";
+        String yaml = """
+                ClassWithAnnotatedProperty:
+                  type: object
+                  properties:
+                    id:
+                      description: 'a long description for this property'
+                      type: string""";
         SerializationMatchers.assertEqualsToYaml(read(ClassWithAnnotatedProperty.class), yaml);
 
     }
@@ -84,12 +86,13 @@ public class PojoTest {
 
     @Test(description = "The @Schema annotation will only be adding additional sugar on the property")
     public void testModelWithAnnotatedPublicMethod() {
-        String yaml = "ClassWithAnnotatedMethod:\n" +
-                "  type: object\n" +
-                "  properties:\n" +
-                "    id:\n" +
-                "      description: 'a long description for this property'\n" +
-                "      type: string";
+        String yaml = """
+                ClassWithAnnotatedMethod:
+                  type: object
+                  properties:
+                    id:
+                      description: 'a long description for this property'
+                      type: string""";
         SerializationMatchers.assertEqualsToYaml(read(ClassWithAnnotatedMethod.class), yaml);
     }
 
@@ -109,14 +112,15 @@ public class PojoTest {
     @Test(description = "The @Schema annotation will override the type of the actual parameter")
     public void testModelWithOverriddenMemberType() {
 
-        String yaml = "ClassWithOverriddenMemberType:\n" +
-                "  type: object\n" +
-                "  properties:\n" +
-                "    id:\n" +
-                "      description: 'we are declaring a string implementation must be a valid long integer, even though " +
-                "the model backs it with a String implementation'\n" +
-                "      type: integer\n" +
-                "      format: int64";
+        String yaml = """
+                ClassWithOverriddenMemberType:
+                  type: object
+                  properties:
+                    id:
+                      description: 'we are declaring a string implementation must be a valid long integer, even though \
+                the model backs it with a String implementation'
+                      type: integer
+                      format: int64""";
         SerializationMatchers.assertEqualsToYaml(read(ClassWithOverriddenMemberType.class), yaml);
     }
 
@@ -136,12 +140,13 @@ public class PojoTest {
 
     @Test(description = "@Schema is completely overriding the type for this model")
     public void testModelWithAlternateRepresentation() {
-        String yaml = "ClassWithAnnotatedMethod:\n" +
-                "  type: object\n" +
-                "  properties:\n" +
-                "    id:\n" +
-                "      description: 'a long description for this property'\n" +
-                "      type: string";
+        String yaml = """
+                ClassWithAnnotatedMethod:
+                  type: object
+                  properties:
+                    id:
+                      description: 'a long description for this property'
+                      type: string""";
         SerializationMatchers.assertEqualsToYaml(read(ClassWithAlternateRepresentation.class), yaml);
     }
 
@@ -161,42 +166,46 @@ public class PojoTest {
     @Test(description = "@Schema is allowing multiple definition interfaces to represent this model")
     public void testModelWithMultipleRepresentations() {
 
-        String yaml = "anyOf:\n" +
-                "- $ref: \"#/components/schemas/UserObject\"\n" +
-                "- $ref: \"#/components/schemas/EmployeeObject\"\n" +
-                "type: object\n" +
-                "properties:\n" +
-                "  id:\n" +
-                "    type: string\n" +
-                "    format: uuid\n" +
-                "  name:\n" +
-                "    type: string\n" +
-                "  department:\n" +
-                "    type: string\n" +
-                "required:\n" +
-                "  - id";
+        String yaml = """
+                anyOf:
+                - $ref: "#/components/schemas/UserObject"
+                - $ref: "#/components/schemas/EmployeeObject"
+                type: object
+                properties:
+                  id:
+                    type: string
+                    format: uuid
+                  name:
+                    type: string
+                  department:
+                    type: string
+                required:
+                  - id""";
 
-        String yamlUser = "type: object\n" +
-                "description: 'A User Object'\n" +
-                "required:\n" +
-                "  - id\n" +
-                "properties:\n" +
-                "  id:\n" +
-                "    type: string\n" +
-                "    format: uuid\n" +
-                "  name:\n" +
-                "    type: string\n";
+        String yamlUser = """
+                type: object
+                description: 'A User Object'
+                required:
+                  - id
+                properties:
+                  id:
+                    type: string
+                    format: uuid
+                  name:
+                    type: string
+                """;
 
-        String yamlEmployee = "type: object\n" +
-                "description: An Employee Object\n" +
-                "required:\n" +
-                "  - department\n" +
-                "properties:\n" +
-                "  id:\n" +
-                "    type: string\n" +
-                "    format: email\n" +
-                "  department:\n" +
-                "    type: string";
+        String yamlEmployee = """
+                type: object
+                description: An Employee Object
+                required:
+                  - department
+                properties:
+                  id:
+                    type: string
+                    format: email
+                  department:
+                    type: string""";
 
         final Map<String, io.swagger.v3.oas.models.media.Schema> schemas = readAll(UberObject.class);
         assertEquals(schemas.size(), 3);
@@ -247,13 +256,14 @@ public class PojoTest {
     @Test(description = "Shows how @Schema can be used to allow only certain data formats")
     public void testModelWithSpecificFormat() {
 
-        String yaml = "AuthorizedUser:\n" +
-                "  type: object\n" +
-                "  properties:\n" +
-                "    id:\n" +
-                "      type: string\n" +
-                "      description: 'A valid user social security'\n" +
-                "      pattern: '^\\d{3}-?\\d{2}-?\\d{4}$'";
+        String yaml = """
+                AuthorizedUser:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      description: 'A valid user social security'
+                      pattern: '^\\d{3}-?\\d{2}-?\\d{4}$'""";
         SerializationMatchers.assertEqualsToYaml(read(ClassWithIdConstraints.class), yaml);
     }
 
@@ -274,17 +284,20 @@ public class PojoTest {
     @Test(description = "Shows how to restrict a particular schema")
     public void testExcludeSchema() {
 
-        String yaml = "type: object\n" +
-                "description: We don't store social security numbers here!\n" +
-                "not:\n" +
-                "  $ref: \"#/components/schemas/AuthorizedUser\"";
+        String yaml = """
+                type: object
+                description: We don't store social security numbers here!
+                not:
+                  $ref: "#/components/schemas/AuthorizedUser"\
+                """;
 
-        String yamlUser = "type: object\n" +
-                "properties:\n" +
-                "  id:\n" +
-                "    type: string\n" +
-                "    description: 'A valid user social security'\n" +
-                "    pattern: '^\\d{3}-?\\d{2}-?\\d{4}$'";
+        String yamlUser = """
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: 'A valid user social security'
+                    pattern: '^\\d{3}-?\\d{2}-?\\d{4}$'""";
         Map<String, io.swagger.v3.oas.models.media.Schema> map = readAll(ArbitraryDataReceiver.class);
         Yaml.prettyPrint(map);
         SerializationMatchers.assertEqualsToYaml(map.get("ArbitraryDataReceiver"), yaml);
@@ -299,8 +312,9 @@ public class PojoTest {
     @Test(description = "Shows how to override a definition with a schema reference")
     public void testSchemaReference() {
 
-        String yaml = "NotAPet:\n" +
-                "  $ref: http://petstore.swagger.io/v2/swagger.json#/definitions/Tag";
+        String yaml = """
+                NotAPet:
+                  $ref: http://petstore.swagger.io/v2/swagger.json#/definitions/Tag""";
         SerializationMatchers.assertEqualsToYaml(read(NotAPet.class), yaml);
 
     }
@@ -312,11 +326,12 @@ public class PojoTest {
     @Test(description = "Shows how to add a reference on a property")
     public void testPropertySchemaReference() {
 
-        String yaml = "ModelWithSchemaPropertyReference:\n" +
-                "  type: object\n" +
-                "  properties:\n" +
-                "    notATag:\n" +
-                "      $ref: 'http://petstore.swagger.io/v2/swagger.json#/definitions/Tag'";
+        String yaml = """
+                ModelWithSchemaPropertyReference:
+                  type: object
+                  properties:
+                    notATag:
+                      $ref: 'http://petstore.swagger.io/v2/swagger.json#/definitions/Tag'""";
         SerializationMatchers.assertEqualsToYaml(read(ModelWithSchemaPropertyReference.class), yaml);
 
     }
@@ -339,11 +354,12 @@ public class PojoTest {
     @Test(description = "Shows how to override a property name")
     public void testPropertyNameOverride() {
 
-        String yaml = "ModelWithPropertyNameOverride:\n" +
-                "  type: object\n" +
-                "  properties:\n" +
-                "    username:\n" +
-                "      type: string";
+        String yaml = """
+                ModelWithPropertyNameOverride:
+                  type: object
+                  properties:
+                    username:
+                      type: string""";
         SerializationMatchers.assertEqualsToYaml(read(ModelWithPropertyNameOverride.class), yaml);
 
     }
@@ -364,11 +380,12 @@ public class PojoTest {
     @Test(description = "Shows how to override a model name")
     public void testModelNameOverride() {
 
-        String yaml = "Employee:\n" +
-                "  type: object\n" +
-                "  properties:\n" +
-                "    id:\n" +
-                "      type: string";
+        String yaml = """
+                Employee:
+                  type: object
+                  properties:
+                    id:
+                      type: string""";
         SerializationMatchers.assertEqualsToYaml(read(ModelWithNameOverride.class), yaml);
 
     }
@@ -389,12 +406,13 @@ public class PojoTest {
     @Test(description = "Shows how to provide model examples")
     public void testModelPropertyExampleOverride() {
 
-        String yaml = "modelWithPropertyExampleOverride:\n" +
-                "  type: object\n" +
-                "  properties:\n" +
-                "    id:\n" +
-                "      type: string\n" +
-                "      example: abc-123";
+        String yaml = """
+                modelWithPropertyExampleOverride:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      example: abc-123""";
         SerializationMatchers.assertEqualsToYaml(read(modelWithPropertyExampleOverride.class), yaml);
     }
 
@@ -415,22 +433,23 @@ public class PojoTest {
     @Test(description = "Shows how to provide model examples as json")
     public void testModelPropertyExampleJson() {
 
-        String yaml = "ExampleJson:\n" +
-                "  type: object\n" +
-                "  properties:\n" +
-                "    id:\n" +
-                "      type: string\n" +
-                "  minimum: 2\n" +
-                "  example:\n" +
-                "    id: 19877734\n" +
-                "modelWithPropertyExampleOverrideJson:\n" +
-                "  minimum: 2\n" +
-                "  type: object\n" +
-                "  properties:\n" +
-                "    exampleJson:\n" +
-                "      $ref: \"#/components/schemas/ExampleJson\"\n" +
-                "  example:\n" +
-                "    id: 19877734";
+        String yaml = """
+                ExampleJson:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                  minimum: 2
+                  example:
+                    id: 19877734
+                modelWithPropertyExampleOverrideJson:
+                  minimum: 2
+                  type: object
+                  properties:
+                    exampleJson:
+                      $ref: "#/components/schemas/ExampleJson"
+                  example:
+                    id: 19877734""";
         SerializationMatchers.assertEqualsToYaml(readAll(modelWithPropertyExampleOverrideJson.class), yaml);
     }
 
@@ -453,18 +472,20 @@ public class PojoTest {
     @Test(description = "Shows how to provide model examples as json")
     public void testModelPropertyImplExampleJson() {
 
-        String yaml = "ExampleJson:\n" +
-                "  type: object\n" +
-                "  properties:\n" +
-                "    id:\n" +
-                "      type: string\n" +
-                "  example:\n" +
-                "    id: 19877734\n" +
-                "modelWithPropertyImplExampleOverrideJson:\n" +
-                "  type: object\n" +
-                "  properties:\n" +
-                "    exampleJson:\n" +
-                "      $ref: \"#/components/schemas/ExampleJson\"\n";
+        String yaml = """
+                ExampleJson:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                  example:
+                    id: 19877734
+                modelWithPropertyImplExampleOverrideJson:
+                  type: object
+                  properties:
+                    exampleJson:
+                      $ref: "#/components/schemas/ExampleJson"
+                """;
         SerializationMatchers.assertEqualsToYaml(readAll(modelWithPropertyImplExampleOverrideJson.class), yaml);
     }
 
@@ -545,14 +566,15 @@ public class PojoTest {
     @Test(description = "Shows how to provide model examples as json")
     public void testModelPropertyStringExampleJson() {
 
-        String yaml = "modelWithPropertyStringExampleOverrideJson:\n" +
-                "  type: object\n" +
-                "  properties:\n" +
-                "    id:\n" +
-                "      minimum: 2\n" +
-                "      type: string\n" +
-                "      description: testdesc\n" +
-                "      example: '{\"id\":19877734}'";
+        String yaml = """
+                modelWithPropertyStringExampleOverrideJson:
+                  type: object
+                  properties:
+                    id:
+                      minimum: 2
+                      type: string
+                      description: testdesc
+                      example: '{"id":19877734}'""";
         SerializationMatchers.assertEqualsToYaml(readAll(modelWithPropertyStringExampleOverrideJson.class), yaml);
     }
 
@@ -619,16 +641,17 @@ public class PojoTest {
     public void testExampleArray() {
 
         String yaml =
-                "modelExampleArray:\n" +
-                        "  type: object\n" +
-                        "  properties:\n" +
-                        "    ids:\n" +
-                        "      type: array\n" +
-                        "      example:\n" +
-                        "      - abc-123\n" +
-                        "      - zz-aa-bb\n" +
-                        "      items:\n" +
-                        "        type: string";
+                """
+                modelExampleArray:
+                  type: object
+                  properties:
+                    ids:
+                      type: array
+                      example:
+                      - abc-123
+                      - zz-aa-bb
+                      items:
+                        type: string""";
         Map<String, io.swagger.v3.oas.models.media.Schema> schemaMap = readAll(modelExampleArray.class);
         SerializationMatchers.assertEqualsToYaml(schemaMap, yaml);
     }
@@ -650,14 +673,15 @@ public class PojoTest {
     public void testArrayWithPattern() {
 
         String yaml =
-                "modelArrayWithPattern:\n" +
-                        "  type: object\n" +
-                        "  properties:\n" +
-                        "    ids:\n" +
-                        "      type: array\n" +
-                        "      items:\n" +
-                        "        pattern: \"[a-zA-Z]*\"\n" +
-                        "        type: string";
+                """
+                modelArrayWithPattern:
+                  type: object
+                  properties:
+                    ids:
+                      type: array
+                      items:
+                        pattern: "[a-zA-Z]*"
+                        type: string""";
         Map<String, io.swagger.v3.oas.models.media.Schema> schemaMap = readAll(modelArrayWithPattern.class);
         SerializationMatchers.assertEqualsToYaml(schemaMap, yaml);
     }
@@ -679,14 +703,15 @@ public class PojoTest {
     public void testModelExampleOverride() {
 
         String yaml =
-                "modelWithExampleOverride:\n" +
-                        "  type: object\n" +
-                        "  properties:\n" +
-                        "    id:\n" +
-                        "      type: string\n" +
-                        "  example:\n" +
-                        "    foo: bar\n" +
-                        "    baz: true";
+                """
+                modelWithExampleOverride:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                  example:
+                    foo: bar
+                    baz: true""";
 
         SerializationMatchers.assertEqualsToYaml(readAll(modelWithExampleOverride.class), yaml);
     }
@@ -707,18 +732,20 @@ public class PojoTest {
     @Test
     public void testModelWithBoolean() {
 
-        String yaml = "ClassWithBoolean:\n" +
-                "  required:\n" +
-                "    - booleanObject\n" +
-                "    - booleanType\n" +
-                "  type: object\n" +
-                "  properties:\n" +
-                "    booleanObject:\n" +
-                "      type: boolean\n" +
-                "      description: my Boolean object field\n" +
-                "    booleanType:\n" +
-                "      type: boolean\n" +
-                "      description: my boolean type field\n";
+        String yaml = """
+                ClassWithBoolean:
+                  required:
+                    - booleanObject
+                    - booleanType
+                  type: object
+                  properties:
+                    booleanObject:
+                      type: boolean
+                      description: my Boolean object field
+                    booleanType:
+                      type: boolean
+                      description: my boolean type field
+                """;
         SerializationMatchers.assertEqualsToYaml(read(ClassWithBoolean.class), yaml);
 
     }

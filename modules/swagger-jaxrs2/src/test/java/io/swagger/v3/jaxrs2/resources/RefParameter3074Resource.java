@@ -12,29 +12,30 @@ import javax.ws.rs.Path;
 public class RefParameter3074Resource {
 
     public static final String EXPECTED_YAML_WITHOUT_WRAPPER =
-            "openapi: 3.0.1\n" +
-            "paths:\n" +
-            "  /employee:\n" +
-            "      get:\n" +
-            "        summary: Get an employee\n" +
-            "        operationId: getEmployee\n" +
-            "        responses:\n" +
-            "          \"200\":\n" +
-            "            content:\n" +
-            "              application/json:\n" +
-            "                schema:\n" +
-            "                   $ref: \"#/components/schemas/Employee\"\n" +
-            "          \"500\":\n" +
-            "            content:\n" +
-            "              application/json:\n" +
-            "                schema:\n" +
-            "                  $ref: \"#/components/schemas/Error\"\n" +
-            "components:\n" +
-            "  schemas:\n" +
-            "    Employee:\n" +
-            "      type: object\n" +
-            "    Error:\n" +
-            "      type: object";
+            """
+            openapi: 3.0.1
+            paths:
+              /employee:
+                  get:
+                    summary: Get an employee
+                    operationId: getEmployee
+                    responses:
+                      "200":
+                        content:
+                          application/json:
+                            schema:
+                               $ref: "#/components/schemas/Employee"
+                      "500":
+                        content:
+                          application/json:
+                            schema:
+                              $ref: "#/components/schemas/Error"
+            components:
+              schemas:
+                Employee:
+                  type: object
+                Error:
+                  type: object""";
 
     public static final String EXPECTED_YAML_WITH_WRAPPER = EXPECTED_YAML_WITHOUT_WRAPPER +
             "\n    Wrapper:\n     type: object";

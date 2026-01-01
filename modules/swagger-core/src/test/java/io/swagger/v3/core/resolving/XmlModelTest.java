@@ -102,7 +102,7 @@ public class XmlModelTest {
                 assertNull(xml.getAttribute());
                 assertTrue(xml.getWrapped());
             } else {
-                fail(String.format("Unexpected property: %s", name));
+                fail("Unexpected property: %s".formatted(name));
             }
         }
     }
@@ -144,41 +144,43 @@ public class XmlModelTest {
                 assertNull(xml.getAttribute());
                 assertNull(xml.getWrapped());
             } else {
-                fail(String.format("Unexpected property: %s", name));
+                fail("Unexpected property: %s".formatted(name));
             }
         }
     }
 
     @Test(description = "it should deserialize a model")
     public void deserializeModel() throws IOException {
-        final String yaml = "---\n" +
-                "type: \"object\"\n" +
-                "properties:\n" +
-                "  id:\n" +
-                "    type: \"string\"\n" +
-                "    xml:\n" +
-                "      attribute: true\n" +
-                "  name:\n" +
-                "    type: \"string\"\n" +
-                "    xml:\n" +
-                "      name: \"renamed\"\n" +
-                "  list:\n" +
-                "    type: \"array\"\n" +
-                "    items:\n" +
-                "      type: \"string\"\n" +
-                "  wrappedList:\n" +
-                "    type: \"array\"\n" +
-                "    xml:\n" +
-                "      name: \"wrappedListItems\"\n" +
-                "      wrapped: true\n" +
-                "    items:\n" +
-                "      type: \"string\"\n" +
-                "  forcedElement:\n" +
-                "    type: \"array\"\n" +
-                "    items:\n" +
-                "      type: \"string\"\n" +
-                "xml:\n" +
-                "  name: \"rootName\"";
+        final String yaml = """
+                ---
+                type: "object"
+                properties:
+                  id:
+                    type: "string"
+                    xml:
+                      attribute: true
+                  name:
+                    type: "string"
+                    xml:
+                      name: "renamed"
+                  list:
+                    type: "array"
+                    items:
+                      type: "string"
+                  wrappedList:
+                    type: "array"
+                    xml:
+                      name: "wrappedListItems"
+                      wrapped: true
+                    items:
+                      type: "string"
+                  forcedElement:
+                    type: "array"
+                    items:
+                      type: "string"
+                xml:
+                  name: "rootName"\
+                """;
         final Schema model = Yaml.mapper().readValue(yaml, Schema.class);
 
         final Schema wrappedList = (Schema) model.getProperties().get("wrappedList");

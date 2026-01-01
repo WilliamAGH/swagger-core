@@ -21,41 +21,42 @@ public class Ticket2992Test extends SwaggerTestBase {
         Schema model = context
                 .resolve(new AnnotatedType(TestObject2992.class));
 
-        SerializationMatchers.assertEqualsToYaml(context.getDefinedModels(), "LocalTime:\n" +
-                "  type: object\n" +
-                "  properties:\n" +
-                "    hour:\n" +
-                "      type: integer\n" +
-                "      format: int32\n" +
-                "    minute:\n" +
-                "      type: integer\n" +
-                "      format: int32\n" +
-                "    second:\n" +
-                "      type: integer\n" +
-                "      format: int32\n" +
-                "    nano:\n" +
-                "      type: integer\n" +
-                "      format: int32\n" +
-                "TestObject2992:\n" +
-                "  type: object\n" +
-                "  properties:\n" +
-                "    name:\n" +
-                "      type: string\n" +
-                "    a:\n" +
-                "      $ref: \"#/components/schemas/LocalTime\"\n" +
-                "    b:\n" +
-                "      $ref: \"#/components/schemas/LocalTime\"\n" +
-                "    c:\n" +
-                "      $ref: \"#/components/schemas/LocalTime\"\n" +
-                "    d:\n" +
-                "      type: string\n" +
-                "      format: date-time\n" +
-                "    e:\n" +
-                "      type: string\n" +
-                "      format: date-time\n" +
-                "    f:\n" +
-                "      type: string\n" +
-                "      format: date-time");
+        SerializationMatchers.assertEqualsToYaml(context.getDefinedModels(), """
+                LocalTime:
+                  type: object
+                  properties:
+                    hour:
+                      type: integer
+                      format: int32
+                    minute:
+                      type: integer
+                      format: int32
+                    second:
+                      type: integer
+                      format: int32
+                    nano:
+                      type: integer
+                      format: int32
+                TestObject2992:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    a:
+                      $ref: "#/components/schemas/LocalTime"
+                    b:
+                      $ref: "#/components/schemas/LocalTime"
+                    c:
+                      $ref: "#/components/schemas/LocalTime"
+                    d:
+                      type: string
+                      format: date-time
+                    e:
+                      type: string
+                      format: date-time
+                    f:
+                      type: string
+                      format: date-time""");
 
         PrimitiveType.enablePartialTime();
         context = new ModelConverterContextImpl(modelResolver);
@@ -63,29 +64,30 @@ public class Ticket2992Test extends SwaggerTestBase {
         context
                 .resolve(new AnnotatedType(TestObject2992.class));
 
-        SerializationMatchers.assertEqualsToYaml(context.getDefinedModels(), "TestObject2992:\n" +
-                "  type: object\n" +
-                "  properties:\n" +
-                "    name:\n" +
-                "      type: string\n" +
-                "    a:\n" +
-                "      type: string\n" +
-                "      format: partial-time\n" +
-                "    b:\n" +
-                "      type: string\n" +
-                "      format: partial-time\n" +
-                "    c:\n" +
-                "      type: string\n" +
-                "      format: partial-time\n" +
-                "    d:\n" +
-                "      type: string\n" +
-                "      format: date-time\n" +
-                "    e:\n" +
-                "      type: string\n" +
-                "      format: date-time\n" +
-                "    f:\n" +
-                "      type: string\n" +
-                "      format: date-time");
+        SerializationMatchers.assertEqualsToYaml(context.getDefinedModels(), """
+                TestObject2992:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    a:
+                      type: string
+                      format: partial-time
+                    b:
+                      type: string
+                      format: partial-time
+                    c:
+                      type: string
+                      format: partial-time
+                    d:
+                      type: string
+                      format: date-time
+                    e:
+                      type: string
+                      format: date-time
+                    f:
+                      type: string
+                      format: date-time""");
     }
 
 }

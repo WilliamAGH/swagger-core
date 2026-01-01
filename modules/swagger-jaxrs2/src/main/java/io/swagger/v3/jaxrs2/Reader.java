@@ -871,8 +871,8 @@ public class Reader implements OpenApiReader {
             return null;
         }
         for (Annotation a : annotations) {
-            if (a instanceof io.swagger.v3.oas.annotations.parameters.RequestBody) {
-                return (io.swagger.v3.oas.annotations.parameters.RequestBody) a;
+            if (a instanceof io.swagger.v3.oas.annotations.parameters.RequestBody body) {
+                return body;
             }
         }
         return null;
@@ -1483,7 +1483,7 @@ public class Reader implements OpenApiReader {
         String operationIdToFind = null;
         int counter = 0;
         while (operationIdUsed) {
-            operationIdToFind = String.format("%s_%d", operationId, ++counter);
+            operationIdToFind = "%s_%d".formatted(operationId, ++counter);
             operationIdUsed = existOperationId(operationIdToFind);
         }
         if (operationIdToFind != null) {
@@ -1689,16 +1689,15 @@ public class Reader implements OpenApiReader {
     }
 
     private static Class<?> getClassArgument(Type cls) {
-        if (cls instanceof ParameterizedType) {
-            final ParameterizedType parameterized = (ParameterizedType) cls;
+        if (cls instanceof ParameterizedType parameterized) {
             final Type[] args = parameterized.getActualTypeArguments();
             if (args.length != 1) {
                 LOGGER.error("Unexpected class definition: {}", cls);
                 return null;
             }
             final Type first = args[0];
-            if (first instanceof Class) {
-                return (Class<?>) first;
+            if (first instanceof Class<?> class1) {
+                return class1;
             } else {
                 return null;
             }

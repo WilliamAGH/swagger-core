@@ -16,17 +16,19 @@ public class InfoTest extends AbstractAnnotationTest {
         int start = openApiYAML.indexOf("info:");
         int end = openApiYAML.length() - 1;
 
-        String expectedYAML = "info:\n" +
-                "  title: the title\n" +
-                "  description: My API\n" +
-                "  contact:\n" +
-                "    name: Fred\n" +
-                "    url: http://gigantic-server.com\n" +
-                "    email: Fred@gigagantic-server.com\n" +
-                "  license:\n" +
-                "    name: Apache 2.0\n" +
-                "    url: http://foo.bar\n" +
-                "  version: \"0.0\"";
+        String expectedYAML = """
+                info:
+                  title: the title
+                  description: My API
+                  contact:
+                    name: Fred
+                    url: http://gigantic-server.com
+                    email: Fred@gigagantic-server.com
+                  license:
+                    name: Apache 2.0
+                    url: http://foo.bar
+                  version: "0.0"\
+                """;
         String extractedYAML = openApiYAML.substring(start, end);
 
         assertEquals(extractedYAML, expectedYAML);

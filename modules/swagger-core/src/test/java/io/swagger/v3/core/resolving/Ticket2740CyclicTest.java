@@ -18,15 +18,16 @@ public class Ticket2740CyclicTest extends SwaggerTestBase {
         final Schema model = context
                 .resolve(new AnnotatedType(MyThing.class));
 
-        SerializationMatchers.assertEqualsToYaml(model, "type: object\n" +
-                "properties:\n" +
-                "  otherThings:\n" +
-                "    uniqueItems: true\n" +
-                "    type: array\n" +
-                "    description: Other related things\n" +
-                "    items:\n" +
-                "      $ref: \"#/components/schemas/MyThing\"\n" +
-                "description: Thing");
+        SerializationMatchers.assertEqualsToYaml(model, """
+                type: object
+                properties:
+                  otherThings:
+                    uniqueItems: true
+                    type: array
+                    description: Other related things
+                    items:
+                      $ref: "#/components/schemas/MyThing"
+                description: Thing""");
     }
 
 }

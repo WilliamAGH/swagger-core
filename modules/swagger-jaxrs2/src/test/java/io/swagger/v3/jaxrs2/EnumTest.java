@@ -17,36 +17,38 @@ public class EnumTest {
     }
 
 
-    static final String EXPECTED_YAML = "openapi: 3.0.1\n" +
-            "paths:\n" +
-            "  /task:\n" +
-            "    get:\n" +
-            "      operationId: getTasks\n" +
-            "      parameters:\n" +
-            "      - name: guid\n" +
-            "        in: query\n" +
-            "        required: true\n" +
-            "        schema:\n" +
-            "          type: string\n" +
-            "      - name: tasktype\n" +
-            "        in: query\n" +
-            "        schema:\n" +
-            "          type: string\n" +
-            "          enum:\n" +
-            "          - A\n" +
-            "          - B\n" +
-            "      responses:\n" +
-            "        \"200\":\n" +
-            "          content:\n" +
-            "            application/json:\n" +
-            "              schema:\n" +
-            "                type: array\n" +
-            "                items:\n" +
-            "                  $ref: \"#/components/schemas/TaskDTO\"\n" +
-            "        \"404\":\n" +
-            "          description: User not found\n" +
-            "components:\n" +
-            "  schemas:\n" +
-            "    TaskDTO:\n" +
-            "      type: object\n";
+    static final String EXPECTED_YAML = """
+            openapi: 3.0.1
+            paths:
+              /task:
+                get:
+                  operationId: getTasks
+                  parameters:
+                  - name: guid
+                    in: query
+                    required: true
+                    schema:
+                      type: string
+                  - name: tasktype
+                    in: query
+                    schema:
+                      type: string
+                      enum:
+                      - A
+                      - B
+                  responses:
+                    "200":
+                      content:
+                        application/json:
+                          schema:
+                            type: array
+                            items:
+                              $ref: "#/components/schemas/TaskDTO"
+                    "404":
+                      description: User not found
+            components:
+              schemas:
+                TaskDTO:
+                  type: object
+            """;
 }

@@ -19,53 +19,55 @@ public class OpenApiDefinitionTest extends AbstractAnnotationTest {
     @Test
     public void testSimpleInfoGet() throws IOException {
 
-        String expectedYAML = "openapi: 3.0.1\n" +
-                "info:\n" +
-                "  title: the title\n" +
-                "  description: My API\n" +
-                "  contact:\n" +
-                "    name: Fred\n" +
-                "    url: http://gigantic-server.com\n" +
-                "    email: Fred@gigagantic-server.com\n" +
-                "  license:\n" +
-                "    name: Apache 2.0\n" +
-                "    url: http://foo.bar\n" +
-                "  version: \"0.0\"\n" +
-                "externalDocs:\n" +
-                "  description: definition docs desc\n" +
-                "servers:\n" +
-                "- url: http://foo\n" +
-                "  description: server 1\n" +
-                "  variables:\n" +
-                "    var1:\n" +
-                "      description: var 1\n" +
-                "      enum:\n" +
-                "      - \"1\"\n" +
-                "      - \"2\"\n" +
-                "      default: \"1\"\n" +
-                "    var2:\n" +
-                "      description: var 2\n" +
-                "      enum:\n" +
-                "      - \"1\"\n" +
-                "      - \"2\"\n" +
-                "      default: \"1\"\n" +
-                "security:\n" +
-                "- req 1:\n" +
-                "  - a\n" +
-                "  - b\n" +
-                "- req 2:\n" +
-                "  - b\n" +
-                "  - c\n" +
-                "tags:\n" +
-                "- name: Tag 1\n" +
-                "  description: desc 1\n" +
-                "  externalDocs:\n" +
-                "    description: docs desc\n" +
-                "- name: Tag 2\n" +
-                "  description: desc 2\n" +
-                "  externalDocs:\n" +
-                "    description: docs desc 2\n" +
-                "- name: Tag 3\n";
+        String expectedYAML = """
+                openapi: 3.0.1
+                info:
+                  title: the title
+                  description: My API
+                  contact:
+                    name: Fred
+                    url: http://gigantic-server.com
+                    email: Fred@gigagantic-server.com
+                  license:
+                    name: Apache 2.0
+                    url: http://foo.bar
+                  version: "0.0"
+                externalDocs:
+                  description: definition docs desc
+                servers:
+                - url: http://foo
+                  description: server 1
+                  variables:
+                    var1:
+                      description: var 1
+                      enum:
+                      - "1"
+                      - "2"
+                      default: "1"
+                    var2:
+                      description: var 2
+                      enum:
+                      - "1"
+                      - "2"
+                      default: "1"
+                security:
+                - req 1:
+                  - a
+                  - b
+                - req 2:
+                  - b
+                  - c
+                tags:
+                - name: Tag 1
+                  description: desc 1
+                  externalDocs:
+                    description: docs desc
+                - name: Tag 2
+                  description: desc 2
+                  externalDocs:
+                    description: docs desc 2
+                - name: Tag 3
+                """;
 
         compareAsYaml(OpenApiDefinitionTest.ClassWithAnnotation.class, expectedYAML);
     }
@@ -108,23 +110,25 @@ public class OpenApiDefinitionTest extends AbstractAnnotationTest {
     @Test
     public void testServerVariableWithoutEnum() throws IOException {
 
-        String expectedYAML = "openapi: 3.0.1\n" +
-                "info:\n" +
-                "  title: My Rest API\n" +
-                "  description: My RESTful API implementation\n" +
-                "  version: 1.0.0\n" +
-                "servers:\n" +
-                "- url: /{context-path}/{rest-api}\n" +
-                "  description: My REST API\n" +
-                "  variables:\n" +
-                "    context-path:\n" +
-                "      default: my-war\n" +
-                "    rest-api:\n" +
-                "      enum:\n" +
-                "      - api\n" +
-                "      - rest\n" +
-                "      - batchapi\n" +
-                "      default: api\n";
+        String expectedYAML = """
+                openapi: 3.0.1
+                info:
+                  title: My Rest API
+                  description: My RESTful API implementation
+                  version: 1.0.0
+                servers:
+                - url: /{context-path}/{rest-api}
+                  description: My REST API
+                  variables:
+                    context-path:
+                      default: my-war
+                    rest-api:
+                      enum:
+                      - api
+                      - rest
+                      - batchapi
+                      default: api
+                """;
 
         compareAsYaml(OpenApiDefinitionTest.ServerVariableWithoutEnum.class, expectedYAML);
     }

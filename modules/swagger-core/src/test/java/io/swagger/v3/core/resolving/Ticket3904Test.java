@@ -20,12 +20,13 @@ public class Ticket3904Test extends SwaggerTestBase {
         Schema model = context
                 .resolve(new AnnotatedType(Request.class));
 
-        SerializationMatchers.assertEqualsToYaml(context.getDefinedModels(), "Request:\n" +
-                "  type: object\n" +
-                "  properties:\n" +
-                "    id:\n" +
-                "      type: string\n" +
-                "      description: Description of ID.");
+        SerializationMatchers.assertEqualsToYaml(context.getDefinedModels(), """
+                Request:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      description: Description of ID.""");
 
     }
 

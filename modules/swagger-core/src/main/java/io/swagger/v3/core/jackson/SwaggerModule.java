@@ -2,7 +2,10 @@ package io.swagger.v3.core.jackson;
 
 import com.fasterxml.jackson.databind.module.SimpleModule;
 
+import java.io.Serial;
+
 public class SwaggerModule extends SimpleModule {
+    @Serial
     private static final long serialVersionUID = 1L;
 
     public SwaggerModule() {

@@ -14,221 +14,224 @@ public class SchemaResolutionInlineTest {
         ModelConverters.reset();
         Reader reader = new Reader(new SwaggerConfiguration().openAPI(new OpenAPI()).schemaResolution(Schema.SchemaResolution.INLINE));
         OpenAPI openAPI = reader.read(SchemaResolutionResource.class);
-        String yaml = "openapi: 3.0.1\n" +
-                "paths:\n" +
-                "  /test/inlineSchemaFirst:\n" +
-                "    get:\n" +
-                "      operationId: inlineSchemaFirst\n" +
-                "      responses:\n" +
-                "        default:\n" +
-                "          description: default response\n" +
-                "          content:\n" +
-                "            '*/*':\n" +
-                "              schema:\n" +
-                "                type: object\n" +
-                "                properties:\n" +
-                "                  property1:\n" +
-                "                    type: object\n" +
-                "                    properties:\n" +
-                "                      bar:\n" +
-                "                        type: string\n" +
-                "                    description: InlineSchemaFirst property 1\n" +
-                "                    nullable: true\n" +
-                "                    example: example\n" +
-                "                  property2:\n" +
-                "                    type: object\n" +
-                "                    properties:\n" +
-                "                      bar:\n" +
-                "                        type: string\n" +
-                "                    description: ' InlineSchemaFirst property 2'\n" +
-                "                    example: example 2\n" +
-                "  /test/inlineSchemaSecond:\n" +
-                "    get:\n" +
-                "      operationId: inlineSchemaSecond\n" +
-                "      requestBody:\n" +
-                "        content:\n" +
-                "          '*/*':\n" +
-                "            schema:\n" +
-                "              type: object\n" +
-                "              properties:\n" +
-                "                foo:\n" +
-                "                  type: string\n" +
-                "                propertySecond1:\n" +
-                "                  type: object\n" +
-                "                  properties:\n" +
-                "                    bar:\n" +
-                "                      type: object\n" +
-                "                      properties:\n" +
-                "                        property1:\n" +
-                "                          type: object\n" +
-                "                          properties:\n" +
-                "                            bar:\n" +
-                "                              type: string\n" +
-                "                          description: property 1\n" +
-                "                        property2:\n" +
-                "                          type: object\n" +
-                "                          properties:\n" +
-                "                            bar:\n" +
-                "                              type: string\n" +
-                "                          description: property 2\n" +
-                "                          example: example\n" +
-                "                  description: InlineSchemaSecond property 1\n" +
-                "                  nullable: true\n" +
-                "                  example: examplesecond\n" +
-                "                property2:\n" +
-                "                  type: object\n" +
-                "                  properties:\n" +
-                "                    bar:\n" +
-                "                      type: string\n" +
-                "                  description: InlineSchemaSecond property 2\n" +
-                "                  example: InlineSchemaSecond example 2\n" +
-                "              description: InlineSchemaSecond API\n" +
-                "      responses:\n" +
-                "        default:\n" +
-                "          description: default response\n" +
-                "          content:\n" +
-                "            '*/*':\n" +
-                "              schema:\n" +
-                "                type: object\n" +
-                "                properties:\n" +
-                "                  foo:\n" +
-                "                    type: string\n" +
-                "                  propertySecond1:\n" +
-                "                    type: object\n" +
-                "                    properties:\n" +
-                "                      bar:\n" +
-                "                        type: object\n" +
-                "                        properties:\n" +
-                "                          property1:\n" +
-                "                            type: object\n" +
-                "                            properties:\n" +
-                "                              bar:\n" +
-                "                                type: string\n" +
-                "                            description: property 1\n" +
-                "                          property2:\n" +
-                "                            type: object\n" +
-                "                            properties:\n" +
-                "                              bar:\n" +
-                "                                type: string\n" +
-                "                            description: property 2\n" +
-                "                            example: example\n" +
-                "                    description: InlineSchemaSecond property 1\n" +
-                "                    nullable: true\n" +
-                "                    example: examplesecond\n" +
-                "                  property2:\n" +
-                "                    type: object\n" +
-                "                    properties:\n" +
-                "                      bar:\n" +
-                "                        type: string\n" +
-                "                    description: InlineSchemaSecond property 2\n" +
-                "                    example: InlineSchemaSecond example 2\n" +
-                "components:\n" +
-                "  schemas:\n" +
-                "    InlineSchemaFirst:\n" +
-                "      type: object\n" +
-                "      properties:\n" +
-                "        property1:\n" +
-                "          type: object\n" +
-                "          properties:\n" +
-                "            bar:\n" +
-                "              type: string\n" +
-                "          description: InlineSchemaFirst property 1\n" +
-                "          nullable: true\n" +
-                "          example: example\n" +
-                "        property2:\n" +
-                "          type: object\n" +
-                "          properties:\n" +
-                "            bar:\n" +
-                "              type: string\n" +
-                "          description: ' InlineSchemaFirst property 2'\n" +
-                "          example: example 2\n" +
-                "    InlineSchemaPropertyFirst:\n" +
-                "      type: object\n" +
-                "      properties:\n" +
-                "        bar:\n" +
-                "          type: string\n" +
-                "      description: property\n" +
-                "      example: example\n" +
-                "    InlineSchemaPropertySecond:\n" +
-                "      type: object\n" +
-                "      properties:\n" +
-                "        bar:\n" +
-                "          type: object\n" +
-                "          properties:\n" +
-                "            property1:\n" +
-                "              type: object\n" +
-                "              properties:\n" +
-                "                bar:\n" +
-                "                  type: string\n" +
-                "              description: property 1\n" +
-                "            property2:\n" +
-                "              type: object\n" +
-                "              properties:\n" +
-                "                bar:\n" +
-                "                  type: string\n" +
-                "              description: property 2\n" +
-                "              example: example\n" +
-                "      description: propertysecond\n" +
-                "      nullable: true\n" +
-                "      example: examplesecond\n" +
-                "    InlineSchemaPropertySimple:\n" +
-                "      type: object\n" +
-                "      properties:\n" +
-                "        bar:\n" +
-                "          type: string\n" +
-                "      description: property\n" +
-                "      example: example\n" +
-                "    InlineSchemaSecond:\n" +
-                "      type: object\n" +
-                "      properties:\n" +
-                "        foo:\n" +
-                "          type: string\n" +
-                "        propertySecond1:\n" +
-                "          type: object\n" +
-                "          properties:\n" +
-                "            bar:\n" +
-                "              type: object\n" +
-                "              properties:\n" +
-                "                property1:\n" +
-                "                  type: object\n" +
-                "                  properties:\n" +
-                "                    bar:\n" +
-                "                      type: string\n" +
-                "                  description: property 1\n" +
-                "                property2:\n" +
-                "                  type: object\n" +
-                "                  properties:\n" +
-                "                    bar:\n" +
-                "                      type: string\n" +
-                "                  description: property 2\n" +
-                "                  example: example\n" +
-                "          description: InlineSchemaSecond property 1\n" +
-                "          nullable: true\n" +
-                "          example: examplesecond\n" +
-                "        property2:\n" +
-                "          type: object\n" +
-                "          properties:\n" +
-                "            bar:\n" +
-                "              type: string\n" +
-                "          description: InlineSchemaSecond property 2\n" +
-                "          example: InlineSchemaSecond example 2\n" +
-                "      description: InlineSchemaSecond API\n" +
-                "    InlineSchemaSimple:\n" +
-                "      type: object\n" +
-                "      properties:\n" +
-                "        property1:\n" +
-                "          type: object\n" +
-                "          properties:\n" +
-                "            bar:\n" +
-                "              type: string\n" +
-                "          description: property 1\n" +
-                "        property2:\n" +
-                "          type: object\n" +
-                "          properties:\n" +
-                "            bar:\n" +
-                "              type: string\n" +
-                "          description: property 2\n" +
-                "          example: example\n\n";
+        String yaml = """
+                openapi: 3.0.1
+                paths:
+                  /test/inlineSchemaFirst:
+                    get:
+                      operationId: inlineSchemaFirst
+                      responses:
+                        default:
+                          description: default response
+                          content:
+                            '*/*':
+                              schema:
+                                type: object
+                                properties:
+                                  property1:
+                                    type: object
+                                    properties:
+                                      bar:
+                                        type: string
+                                    description: InlineSchemaFirst property 1
+                                    nullable: true
+                                    example: example
+                                  property2:
+                                    type: object
+                                    properties:
+                                      bar:
+                                        type: string
+                                    description: ' InlineSchemaFirst property 2'
+                                    example: example 2
+                  /test/inlineSchemaSecond:
+                    get:
+                      operationId: inlineSchemaSecond
+                      requestBody:
+                        content:
+                          '*/*':
+                            schema:
+                              type: object
+                              properties:
+                                foo:
+                                  type: string
+                                propertySecond1:
+                                  type: object
+                                  properties:
+                                    bar:
+                                      type: object
+                                      properties:
+                                        property1:
+                                          type: object
+                                          properties:
+                                            bar:
+                                              type: string
+                                          description: property 1
+                                        property2:
+                                          type: object
+                                          properties:
+                                            bar:
+                                              type: string
+                                          description: property 2
+                                          example: example
+                                  description: InlineSchemaSecond property 1
+                                  nullable: true
+                                  example: examplesecond
+                                property2:
+                                  type: object
+                                  properties:
+                                    bar:
+                                      type: string
+                                  description: InlineSchemaSecond property 2
+                                  example: InlineSchemaSecond example 2
+                              description: InlineSchemaSecond API
+                      responses:
+                        default:
+                          description: default response
+                          content:
+                            '*/*':
+                              schema:
+                                type: object
+                                properties:
+                                  foo:
+                                    type: string
+                                  propertySecond1:
+                                    type: object
+                                    properties:
+                                      bar:
+                                        type: object
+                                        properties:
+                                          property1:
+                                            type: object
+                                            properties:
+                                              bar:
+                                                type: string
+                                            description: property 1
+                                          property2:
+                                            type: object
+                                            properties:
+                                              bar:
+                                                type: string
+                                            description: property 2
+                                            example: example
+                                    description: InlineSchemaSecond property 1
+                                    nullable: true
+                                    example: examplesecond
+                                  property2:
+                                    type: object
+                                    properties:
+                                      bar:
+                                        type: string
+                                    description: InlineSchemaSecond property 2
+                                    example: InlineSchemaSecond example 2
+                components:
+                  schemas:
+                    InlineSchemaFirst:
+                      type: object
+                      properties:
+                        property1:
+                          type: object
+                          properties:
+                            bar:
+                              type: string
+                          description: InlineSchemaFirst property 1
+                          nullable: true
+                          example: example
+                        property2:
+                          type: object
+                          properties:
+                            bar:
+                              type: string
+                          description: ' InlineSchemaFirst property 2'
+                          example: example 2
+                    InlineSchemaPropertyFirst:
+                      type: object
+                      properties:
+                        bar:
+                          type: string
+                      description: property
+                      example: example
+                    InlineSchemaPropertySecond:
+                      type: object
+                      properties:
+                        bar:
+                          type: object
+                          properties:
+                            property1:
+                              type: object
+                              properties:
+                                bar:
+                                  type: string
+                              description: property 1
+                            property2:
+                              type: object
+                              properties:
+                                bar:
+                                  type: string
+                              description: property 2
+                              example: example
+                      description: propertysecond
+                      nullable: true
+                      example: examplesecond
+                    InlineSchemaPropertySimple:
+                      type: object
+                      properties:
+                        bar:
+                          type: string
+                      description: property
+                      example: example
+                    InlineSchemaSecond:
+                      type: object
+                      properties:
+                        foo:
+                          type: string
+                        propertySecond1:
+                          type: object
+                          properties:
+                            bar:
+                              type: object
+                              properties:
+                                property1:
+                                  type: object
+                                  properties:
+                                    bar:
+                                      type: string
+                                  description: property 1
+                                property2:
+                                  type: object
+                                  properties:
+                                    bar:
+                                      type: string
+                                  description: property 2
+                                  example: example
+                          description: InlineSchemaSecond property 1
+                          nullable: true
+                          example: examplesecond
+                        property2:
+                          type: object
+                          properties:
+                            bar:
+                              type: string
+                          description: InlineSchemaSecond property 2
+                          example: InlineSchemaSecond example 2
+                      description: InlineSchemaSecond API
+                    InlineSchemaSimple:
+                      type: object
+                      properties:
+                        property1:
+                          type: object
+                          properties:
+                            bar:
+                              type: string
+                          description: property 1
+                        property2:
+                          type: object
+                          properties:
+                            bar:
+                              type: string
+                          description: property 2
+                          example: example
+                
+                """;
         SerializationMatchers.assertEqualsToYaml(openAPI, yaml);
         ModelConverters.reset();
     }

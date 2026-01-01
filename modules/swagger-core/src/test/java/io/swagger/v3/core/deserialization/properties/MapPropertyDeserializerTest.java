@@ -17,104 +17,110 @@ import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
 public class MapPropertyDeserializerTest {
-    private static final String json = "{\n" +
-            "  \"tags\": [\n" +
-            "    \"store\"\n" +
-            "  ],\n" +
-            "  \"summary\": \"Returns pet inventories by status\",\n" +
-            "  \"description\": \"Returns a map of status codes to quantities\",\n" +
-            "  \"operationId\": \"getInventory\",\n" +
-            "  \"produces\": [\n" +
-            "    \"application/json\"\n" +
-            "  ],\n" +
-            "  \"parameters\": [],\n" +
-            "  \"responses\": {\n" +
-            "    \"200\": {\n" +
-            "      \"description\": \"successful operation\",\n" +
-            "      \"content\": {\n" +
-            "        \"*/*\": {\n" +
-            "          \"schema\": {\n" +
-            "            \"type\": \"object\",\n" +
-            "            \"x-foo\": \"vendor x\",\n" +
-            "            \"additionalProperties\": {\n" +
-            "              \"type\": \"integer\",\n" +
-            "              \"format\": \"int32\"\n" +
-            "            }\n" +
-            "          }\n" +
-            "        }\n" +
-            "      }\n" +
-            "    }\n" +
-            "  },\n" +
-            "  \"security\": [\n" +
-            "    {\n" +
-            "      \"api_key\": []\n" +
-            "    }\n" +
-            "  ]\n" +
-            "}";
+    private static final String json = """
+            {
+              "tags": [
+                "store"
+              ],
+              "summary": "Returns pet inventories by status",
+              "description": "Returns a map of status codes to quantities",
+              "operationId": "getInventory",
+              "produces": [
+                "application/json"
+              ],
+              "parameters": [],
+              "responses": {
+                "200": {
+                  "description": "successful operation",
+                  "content": {
+                    "*/*": {
+                      "schema": {
+                        "type": "object",
+                        "x-foo": "vendor x",
+                        "additionalProperties": {
+                          "type": "integer",
+                          "format": "int32"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "security": [
+                {
+                  "api_key": []
+                }
+              ]
+            }\
+            """;
 
-    private static final String jsonAdditionalPropertiesBoolean = "{\n" +
-            "  \"tags\": [\n" +
-            "    \"store\"\n" +
-            "  ],\n" +
-            "  \"summary\": \"Returns pet inventories by status\",\n" +
-            "  \"description\": \"Returns a map of status codes to quantities\",\n" +
-            "  \"operationId\": \"getInventory\",\n" +
-            "  \"produces\": [\n" +
-            "    \"application/json\"\n" +
-            "  ],\n" +
-            "  \"parameters\": [],\n" +
-            "  \"responses\": {\n" +
-            "    \"200\": {\n" +
-            "      \"description\": \"successful operation\",\n" +
-            "      \"content\": {\n" +
-            "        \"*/*\": {\n" +
-            "          \"schema\": {\n" +
-            "            \"type\": \"object\",\n" +
-            "            \"x-foo\": \"vendor x\",\n" +
-            "            \"additionalProperties\": false\n" +
-            "          }\n" +
-            "        }\n" +
-            "      }\n" +
-            "    }\n" +
-            "  },\n" +
-            "  \"security\": [\n" +
-            "    {\n" +
-            "      \"api_key\": []\n" +
-            "    }\n" +
-            "  ]\n" +
-            "}";
+    private static final String jsonAdditionalPropertiesBoolean = """
+            {
+              "tags": [
+                "store"
+              ],
+              "summary": "Returns pet inventories by status",
+              "description": "Returns a map of status codes to quantities",
+              "operationId": "getInventory",
+              "produces": [
+                "application/json"
+              ],
+              "parameters": [],
+              "responses": {
+                "200": {
+                  "description": "successful operation",
+                  "content": {
+                    "*/*": {
+                      "schema": {
+                        "type": "object",
+                        "x-foo": "vendor x",
+                        "additionalProperties": false
+                      }
+                    }
+                  }
+                }
+              },
+              "security": [
+                {
+                  "api_key": []
+                }
+              ]
+            }\
+            """;
 
-    private static final String jsonAdditionalPropertiesBooleanTrue = "{\n" +
-            "  \"tags\": [\n" +
-            "    \"store\"\n" +
-            "  ],\n" +
-            "  \"summary\": \"Returns pet inventories by status\",\n" +
-            "  \"description\": \"Returns a map of status codes to quantities\",\n" +
-            "  \"operationId\": \"getInventory\",\n" +
-            "  \"produces\": [\n" +
-            "    \"application/json\"\n" +
-            "  ],\n" +
-            "  \"parameters\": [],\n" +
-            "  \"responses\": {\n" +
-            "    \"200\": {\n" +
-            "      \"description\": \"successful operation\",\n" +
-            "      \"content\": {\n" +
-            "        \"*/*\": {\n" +
-            "          \"schema\": {\n" +
-            "            \"type\": \"object\",\n" +
-            "            \"x-foo\": \"vendor x\",\n" +
-            "            \"additionalProperties\": true\n" +
-            "          }\n" +
-            "        }\n" +
-            "      }\n" +
-            "    }\n" +
-            "  },\n" +
-            "  \"security\": [\n" +
-            "    {\n" +
-            "      \"api_key\": []\n" +
-            "    }\n" +
-            "  ]\n" +
-            "}";
+    private static final String jsonAdditionalPropertiesBooleanTrue = """
+            {
+              "tags": [
+                "store"
+              ],
+              "summary": "Returns pet inventories by status",
+              "description": "Returns a map of status codes to quantities",
+              "operationId": "getInventory",
+              "produces": [
+                "application/json"
+              ],
+              "parameters": [],
+              "responses": {
+                "200": {
+                  "description": "successful operation",
+                  "content": {
+                    "*/*": {
+                      "schema": {
+                        "type": "object",
+                        "x-foo": "vendor x",
+                        "additionalProperties": true
+                      }
+                    }
+                  }
+                }
+              },
+              "security": [
+                {
+                  "api_key": []
+                }
+              ]
+            }\
+            """;
 
     @Test(description = "it should deserialize a response per #1349")
     public void testMapDeserialization() throws Exception {
@@ -167,23 +173,27 @@ public class MapPropertyDeserializerTest {
         Schema responseSchema = response.getContent().get("*/*").getSchema();
 
         Schema schema = new ObjectSchema().additionalProperties(true);
-        assertEquals(normalizeLineEnds(Json.pretty(schema)), "{\n" +
-                "  \"type\" : \"object\",\n" +
-                "  \"additionalProperties\" : true\n" +
-                "}");
+        assertEquals(normalizeLineEnds(Json.pretty(schema)), """
+                {
+                  "type" : "object",
+                  "additionalProperties" : true
+                }\
+                """);
 
         schema = new ObjectSchema().additionalProperties(responseSchema);
-        assertEquals(normalizeLineEnds(Json.pretty(schema)), "{\n" +
-                "  \"type\" : \"object\",\n" +
-                "  \"additionalProperties\" : {\n" +
-                "    \"type\" : \"object\",\n" +
-                "    \"additionalProperties\" : {\n" +
-                "      \"type\" : \"integer\",\n" +
-                "      \"format\" : \"int32\"\n" +
-                "    },\n" +
-                "    \"x-foo\" : \"vendor x\"\n" +
-                "  }\n" +
-                "}");
+        assertEquals(normalizeLineEnds(Json.pretty(schema)), """
+                {
+                  "type" : "object",
+                  "additionalProperties" : {
+                    "type" : "object",
+                    "additionalProperties" : {
+                      "type" : "integer",
+                      "format" : "int32"
+                    },
+                    "x-foo" : "vendor x"
+                  }
+                }\
+                """);
     }
 
     @Test(description = "vendor extensions should be included with object type")
@@ -204,21 +214,22 @@ public class MapPropertyDeserializerTest {
     @Test(description = "it should read an example within an inlined schema")
     public void testIssue1261InlineSchemaExample() throws Exception {
         Operation operation = Yaml.mapper().readValue(
-                "      responses:\n" +
-                        "        \"200\":\n" +
-                        "          content:\n" +
-                        "            '*/*':\n" +
-                        "              description: OK\n" +
-                        "              schema:\n" +
-                        "                type: object\n" +
-                        "                properties:\n" +
-                        "                  id:\n" +
-                        "                    type: integer\n" +
-                        "                    format: int32\n" +
-                        "                  name:\n" +
-                        "                    type: string\n" +
-                        "                required: [id, name]\n" +
-                        "                example: ok", Operation.class);
+                """
+                      responses:
+                        "200":
+                          content:
+                            '*/*':
+                              description: OK
+                              schema:
+                                type: object
+                                properties:
+                                  id:
+                                    type: integer
+                                    format: int32
+                                  name:
+                                    type: string
+                                required: [id, name]
+                                example: ok""", Operation.class);
 
         ApiResponse response = operation.getResponses().get("200");
         assertNotNull(response);

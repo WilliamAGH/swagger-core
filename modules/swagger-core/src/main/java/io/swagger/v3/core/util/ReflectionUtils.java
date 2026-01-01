@@ -34,7 +34,7 @@ public class ReflectionUtils {
         try {
             return loadClassByName(type);
         } catch (Exception e) {
-            LOGGER.warn(String.format("Failed to resolve '%s' into class", type), e);
+            LOGGER.warn("Failed to resolve '%s' into class".formatted(type), e);
         }
         return null;
     }

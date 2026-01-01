@@ -55,14 +55,16 @@ public class ByteConverterTest {
     @Test
     public void testDeserializeByteProperty() throws Exception {
         String json =
-                "{\n" +
-                        "  \"properties\" : {\n" +
-                        "    \"byteProperty\" : {\n" +
-                        "      \"type\" : \"string\",\n" +
-                        "      \"format\" : \"byte\"\n" +
-                        "    }\n" +
-                        "  }\n" +
-                        "}";
+                """
+                {
+                  "properties" : {
+                    "byteProperty" : {
+                      "type" : "string",
+                      "format" : "byte"
+                    }
+                  }
+                }\
+                """;
 
         Schema model = Json.mapper().readValue(json, Schema.class);
         assertNotNull(model);

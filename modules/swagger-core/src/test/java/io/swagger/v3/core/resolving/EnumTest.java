@@ -179,8 +179,7 @@ public class EnumTest extends SwaggerTestBase {
 
         boolean hasEnumRef = false;
         for (Object allOfItem : enumPropertySchema.getAllOf()) {
-            if (allOfItem instanceof Schema) {
-                Schema allOfSchema = (Schema) allOfItem;
+            if (allOfItem instanceof Schema allOfSchema) {
                 if ("#/components/schemas/EnumWithSchemaProperty".equals(allOfSchema.get$ref())) {
                     hasEnumRef = true;
                     break;

@@ -35,10 +35,10 @@ public class DateSchema extends Schema<Date> {
     protected Date cast(Object value) {
         if (value != null) {
             try {
-                if (value instanceof Date) {
-                    return (Date) value;
-                } else if (value instanceof String) {
-                    return new SimpleDateFormat("yyyy-MM-dd Z").parse((String)value + " UTC");
+                if (value instanceof Date date) {
+                    return date;
+                } else if (value instanceof String string) {
+                    return new SimpleDateFormat("yyyy-MM-dd Z").parse(string + " UTC");
                 }
             } catch (Exception e) {
             }

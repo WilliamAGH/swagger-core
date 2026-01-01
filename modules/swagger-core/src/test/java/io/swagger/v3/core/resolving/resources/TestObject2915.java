@@ -3,10 +3,13 @@ package io.swagger.v3.core.resolving.resources;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import javax.validation.constraints.NotNull;
+
+import java.io.Serial;
 import java.io.Serializable;
 
 @Schema(name = "TestObject2616", description = "Nutritional value specification")
 public class TestObject2915 implements Serializable {
+    @Serial
     private final static long serialVersionUID = 1L;
     private String name;
 
@@ -40,6 +43,7 @@ public class TestObject2915 implements Serializable {
     @Schema(name = "QuantitativeValue", description = "A combination of a value and associated unit")
     public class QuantitativeValueDTO implements Serializable {
 
+        @Serial
         private final static long serialVersionUID = 1L;
 
         @NotNull

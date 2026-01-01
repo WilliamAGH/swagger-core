@@ -12,11 +12,14 @@ import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import javax.xml.bind.annotation.XmlElement;
+
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class SwaggerAnnotationIntrospector extends AnnotationIntrospector {
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Override

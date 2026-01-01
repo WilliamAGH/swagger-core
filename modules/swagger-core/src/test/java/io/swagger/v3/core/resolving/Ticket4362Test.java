@@ -28,16 +28,17 @@ public class Ticket4362Test extends SwaggerTestBase {
         final Schema model = context
                 .resolve(new AnnotatedType(DayOfWeek.class));
 
-        SerializationMatchers.assertEqualsToYaml(context.getDefinedModels(), "DayOfWeek:\n" +
-                "  type: string\n" +
-                "  enum:\n" +
-                "  - MONDAY\n" +
-                "  - TUESDAY\n" +
-                "  - WEDNESDAY\n" +
-                "  - THURSDAY\n" +
-                "  - FRIDAY\n" +
-                "  - SATURDAY\n" +
-                "  - SUNDAY");
+        SerializationMatchers.assertEqualsToYaml(context.getDefinedModels(), """
+                DayOfWeek:
+                  type: string
+                  enum:
+                  - MONDAY
+                  - TUESDAY
+                  - WEDNESDAY
+                  - THURSDAY
+                  - FRIDAY
+                  - SATURDAY
+                  - SUNDAY""");
     }
 
 }

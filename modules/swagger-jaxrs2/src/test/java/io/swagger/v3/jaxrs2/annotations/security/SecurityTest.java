@@ -23,68 +23,70 @@ public class SecurityTest extends AbstractAnnotationTest {
         String openApiYAML = readIntoYaml(SecurityTest.OAuth2SchemeOnClass.class);
         int start = openApiYAML.indexOf("components:");
         String extractedYAML = openApiYAML.substring(start, openApiYAML.length() - 1);
-        String expectedYAML = "components:\n" +
-                "  securitySchemes:\n" +
-                "    myOauth2Security:\n" +
-                "      type: oauth2\n" +
-                "      in: header\n" +
-                "      flows:\n" +
-                "        implicit:\n" +
-                "          authorizationUrl: http://url.com/auth\n" +
-                "          scopes:\n" +
-                "            write:pets: modify pets in your account";
+        String expectedYAML = """
+                components:
+                  securitySchemes:
+                    myOauth2Security:
+                      type: oauth2
+                      in: header
+                      flows:
+                        implicit:
+                          authorizationUrl: http://url.com/auth
+                          scopes:
+                            write:pets: modify pets in your account""";
         assertEquals(extractedYAML, expectedYAML);
 
     }
 
     @Test
     public void testSecurityRequirement() throws IOException {
-        String expectedYAML = "openapi: 3.0.1\n" +
-                "paths:\n" +
-                "  /2:\n" +
-                "    get:\n" +
-                "      description: description 2\n" +
-                "      operationId: Operation Id 2\n" +
-                "      responses:\n" +
-                "        default:\n" +
-                "          description: default response\n" +
-                "          content:\n" +
-                "            '*/*': {}\n" +
-                "      security:\n" +
-                "      - security_key:\n" +
-                "        - write:pets\n" +
-                "        - read:pets\n" +
-                "      - myOauth2Security:\n" +
-                "        - write:pets\n" +
-                "      - security_key2:\n" +
-                "        - write:pets\n" +
-                "        - read:pets\n" +
-                "  /:\n" +
-                "    get:\n" +
-                "      description: description\n" +
-                "      operationId: Operation Id\n" +
-                "      responses:\n" +
-                "        default:\n" +
-                "          description: default response\n" +
-                "          content:\n" +
-                "            '*/*': {}\n" +
-                "      security:\n" +
-                "      - security_key:\n" +
-                "        - write:pets\n" +
-                "        - read:pets\n" +
-                "      - myOauth2Security:\n" +
-                "        - write:pets\n" +
-                "components:\n" +
-                "  securitySchemes:\n" +
-                "    myOauth2Security:\n" +
-                "      type: oauth2\n" +
-                "      description: myOauthSecurity Description\n" +
-                "      in: header\n" +
-                "      flows:\n" +
-                "        implicit:\n" +
-                "          authorizationUrl: http://x.com\n" +
-                "          scopes:\n" +
-                "            write:pets: modify pets in your account";
+        String expectedYAML = """
+                openapi: 3.0.1
+                paths:
+                  /2:
+                    get:
+                      description: description 2
+                      operationId: Operation Id 2
+                      responses:
+                        default:
+                          description: default response
+                          content:
+                            '*/*': {}
+                      security:
+                      - security_key:
+                        - write:pets
+                        - read:pets
+                      - myOauth2Security:
+                        - write:pets
+                      - security_key2:
+                        - write:pets
+                        - read:pets
+                  /:
+                    get:
+                      description: description
+                      operationId: Operation Id
+                      responses:
+                        default:
+                          description: default response
+                          content:
+                            '*/*': {}
+                      security:
+                      - security_key:
+                        - write:pets
+                        - read:pets
+                      - myOauth2Security:
+                        - write:pets
+                components:
+                  securitySchemes:
+                    myOauth2Security:
+                      type: oauth2
+                      description: myOauthSecurity Description
+                      in: header
+                      flows:
+                        implicit:
+                          authorizationUrl: http://x.com
+                          scopes:
+                            write:pets: modify pets in your account""";
         compareAsYaml(SecurityResource.class, expectedYAML);
 
     }
@@ -94,20 +96,21 @@ public class SecurityTest extends AbstractAnnotationTest {
         String openApiYAML = readIntoYaml(SecurityTest.MultipleSchemesOnClass.class);
         int start = openApiYAML.indexOf("components:");
         String extractedYAML = openApiYAML.substring(start, openApiYAML.length() - 1);
-        String expectedYAML = "components:\n" +
-                "  securitySchemes:\n" +
-                "    apiKey:\n" +
-                "      type: apiKey\n" +
-                "      name: API_KEY\n" +
-                "      in: header\n" +
-                "    myOauth2Security:\n" +
-                "      type: oauth2\n" +
-                "      in: header\n" +
-                "      flows:\n" +
-                "        implicit:\n" +
-                "          authorizationUrl: http://url.com/auth\n" +
-                "          scopes:\n" +
-                "            write:pets: modify pets in your account";
+        String expectedYAML = """
+                components:
+                  securitySchemes:
+                    apiKey:
+                      type: apiKey
+                      name: API_KEY
+                      in: header
+                    myOauth2Security:
+                      type: oauth2
+                      in: header
+                      flows:
+                        implicit:
+                          authorizationUrl: http://url.com/auth
+                          scopes:
+                            write:pets: modify pets in your account""";
         assertEquals(extractedYAML, expectedYAML);
 
     }
@@ -115,17 +118,19 @@ public class SecurityTest extends AbstractAnnotationTest {
     @Test
     public void testTicket2767() {
         String openApiYAML = readIntoYaml(SecurityTest.Ticket2767.class);
-        String expectedYAML = "openapi: 3.0.1\n" +
-                "info:\n" +
-                "  title: Test\n" +
-                "  version: 1.0-SNAPSHOT\n" +
-                "security:\n" +
-                "- basicAuth: []\n" +
-                "components:\n" +
-                "  securitySchemes:\n" +
-                "    basicAuth:\n" +
-                "      type: http\n" +
-                "      scheme: basic\n";
+        String expectedYAML = """
+                openapi: 3.0.1
+                info:
+                  title: Test
+                  version: 1.0-SNAPSHOT
+                security:
+                - basicAuth: []
+                components:
+                  securitySchemes:
+                    basicAuth:
+                      type: http
+                      scheme: basic
+                """;
         assertEquals(openApiYAML, expectedYAML);
 
     }
@@ -133,17 +138,19 @@ public class SecurityTest extends AbstractAnnotationTest {
     @Test
     public void testTicket2767_2() {
         String openApiYAML = readIntoYaml(SecurityTest.Ticket2767_2.class);
-        String expectedYAML = "openapi: 3.0.1\n" +
-                "info:\n" +
-                "  title: Test\n" +
-                "  version: 1.0-SNAPSHOT\n" +
-                "security:\n" +
-                "- api_key: []\n" +
-                "components:\n" +
-                "  securitySchemes:\n" +
-                "    api_key:\n" +
-                "      type: apiKey\n" +
-                "      name: API_KEY\n";
+        String expectedYAML = """
+                openapi: 3.0.1
+                info:
+                  title: Test
+                  version: 1.0-SNAPSHOT
+                security:
+                - api_key: []
+                components:
+                  securitySchemes:
+                    api_key:
+                      type: apiKey
+                      name: API_KEY
+                """;
         assertEquals(openApiYAML, expectedYAML);
 
     }

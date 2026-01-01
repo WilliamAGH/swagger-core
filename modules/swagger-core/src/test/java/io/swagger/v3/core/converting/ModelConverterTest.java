@@ -207,7 +207,7 @@ public class ModelConverterTest {
                 assertNotNull(additionalProperty.get$ref());
                 assertEquals(additionalProperty.get$ref(), "#/components/schemas/ComplexLeft");
             } else {
-                fail(String.format("Unexpected property: %s", name));
+                fail("Unexpected property: %s".formatted(name));
             }
         }
     }
@@ -321,7 +321,7 @@ public class ModelConverterTest {
             } else if ("bigDecimal".equals(name)) {
                 checkType(property, NumberSchema.class, "number", null);
             } else {
-                fail(String.format("Unexpected property: %s", name));
+                fail("Unexpected property: %s".formatted(name));
             }
         }
     }

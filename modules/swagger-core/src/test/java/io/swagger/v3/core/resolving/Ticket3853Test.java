@@ -30,21 +30,22 @@ public class Ticket3853Test extends SwaggerTestBase {
         final Schema model = context.resolve(new AnnotatedType(BaseClass.class));
 
         assertNotNull(model);
-        String yaml = "io.swagger.v3.core.resolving.Ticket3853Test$BaseClass:\n" +
-                "  type: object\n" +
-                "  properties:\n" +
-                "    property:\n" +
-                "      type: string\n" +
-                "    type:\n" +
-                "      type: string\n" +
-                "io.swagger.v3.core.resolving.Ticket3853Test$SubClass:\n" +
-                "  type: object\n" +
-                "  allOf:\n" +
-                "  - $ref: \"#/components/schemas/io.swagger.v3.core.resolving.Ticket3853Test$BaseClass\"\n" +
-                "  - type: object\n" +
-                "    properties:\n" +
-                "      subClassProperty:\n" +
-                "        type: string";
+        String yaml = """
+                io.swagger.v3.core.resolving.Ticket3853Test$BaseClass:
+                  type: object
+                  properties:
+                    property:
+                      type: string
+                    type:
+                      type: string
+                io.swagger.v3.core.resolving.Ticket3853Test$SubClass:
+                  type: object
+                  allOf:
+                  - $ref: "#/components/schemas/io.swagger.v3.core.resolving.Ticket3853Test$BaseClass"
+                  - type: object
+                    properties:
+                      subClassProperty:
+                        type: string""";
 
         SerializationMatchers.assertEqualsToYaml(context.getDefinedModels(), yaml);
     }

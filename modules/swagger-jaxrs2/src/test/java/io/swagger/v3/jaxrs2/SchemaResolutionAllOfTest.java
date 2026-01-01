@@ -13,48 +13,50 @@ public class SchemaResolutionAllOfTest {
     public void testSchemaResolutionAllOf() {
         Reader reader = new Reader(new SwaggerConfiguration().openAPI(new OpenAPI()).schemaResolution(Schema.SchemaResolution.ALL_OF));
         OpenAPI openAPI = reader.read(SchemaResolutionResourceSimple.class);
-        String yaml = "openapi: 3.0.1\n" +
-                "paths:\n" +
-                "  /test/inlineSchemaFirst:\n" +
-                "    get:\n" +
-                "      operationId: inlineSchemaFirst\n" +
-                "      responses:\n" +
-                "        default:\n" +
-                "          description: InlineSchemaFirst Response API\n" +
-                "          content:\n" +
-                "            '*/*':\n" +
-                "              schema:\n" +
-                "                $ref: \"#/components/schemas/InlineSchemaFirst\"\n" +
-                "  /test/inlineSchemaSecond:\n" +
-                "    get:\n" +
-                "      operationId: inlineSchemaFirst_1\n" +
-                "      requestBody:\n" +
-                "        content:\n" +
-                "          '*/*':\n" +
-                "            schema:\n" +
-                "              allOf:\n" +
-                "              - description: InlineSchemaSecond API\n" +
-                "              - $ref: \"#/components/schemas/InlineSchemaFirst\"\n" +
-                "      responses:\n" +
-                "        default:\n" +
-                "          description: default response\n" +
-                "          content:\n" +
-                "            '*/*': {}\n" +
-                "components:\n" +
-                "  schemas:\n" +
-                "    InlineSchemaFirst:\n" +
-                "      type: object\n" +
-                "      properties:\n" +
-                "        property1:\n" +
-                "          $ref: \"#/components/schemas/InlineSchemaPropertyFirst\"\n" +
-                "    InlineSchemaPropertyFirst:\n" +
-                "      type: object\n" +
-                "      properties:\n" +
-                "        bar:\n" +
-                "          type: string\n" +
-                "      description: property\n" +
-                "      nullable: true\n" +
-                "      example: example\n";
+        String yaml = """
+                openapi: 3.0.1
+                paths:
+                  /test/inlineSchemaFirst:
+                    get:
+                      operationId: inlineSchemaFirst
+                      responses:
+                        default:
+                          description: InlineSchemaFirst Response API
+                          content:
+                            '*/*':
+                              schema:
+                                $ref: "#/components/schemas/InlineSchemaFirst"
+                  /test/inlineSchemaSecond:
+                    get:
+                      operationId: inlineSchemaFirst_1
+                      requestBody:
+                        content:
+                          '*/*':
+                            schema:
+                              allOf:
+                              - description: InlineSchemaSecond API
+                              - $ref: "#/components/schemas/InlineSchemaFirst"
+                      responses:
+                        default:
+                          description: default response
+                          content:
+                            '*/*': {}
+                components:
+                  schemas:
+                    InlineSchemaFirst:
+                      type: object
+                      properties:
+                        property1:
+                          $ref: "#/components/schemas/InlineSchemaPropertyFirst"
+                    InlineSchemaPropertyFirst:
+                      type: object
+                      properties:
+                        bar:
+                          type: string
+                      description: property
+                      nullable: true
+                      example: example
+                """;
         SerializationMatchers.assertEqualsToYaml(openAPI, yaml);
     }
 }

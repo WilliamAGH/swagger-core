@@ -26,23 +26,24 @@ public class EncodingTest extends AbstractAnnotationTest {
         int start = openApiYAML.indexOf("get:");
         int end = openApiYAML.length() - 1;
 
-        String expectedYAML = "get:\n" +
-                "      summary: Simple get operation\n" +
-                "      description: Defines a simple get operation with no inputs and a complex\n" +
-                "      operationId: simpleGet\n" +
-                "      responses:\n" +
-                "        \"200\":\n" +
-                "          description: voila!\n" +
-                "          content:\n" +
-                "            application/json:\n" +
-                "              schema:\n" +
-                "                type: string\n" +
-                "              encoding:\n" +
-                "                test:\n" +
-                "                  contentType: text/plain\n" +
-                "                  style: form\n" +
-                "                  explode: true\n" +
-                "                  allowReserved: true";
+        String expectedYAML = """
+                get:
+                      summary: Simple get operation
+                      description: Defines a simple get operation with no inputs and a complex
+                      operationId: simpleGet
+                      responses:
+                        "200":
+                          description: voila!
+                          content:
+                            application/json:
+                              schema:
+                                type: string
+                              encoding:
+                                test:
+                                  contentType: text/plain
+                                  style: form
+                                  explode: true
+                                  allowReserved: true""";
 
         String extractedYAML = openApiYAML.substring(start, end);
 
@@ -83,26 +84,27 @@ public class EncodingTest extends AbstractAnnotationTest {
         int start = openApiYAML.indexOf("get:");
         int end = openApiYAML.length() - 1;
 
-        String expectedYAML = "get:\n" +
-                "      summary: Simple get operation\n" +
-                "      description: Defines a simple get operation with no inputs and a complex\n" +
-                "      operationId: getWithEncodingInParameter\n" +
-                "      parameters:\n" +
-                "      - name: testParam\n" +
-                "        in: query\n" +
-                "        description: A parameter for testing encoding annotation.\n" +
-                "        required: true\n" +
-                "        content:\n" +
-                "          application/json:\n" +
-                "            schema:\n" +
-                "              type: string\n" +
-                "            encoding:\n" +
-                "              testingParam:\n" +
-                "                style: form\n" +
-                "                allowReserved: true\n" +
-                "      responses:\n" +
-                "        \"200\":\n" +
-                "          description: voila!";
+        String expectedYAML = """
+                get:
+                      summary: Simple get operation
+                      description: Defines a simple get operation with no inputs and a complex
+                      operationId: getWithEncodingInParameter
+                      parameters:
+                      - name: testParam
+                        in: query
+                        description: A parameter for testing encoding annotation.
+                        required: true
+                        content:
+                          application/json:
+                            schema:
+                              type: string
+                            encoding:
+                              testingParam:
+                                style: form
+                                allowReserved: true
+                      responses:
+                        "200":
+                          description: voila!""";
 
         String extractedYAML = openApiYAML.substring(start, end);
 
@@ -151,34 +153,35 @@ public class EncodingTest extends AbstractAnnotationTest {
         int start = openApiYAML.indexOf("get:");
         int end = openApiYAML.length() - 1;
 
-        String expectedYAML = "get:\n" +
-                "      summary: Simple get operation\n" +
-                "      description: Defines a simple get operation with no inputs and a complex\n" +
-                "      operationId: getWithEncodingArrayInParameter\n" +
-                "      parameters:\n" +
-                "      - name: testParam\n" +
-                "        in: query\n" +
-                "        description: A parameter for testing encoding annotation.\n" +
-                "        required: true\n" +
-                "        content:\n" +
-                "          application/json:\n" +
-                "            schema:\n" +
-                "              title: testEncoding2\n" +
-                "              type: string\n" +
-                "            encoding:\n" +
-                "              testEncoding:\n" +
-                "                style: form\n" +
-                "                allowReserved: true\n" +
-                "              testEncoding2:\n" +
-                "                headers:\n" +
-                "                  testHeader:\n" +
-                "                    required: true\n" +
-                "                    style: simple\n" +
-                "                style: form\n" +
-                "                allowReserved: true\n" +
-                "      responses:\n" +
-                "        \"200\":\n" +
-                "          description: voila!";
+        String expectedYAML = """
+                get:
+                      summary: Simple get operation
+                      description: Defines a simple get operation with no inputs and a complex
+                      operationId: getWithEncodingArrayInParameter
+                      parameters:
+                      - name: testParam
+                        in: query
+                        description: A parameter for testing encoding annotation.
+                        required: true
+                        content:
+                          application/json:
+                            schema:
+                              title: testEncoding2
+                              type: string
+                            encoding:
+                              testEncoding:
+                                style: form
+                                allowReserved: true
+                              testEncoding2:
+                                headers:
+                                  testHeader:
+                                    required: true
+                                    style: simple
+                                style: form
+                                allowReserved: true
+                      responses:
+                        "200":
+                          description: voila!""";
 
         String extractedYAML = openApiYAML.substring(start, end);
 
@@ -237,25 +240,26 @@ public class EncodingTest extends AbstractAnnotationTest {
         int start = openApiYAML.indexOf("get:");
         int end = openApiYAML.length() - 1;
 
-        String expectedYAML = "get:\n" +
-                "      summary: Simple get operation\n" +
-                "      description: Defines a simple get operation with encoding in requestBody\n" +
-                "      operationId: getWithEncodingInRequestBody\n" +
-                "      requestBody:\n" +
-                "        description: Test requestBody with encoding.\n" +
-                "        content:\n" +
-                "          application/json:\n" +
-                "            schema:\n" +
-                "              type: string\n" +
-                "            encoding:\n" +
-                "              testRequestBody:\n" +
-                "                contentType: text/plain\n" +
-                "                style: form\n" +
-                "                explode: true\n" +
-                "        required: true\n" +
-                "      responses:\n" +
-                "        \"200\":\n" +
-                "          description: voila!";
+        String expectedYAML = """
+                get:
+                      summary: Simple get operation
+                      description: Defines a simple get operation with encoding in requestBody
+                      operationId: getWithEncodingInRequestBody
+                      requestBody:
+                        description: Test requestBody with encoding.
+                        content:
+                          application/json:
+                            schema:
+                              type: string
+                            encoding:
+                              testRequestBody:
+                                contentType: text/plain
+                                style: form
+                                explode: true
+                        required: true
+                      responses:
+                        "200":
+                          description: voila!""";
         String extractedYAML = openApiYAML.substring(start, end);
 
         assertEquals(extractedYAML, expectedYAML);
@@ -296,13 +300,14 @@ public class EncodingTest extends AbstractAnnotationTest {
         int start = openApiYAML.indexOf("get:");
         int end = openApiYAML.length() - 1;
 
-        String expectedYAML = "get:\n" +
-                "      summary: Simple get operation\n" +
-                "      description: Defines a simple get operation with no inputs and a complex\n" +
-                "      operationId: getWithNoParameters\n" +
-                "      responses:\n" +
-                "        \"200\":\n" +
-                "          description: voila!";
+        String expectedYAML = """
+                get:
+                      summary: Simple get operation
+                      description: Defines a simple get operation with no inputs and a complex
+                      operationId: getWithNoParameters
+                      responses:
+                        "200":
+                          description: voila!""";
         String extractedYAML = openApiYAML.substring(start, end);
 
         assertEquals(extractedYAML, expectedYAML);
@@ -331,15 +336,17 @@ public class EncodingTest extends AbstractAnnotationTest {
         int start = openApiYAML.indexOf("get:");
         int end = openApiYAML.length() - 1;
 
-        String expectedYAML = "get:\n" +
-                "      summary: Simple get operation\n" +
-                "      description: Defines a simple get operation with no inputs or responses\n" +
-                "      operationId: getWithNoParametersAndNoResponses\n" +
-                "      responses:\n" +
-                "        default:\n" +
-                "          description: default response\n" +
-                "          content:\n" +
-                "            '*/*': {}";
+        String expectedYAML = """
+                get:
+                      summary: Simple get operation
+                      description: Defines a simple get operation with no inputs or responses
+                      operationId: getWithNoParametersAndNoResponses
+                      responses:
+                        default:
+                          description: default response
+                          content:
+                            '*/*': {}\
+                """;
         String extractedYAML = openApiYAML.substring(start, end);
 
         assertEquals(extractedYAML, expectedYAML);

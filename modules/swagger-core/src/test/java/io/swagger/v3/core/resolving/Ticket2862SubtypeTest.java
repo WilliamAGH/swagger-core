@@ -18,18 +18,20 @@ public class Ticket2862SubtypeTest extends SwaggerTestBase {
         final Schema model = context
                 .resolve(new AnnotatedType(Ticket2862Model.class));
 
-        SerializationMatchers.assertEqualsToYaml(context.getDefinedModels(), "Ticket2862Model:\n" +
-                "  type: object\n" +
-                "  properties:\n" +
-                "    Ticket2862Model:\n" +
-                "      type: object\n" +
-                "Ticket2862ModelImpl:\n" +
-                "  type: string\n" +
-                "  allOf:\n" +
-                "  - $ref: \"#/components/schemas/Ticket2862Model\"\n" +
-                "  enum:\n" +
-                "  - VALUE1\n" +
-                "  - VALUE2\n");
+        SerializationMatchers.assertEqualsToYaml(context.getDefinedModels(), """
+                Ticket2862Model:
+                  type: object
+                  properties:
+                    Ticket2862Model:
+                      type: object
+                Ticket2862ModelImpl:
+                  type: string
+                  allOf:
+                  - $ref: "#/components/schemas/Ticket2862Model"
+                  enum:
+                  - VALUE1
+                  - VALUE2
+                """);
     }
 
 }

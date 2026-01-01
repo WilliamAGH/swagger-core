@@ -16,17 +16,19 @@ public class Ticket3699Test extends SwaggerTestBase {
         ModelConverterContextImpl context = new ModelConverterContextImpl(modelResolver);
         context.resolve(new AnnotatedType(TestObject3699.class));
 
-        SerializationMatchers.assertEqualsToYaml(context.getDefinedModels(), "TestObject3699:\n" +
-                "  type: object\n" +
-                "  properties:\n" +
-                "    CustomName:\n" +
-                "      type: object\n" +
-                "      properties:\n" +
-                "        bar:\n" +
-                "          type: string\n" +
-                "        foo:\n" +
-                "          type: array\n" +
-                "          items:\n" +
-                "            type: string\n");
+        SerializationMatchers.assertEqualsToYaml(context.getDefinedModels(), """
+                TestObject3699:
+                  type: object
+                  properties:
+                    CustomName:
+                      type: object
+                      properties:
+                        bar:
+                          type: string
+                        foo:
+                          type: array
+                          items:
+                            type: string
+                """);
     }
 }

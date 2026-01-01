@@ -16,31 +16,32 @@ public class ContainerTypeSchemaTicket2636Test extends AbstractAnnotationTest {
 
     @Test
     public void testContainerTypeSchemaTicket2636() throws Exception {
-        String expectedYaml = "openapi: 3.0.1\n" +
-                "paths:\n" +
-                "  /path:\n" +
-                "    get:\n" +
-                "      summary: Op\n" +
-                "      description: 'RequestBody contains a Schema class that extends a Map '\n" +
-                "      operationId: getWithNoParameters\n" +
-                "      requestBody:\n" +
-                "        content:\n" +
-                "          application/json:\n" +
-                "            schema:\n" +
-                "              $ref: \"#/components/schemas/MyModel\"\n" +
-                "        required: true\n" +
-                "      responses:\n" +
-                "        \"200\":\n" +
-                "          description: voila!\n" +
-                "components:\n" +
-                "  schemas:\n" +
-                "    MyModel:\n" +
-                "      type: object\n" +
-                "      properties:\n" +
-                "        empty:\n" +
-                "          type: boolean\n" +
-                "      additionalProperties:\n" +
-                "        type: string";
+        String expectedYaml = """
+                openapi: 3.0.1
+                paths:
+                  /path:
+                    get:
+                      summary: Op
+                      description: 'RequestBody contains a Schema class that extends a Map '
+                      operationId: getWithNoParameters
+                      requestBody:
+                        content:
+                          application/json:
+                            schema:
+                              $ref: "#/components/schemas/MyModel"
+                        required: true
+                      responses:
+                        "200":
+                          description: voila!
+                components:
+                  schemas:
+                    MyModel:
+                      type: object
+                      properties:
+                        empty:
+                          type: boolean
+                      additionalProperties:
+                        type: string""";
         compareAsYaml(RequestBodyInheritanceModelIssue.class, expectedYaml);
     }
 

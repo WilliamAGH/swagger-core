@@ -67,9 +67,9 @@ public class SerializationMatchers {
             if (o1.equals(o2)) {
                 return 0;
             }
-            if ((o1 instanceof NumericNode) && (o2 instanceof NumericNode)) {
-                double d1 = ((NumericNode) o1).asDouble();
-                double d2 = ((NumericNode) o2).asDouble();
+            if ((o1 instanceof NumericNode node1) && (o2 instanceof NumericNode node2)) {
+                double d1 = node1.asDouble();
+                double d2 = node2.asDouble();
                 return Double.compare(d1, d2);
             }
             int comp = o1.asText().compareTo(o2.asText());

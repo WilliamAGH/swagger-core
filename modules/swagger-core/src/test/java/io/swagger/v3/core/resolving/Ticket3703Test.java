@@ -21,19 +21,20 @@ public class Ticket3703Test extends SwaggerTestBase {
         Schema model = context
                 .resolve(new AnnotatedType(ModelContainer.class));
 
-        SerializationMatchers.assertEqualsToYaml(context.getDefinedModels(), "Model:\n" +
-                "  type: object\n" +
-                "  properties:\n" +
-                "    model:\n" +
-                "      $ref: \"#/components/schemas/Model\"\n" +
-                "ModelContainer:\n" +
-                "  type: object\n" +
-                "  properties:\n" +
-                "    model:\n" +
-                "      $ref: \"#/components/schemas/Model\"\n" +
-                "    bytes:\n" +
-                "      type: string\n" +
-                "      format: byte");
+        SerializationMatchers.assertEqualsToYaml(context.getDefinedModels(), """
+                Model:
+                  type: object
+                  properties:
+                    model:
+                      $ref: "#/components/schemas/Model"
+                ModelContainer:
+                  type: object
+                  properties:
+                    model:
+                      $ref: "#/components/schemas/Model"
+                    bytes:
+                      type: string
+                      format: byte""");
 
     }
 

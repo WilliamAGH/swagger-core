@@ -35,13 +35,13 @@ public class BinarySchema extends Schema<byte[]> {
     protected byte[] cast(Object value) {
         if (value != null) {
             try {
-                if (value instanceof byte[]) {
-                    return (byte[]) value;
-                } else if (value instanceof String) {
+                if (value instanceof byte[] bytes) {
+                    return bytes;
+                } else if (value instanceof String string) {
                     if (
                             (System.getProperty(BINARY_STRING_CONVERSION_PROPERTY) != null && System.getProperty(BINARY_STRING_CONVERSION_PROPERTY).equals(BynaryStringConversion.BINARY_STRING_CONVERSION_BASE64.toString())) ||
                             (System.getenv(BINARY_STRING_CONVERSION_PROPERTY) != null && System.getenv(BINARY_STRING_CONVERSION_PROPERTY).equals(BynaryStringConversion.BINARY_STRING_CONVERSION_BASE64.toString()))) {
-                        return Base64.getDecoder().decode((String) value);
+                        return Base64.getDecoder().decode(string);
                     }
                     return value.toString().getBytes();
                 } else {

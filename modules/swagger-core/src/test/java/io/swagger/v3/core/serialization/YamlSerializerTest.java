@@ -10,10 +10,12 @@ public class YamlSerializerTest {
     @Test
     public void testMultiLineYaml() throws Exception {
         final String yaml =
-                "multiLineString: |\n" +
-                        "  \"hello multiple lines\n" +
-                        "  in my content without\n" +
-                        "  any problem\"\n";
+                """
+                multiLineString: |
+                  "hello multiple lines
+                  in my content without
+                  any problem"
+                """;
 
         JsonNode node = Yaml.mapper().readValue(yaml, JsonNode.class);
 

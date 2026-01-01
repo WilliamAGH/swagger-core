@@ -17,17 +17,19 @@ public class ResponseExamplesTest {
                         .addMediaType("application/json", new MediaType()
                                 .addExamples("test", new Example().value("{\"name\":\"Fred\",\"id\":123456\"}"))));
 
-        final String json = "{\n" +
-                "  \"content\" : {\n" +
-                "    \"application/json\" : {\n" +
-                "      \"examples\" : {\n" +
-                "        \"test\" : {\n" +
-                "          \"value\" : \"{\\\"name\\\":\\\"Fred\\\",\\\"id\\\":123456\\\"}\"\n" +
-                "        }\n" +
-                "      }\n" +
-                "    }\n" +
-                "  }\n" +
-                "}";
+        final String json = """
+                {
+                  "content" : {
+                    "application/json" : {
+                      "examples" : {
+                        "test" : {
+                          "value" : "{\\"name\\":\\"Fred\\",\\"id\\":123456\\"}"
+                        }
+                      }
+                    }
+                  }
+                }\
+                """;
         SerializationMatchers.assertEqualsToJson(response, json);
     }
 }

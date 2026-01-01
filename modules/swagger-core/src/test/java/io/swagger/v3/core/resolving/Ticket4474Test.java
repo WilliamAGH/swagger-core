@@ -31,91 +31,92 @@ public class Ticket4474Test extends SwaggerTestBase {
         final Schema model = context
                 .resolve(new AnnotatedType(Document.class));
 
-        SerializationMatchers.assertEqualsToYaml(context.getDefinedModels(), "Document:\n" +
-                "  type: object\n" +
-                "  properties:\n" +
-                "    data:\n" +
-                "      type: object\n" +
-                "      additionalProperties:\n" +
-                "        type: object\n" +
-                "        anyOf:\n" +
-                "        - type: array\n" +
-                "          items:\n" +
-                "            type: boolean\n" +
-                "        - type: array\n" +
-                "          items:\n" +
-                "            type: integer\n" +
-                "            format: int32\n" +
-                "        - type: array\n" +
-                "          items:\n" +
-                "            type: integer\n" +
-                "            format: int64\n" +
-                "        - type: array\n" +
-                "          items:\n" +
-                "            type: number\n" +
-                "            format: double\n" +
-                "        - type: array\n" +
-                "          items:\n" +
-                "            type: string\n" +
-                "        - type: boolean\n" +
-                "        - type: integer\n" +
-                "          format: int32\n" +
-                "        - type: integer\n" +
-                "          format: int64\n" +
-                "    listData:\n" +
-                "      type: array\n" +
-                "      items:\n" +
-                "        type: object\n" +
-                "        anyOf:\n" +
-                "        - type: array\n" +
-                "          items:\n" +
-                "            type: boolean\n" +
-                "        - type: array\n" +
-                "          items:\n" +
-                "            type: integer\n" +
-                "            format: int32\n" +
-                "        - type: array\n" +
-                "          items:\n" +
-                "            type: integer\n" +
-                "            format: int64\n" +
-                "        - type: array\n" +
-                "          items:\n" +
-                "            type: number\n" +
-                "            format: double\n" +
-                "        - type: array\n" +
-                "          items:\n" +
-                "            type: string\n" +
-                "        - type: boolean\n" +
-                "        - type: integer\n" +
-                "          format: int32\n" +
-                "        - type: integer\n" +
-                "          format: int64\n" +
-                "    itemData:\n" +
-                "      type: object\n" +
-                "      anyOf:\n" +
-                "      - type: array\n" +
-                "        items:\n" +
-                "          type: boolean\n" +
-                "      - type: array\n" +
-                "        items:\n" +
-                "          type: integer\n" +
-                "          format: int32\n" +
-                "      - type: array\n" +
-                "        items:\n" +
-                "          type: integer\n" +
-                "          format: int64\n" +
-                "      - type: array\n" +
-                "        items:\n" +
-                "          type: number\n" +
-                "          format: double\n" +
-                "      - type: array\n" +
-                "        items:\n" +
-                "          type: string\n" +
-                "      - type: boolean\n" +
-                "      - type: integer\n" +
-                "        format: int32\n" +
-                "      - type: integer\n" +
-                "        format: int64");
+        SerializationMatchers.assertEqualsToYaml(context.getDefinedModels(), """
+                Document:
+                  type: object
+                  properties:
+                    data:
+                      type: object
+                      additionalProperties:
+                        type: object
+                        anyOf:
+                        - type: array
+                          items:
+                            type: boolean
+                        - type: array
+                          items:
+                            type: integer
+                            format: int32
+                        - type: array
+                          items:
+                            type: integer
+                            format: int64
+                        - type: array
+                          items:
+                            type: number
+                            format: double
+                        - type: array
+                          items:
+                            type: string
+                        - type: boolean
+                        - type: integer
+                          format: int32
+                        - type: integer
+                          format: int64
+                    listData:
+                      type: array
+                      items:
+                        type: object
+                        anyOf:
+                        - type: array
+                          items:
+                            type: boolean
+                        - type: array
+                          items:
+                            type: integer
+                            format: int32
+                        - type: array
+                          items:
+                            type: integer
+                            format: int64
+                        - type: array
+                          items:
+                            type: number
+                            format: double
+                        - type: array
+                          items:
+                            type: string
+                        - type: boolean
+                        - type: integer
+                          format: int32
+                        - type: integer
+                          format: int64
+                    itemData:
+                      type: object
+                      anyOf:
+                      - type: array
+                        items:
+                          type: boolean
+                      - type: array
+                        items:
+                          type: integer
+                          format: int32
+                      - type: array
+                        items:
+                          type: integer
+                          format: int64
+                      - type: array
+                        items:
+                          type: number
+                          format: double
+                      - type: array
+                        items:
+                          type: string
+                      - type: boolean
+                      - type: integer
+                        format: int32
+                      - type: integer
+                        format: int64""");
     }
 
     static class Document {

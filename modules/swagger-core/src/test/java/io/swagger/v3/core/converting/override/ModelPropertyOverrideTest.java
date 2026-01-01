@@ -75,31 +75,33 @@ public class ModelPropertyOverrideTest {
     public void customAnnotationTest() throws Exception {
         ModelConverters.getInstance().addConverter(new CustomAnnotationConverter(Json.mapper()));
         final Map<String, Schema> model = ModelConverters.getInstance().read(BidimensionalArray.class);
-        final String expected = "BidimensionalArray:\n" +
-                "  type: object\n" +
-                "  properties:\n" +
-                "    withCustomAnnotation:\n" +
-                "      maxItems: 3\n" +
-                "      type: array\n" +
-                "      items:\n" +
-                "        maxItems: 2\n" +
-                "        type: array\n" +
-                "        items:\n" +
-                "          type: string\n" +
-                "    withHelperClass:\n" +
-                "      maxItems: 3\n" +
-                "      type: array\n" +
-                "      items:\n" +
-                "        maxItems: 2\n" +
-                "        type: array\n" +
-                "        items:\n" +
-                "          type: string\n" +
-                "    sized:\n" +
-                "      maxItems: 2\n" +
-                "      minItems: 0\n" +
-                "      type: array\n" +
-                "      items:\n" +
-                "        type: string\n";
+        final String expected = """
+                BidimensionalArray:
+                  type: object
+                  properties:
+                    withCustomAnnotation:
+                      maxItems: 3
+                      type: array
+                      items:
+                        maxItems: 2
+                        type: array
+                        items:
+                          type: string
+                    withHelperClass:
+                      maxItems: 3
+                      type: array
+                      items:
+                        maxItems: 2
+                        type: array
+                        items:
+                          type: string
+                    sized:
+                      maxItems: 2
+                      minItems: 0
+                      type: array
+                      items:
+                        type: string
+                """;
         SerializationMatchers.assertEqualsToYaml(model, expected);
     }
 }

@@ -46,91 +46,92 @@ public class ParametersTest extends AbstractAnnotationTest {
         int start = openApiYAML.indexOf("/test:");
         int end = openApiYAML.length() - 1;
         String extractedYAML = openApiYAML.substring(start, end);
-        String expectedYAML = "/test:\n" +
-                "    post:\n" +
-                "      description: \"subscribes a client to updates relevant to the requestor's account,\\\n" +
-                "        \\ as identified by the input token.  The supplied url will be used as the\\\n" +
-                "        \\ delivery address for response payloads\"\n" +
-                "      operationId: subscribe\n" +
-                "      parameters:\n" +
-                "      - name: subscriptionId\n" +
-                "        in: path\n" +
-                "        required: true\n" +
-                "        style: simple\n" +
-                "        schema:\n" +
-                "          $ref: \"#/components/schemas/SubscriptionResponse\"\n" +
-                "      - name: formId\n" +
-                "        in: query\n" +
-                "        required: true\n" +
-                "        schema:\n" +
-                "          type: string\n" +
-                "        example: Example\n" +
-                "      - name: explodeFalse\n" +
-                "        in: query\n" +
-                "        required: true\n" +
-                "        explode: false\n" +
-                "        schema:\n" +
-                "          $ref: \"#/components/schemas/SubscriptionResponse\"\n" +
-                "      - name: explodeTrue\n" +
-                "        in: query\n" +
-                "        required: true\n" +
-                "        explode: true\n" +
-                "        schema:\n" +
-                "          $ref: \"#/components/schemas/SubscriptionResponse\"\n" +
-                "      - name: explodeAvoiding\n" +
-                "        in: query\n" +
-                "        required: true\n" +
-                "        schema:\n" +
-                "          type: string\n" +
-                "          description: the generated id\n" +
-                "          format: id\n" +
-                "          readOnly: true\n" +
-                "      - name: arrayParameter\n" +
-                "        in: query\n" +
-                "        required: true\n" +
-                "        explode: true\n" +
-                "        content:\n" +
-                "          application/json:\n" +
-                "            schema:\n" +
-                "              type: number\n" +
-                "              description: the generated id\n" +
-                "              readOnly: true\n" +
-                "          application/xml:\n" +
-                "            schema:\n" +
-                "              type: number\n" +
-                "              description: the generated id\n" +
-                "              readOnly: true\n" +
-                "      - name: arrayParameterImplementation\n" +
-                "        in: query\n" +
-                "        required: true\n" +
-                "        explode: true\n" +
-                "        schema:\n" +
-                "          maxItems: 10\n" +
-                "          minItems: 1\n" +
-                "          uniqueItems: true\n" +
-                "          type: array\n" +
-                "          items:\n" +
-                "            $ref: \"#/components/schemas/SubscriptionResponse\"\n" +
-                "      - name: arrayParameterImplementation2\n" +
-                "        in: query\n" +
-                "        required: true\n" +
-                "        explode: true\n" +
-                "        schema:\n" +
-                "          $ref: \"#/components/schemas/SubscriptionResponse\"\n" +
-                "      responses:\n" +
-                "        default:\n" +
-                "          description: test description\n" +
-                "          content:\n" +
-                "            '*/*':\n" +
-                "              schema:\n" +
-                "                $ref: \"#/components/schemas/SubscriptionResponse\"\n" +
-                "components:\n" +
-                "  schemas:\n" +
-                "    SubscriptionResponse:\n" +
-                "      type: object\n" +
-                "      properties:\n" +
-                "        subscriptionId:\n" +
-                "          type: string";
+        String expectedYAML = """
+                /test:
+                    post:
+                      description: "subscribes a client to updates relevant to the requestor's account,\\
+                        \\ as identified by the input token.  The supplied url will be used as the\\
+                        \\ delivery address for response payloads"
+                      operationId: subscribe
+                      parameters:
+                      - name: subscriptionId
+                        in: path
+                        required: true
+                        style: simple
+                        schema:
+                          $ref: "#/components/schemas/SubscriptionResponse"
+                      - name: formId
+                        in: query
+                        required: true
+                        schema:
+                          type: string
+                        example: Example
+                      - name: explodeFalse
+                        in: query
+                        required: true
+                        explode: false
+                        schema:
+                          $ref: "#/components/schemas/SubscriptionResponse"
+                      - name: explodeTrue
+                        in: query
+                        required: true
+                        explode: true
+                        schema:
+                          $ref: "#/components/schemas/SubscriptionResponse"
+                      - name: explodeAvoiding
+                        in: query
+                        required: true
+                        schema:
+                          type: string
+                          description: the generated id
+                          format: id
+                          readOnly: true
+                      - name: arrayParameter
+                        in: query
+                        required: true
+                        explode: true
+                        content:
+                          application/json:
+                            schema:
+                              type: number
+                              description: the generated id
+                              readOnly: true
+                          application/xml:
+                            schema:
+                              type: number
+                              description: the generated id
+                              readOnly: true
+                      - name: arrayParameterImplementation
+                        in: query
+                        required: true
+                        explode: true
+                        schema:
+                          maxItems: 10
+                          minItems: 1
+                          uniqueItems: true
+                          type: array
+                          items:
+                            $ref: "#/components/schemas/SubscriptionResponse"
+                      - name: arrayParameterImplementation2
+                        in: query
+                        required: true
+                        explode: true
+                        schema:
+                          $ref: "#/components/schemas/SubscriptionResponse"
+                      responses:
+                        default:
+                          description: test description
+                          content:
+                            '*/*':
+                              schema:
+                                $ref: "#/components/schemas/SubscriptionResponse"
+                components:
+                  schemas:
+                    SubscriptionResponse:
+                      type: object
+                      properties:
+                        subscriptionId:
+                          type: string""";
         assertEquals(extractedYAML, expectedYAML);
     }
 
@@ -140,38 +141,39 @@ public class ParametersTest extends AbstractAnnotationTest {
         int start = openApiYAML.indexOf("/test:");
         int end = openApiYAML.length() - 1;
         String extractedYAML = openApiYAML.substring(start, end);
-        String expectedYAML = "/test:\n" +
-                "    post:\n" +
-                "      description: \"subscribes a client to updates relevant to the requestor's account,\\\n" +
-                "        \\ as identified by the input token.  The supplied url will be used as the\\\n" +
-                "        \\ delivery address for response payloads\"\n" +
-                "      operationId: subscribe\n" +
-                "      parameters:\n" +
-                "      - name: arrayParameter\n" +
-                "        in: query\n" +
-                "        required: true\n" +
-                "        explode: true\n" +
-                "        schema:\n" +
-                "          maxItems: 10\n" +
-                "          minItems: 1\n" +
-                "          uniqueItems: true\n" +
-                "          type: array\n" +
-                "          items:\n" +
-                "            $ref: \"#/components/schemas/SubscriptionResponse\"\n" +
-                "      responses:\n" +
-                "        default:\n" +
-                "          description: test description\n" +
-                "          content:\n" +
-                "            '*/*':\n" +
-                "              schema:\n" +
-                "                $ref: \"#/components/schemas/SubscriptionResponse\"\n" +
-                "components:\n" +
-                "  schemas:\n" +
-                "    SubscriptionResponse:\n" +
-                "      type: object\n" +
-                "      properties:\n" +
-                "        subscriptionId:\n" +
-                "          type: string";
+        String expectedYAML = """
+                /test:
+                    post:
+                      description: "subscribes a client to updates relevant to the requestor's account,\\
+                        \\ as identified by the input token.  The supplied url will be used as the\\
+                        \\ delivery address for response payloads"
+                      operationId: subscribe
+                      parameters:
+                      - name: arrayParameter
+                        in: query
+                        required: true
+                        explode: true
+                        schema:
+                          maxItems: 10
+                          minItems: 1
+                          uniqueItems: true
+                          type: array
+                          items:
+                            $ref: "#/components/schemas/SubscriptionResponse"
+                      responses:
+                        default:
+                          description: test description
+                          content:
+                            '*/*':
+                              schema:
+                                $ref: "#/components/schemas/SubscriptionResponse"
+                components:
+                  schemas:
+                    SubscriptionResponse:
+                      type: object
+                      properties:
+                        subscriptionId:
+                          type: string""";
         assertEquals(extractedYAML, expectedYAML);
     }
 
@@ -181,91 +183,92 @@ public class ParametersTest extends AbstractAnnotationTest {
         int start = openApiYAML.indexOf("/test:");
         int end = openApiYAML.length() - 1;
         String extractedYAML = openApiYAML.substring(start, end);
-        String expectedYAML = "/test:\n" +
-                "    post:\n" +
-                "      description: \"subscribes a client to updates relevant to the requestor's account,\\\n" +
-                "        \\ as identified by the input token.  The supplied url will be used as the\\\n" +
-                "        \\ delivery address for response payloads\"\n" +
-                "      operationId: subscribe\n" +
-                "      parameters:\n" +
-                "      - name: subscriptionId\n" +
-                "        in: path\n" +
-                "        required: true\n" +
-                "        style: simple\n" +
-                "        schema:\n" +
-                "          $ref: \"#/components/schemas/SubscriptionResponse\"\n" +
-                "      - name: formId\n" +
-                "        in: query\n" +
-                "        required: true\n" +
-                "        schema:\n" +
-                "          type: string\n" +
-                "        example: Example\n" +
-                "      - name: explodeFalse\n" +
-                "        in: query\n" +
-                "        required: true\n" +
-                "        explode: false\n" +
-                "        schema:\n" +
-                "          $ref: \"#/components/schemas/SubscriptionResponse\"\n" +
-                "      - name: explodeTrue\n" +
-                "        in: query\n" +
-                "        required: true\n" +
-                "        explode: true\n" +
-                "        schema:\n" +
-                "          $ref: \"#/components/schemas/SubscriptionResponse\"\n" +
-                "      - name: explodeAvoiding\n" +
-                "        in: query\n" +
-                "        required: true\n" +
-                "        schema:\n" +
-                "          type: string\n" +
-                "          description: the generated id\n" +
-                "          format: id\n" +
-                "          readOnly: true\n" +
-                "      - name: arrayParameter\n" +
-                "        in: query\n" +
-                "        required: true\n" +
-                "        explode: true\n" +
-                "        content:\n" +
-                "          application/json:\n" +
-                "            schema:\n" +
-                "              type: number\n" +
-                "              description: the generated id\n" +
-                "              readOnly: true\n" +
-                "          application/xml:\n" +
-                "            schema:\n" +
-                "              type: number\n" +
-                "              description: the generated id\n" +
-                "              readOnly: true\n" +
-                "      - name: arrayParameterImplementation\n" +
-                "        in: query\n" +
-                "        required: true\n" +
-                "        explode: true\n" +
-                "        schema:\n" +
-                "          maxItems: 10\n" +
-                "          minItems: 1\n" +
-                "          uniqueItems: true\n" +
-                "          type: array\n" +
-                "          items:\n" +
-                "            $ref: \"#/components/schemas/SubscriptionResponse\"\n" +
-                "      - name: arrayParameterImplementation2\n" +
-                "        in: query\n" +
-                "        required: true\n" +
-                "        explode: true\n" +
-                "        schema:\n" +
-                "          $ref: \"#/components/schemas/SubscriptionResponse\"\n" +
-                "      responses:\n" +
-                "        default:\n" +
-                "          description: test description\n" +
-                "          content:\n" +
-                "            '*/*':\n" +
-                "              schema:\n" +
-                "                $ref: \"#/components/schemas/SubscriptionResponse\"\n" +
-                "components:\n" +
-                "  schemas:\n" +
-                "    SubscriptionResponse:\n" +
-                "      type: object\n" +
-                "      properties:\n" +
-                "        subscriptionId:\n" +
-                "          type: string";
+        String expectedYAML = """
+                /test:
+                    post:
+                      description: "subscribes a client to updates relevant to the requestor's account,\\
+                        \\ as identified by the input token.  The supplied url will be used as the\\
+                        \\ delivery address for response payloads"
+                      operationId: subscribe
+                      parameters:
+                      - name: subscriptionId
+                        in: path
+                        required: true
+                        style: simple
+                        schema:
+                          $ref: "#/components/schemas/SubscriptionResponse"
+                      - name: formId
+                        in: query
+                        required: true
+                        schema:
+                          type: string
+                        example: Example
+                      - name: explodeFalse
+                        in: query
+                        required: true
+                        explode: false
+                        schema:
+                          $ref: "#/components/schemas/SubscriptionResponse"
+                      - name: explodeTrue
+                        in: query
+                        required: true
+                        explode: true
+                        schema:
+                          $ref: "#/components/schemas/SubscriptionResponse"
+                      - name: explodeAvoiding
+                        in: query
+                        required: true
+                        schema:
+                          type: string
+                          description: the generated id
+                          format: id
+                          readOnly: true
+                      - name: arrayParameter
+                        in: query
+                        required: true
+                        explode: true
+                        content:
+                          application/json:
+                            schema:
+                              type: number
+                              description: the generated id
+                              readOnly: true
+                          application/xml:
+                            schema:
+                              type: number
+                              description: the generated id
+                              readOnly: true
+                      - name: arrayParameterImplementation
+                        in: query
+                        required: true
+                        explode: true
+                        schema:
+                          maxItems: 10
+                          minItems: 1
+                          uniqueItems: true
+                          type: array
+                          items:
+                            $ref: "#/components/schemas/SubscriptionResponse"
+                      - name: arrayParameterImplementation2
+                        in: query
+                        required: true
+                        explode: true
+                        schema:
+                          $ref: "#/components/schemas/SubscriptionResponse"
+                      responses:
+                        default:
+                          description: test description
+                          content:
+                            '*/*':
+                              schema:
+                                $ref: "#/components/schemas/SubscriptionResponse"
+                components:
+                  schemas:
+                    SubscriptionResponse:
+                      type: object
+                      properties:
+                        subscriptionId:
+                          type: string""";
         assertEquals(extractedYAML, expectedYAML);
     }
 

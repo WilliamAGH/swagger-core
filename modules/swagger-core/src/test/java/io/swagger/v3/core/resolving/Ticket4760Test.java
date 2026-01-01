@@ -14,22 +14,24 @@ public class Ticket4760Test {
     @Test
     public void testArraySchemaItemsValidation(){
         final Map<String, Schema> stringSchemaMap = ModelConverters.getInstance().readAll(ClassWithArraySchemaItemsValidation.class);
-        final String expectedJson = "{\n" +
-                "  \"ClassWithArraySchemaItemsValidation\" : {\n" +
-                "    \"type\" : \"object\",\n" +
-                "    \"properties\" : {\n" +
-                "      \"setOfEnums\" : {\n" +
-                "        \"maxItems\" : 3,\n" +
-                "        \"minItems\" : 1,\n" +
-                "        \"type\" : \"array\",\n" +
-                "        \"items\" : {\n" +
-                "          \"type\" : \"string\",\n" +
-                "          \"enum\" : [ \"green\", \"blue\" ]\n" +
-                "        }\n" +
-                "      }\n" +
-                "    }\n" +
-                "  }\n" +
-                "}";
+        final String expectedJson = """
+                {
+                  "ClassWithArraySchemaItemsValidation" : {
+                    "type" : "object",
+                    "properties" : {
+                      "setOfEnums" : {
+                        "maxItems" : 3,
+                        "minItems" : 1,
+                        "type" : "array",
+                        "items" : {
+                          "type" : "string",
+                          "enum" : [ "green", "blue" ]
+                        }
+                      }
+                    }
+                  }
+                }\
+                """;
         SerializationMatchers.assertEqualsToJson(stringSchemaMap, expectedJson);
     }
 

@@ -33,14 +33,15 @@ public class AnnotatedOperationMethodTest extends AbstractAnnotationTest {
         int start = openApiYAML.indexOf("get:");
         int end = openApiYAML.length() - 1;
 
-        String expectedYAML = "get:\n" +
-                "      summary: Simple get operation\n" +
-                "      description: Defines a simple get operation with no inputs and a complex\n" +
-                "      operationId: getWithNoParameters\n" +
-                "      responses:\n" +
-                "        \"200\":\n" +
-                "          description: voila!\n" +
-                "      deprecated: true";
+        String expectedYAML = """
+                get:
+                      summary: Simple get operation
+                      description: Defines a simple get operation with no inputs and a complex
+                      operationId: getWithNoParameters
+                      responses:
+                        "200":
+                          description: voila!
+                      deprecated: true""";
         String extractedYAML = openApiYAML.substring(start, end);
 
         assertEquals(extractedYAML, expectedYAML);
@@ -70,16 +71,17 @@ public class AnnotatedOperationMethodTest extends AbstractAnnotationTest {
         int start = openApiYAML.indexOf("get:");
         int end = openApiYAML.length() - 1;
 
-        String expectedYAML = "get:\n" +
-                "      summary: Simple get operation\n" +
-                "      description: Defines a simple get operation with no inputs or responses\n" +
-                "      operationId: getWithNoParametersAndNoResponses\n" +
-                "      responses:\n" +
-                "        default:\n" +
-                "          description: default response\n" +
-                "          content:\n" +
-                "            '*/*': {}\n" +
-                "      deprecated: true";
+        String expectedYAML = """
+                get:
+                      summary: Simple get operation
+                      description: Defines a simple get operation with no inputs or responses
+                      operationId: getWithNoParametersAndNoResponses
+                      responses:
+                        default:
+                          description: default response
+                          content:
+                            '*/*': {}
+                      deprecated: true""";
         String extractedYAML = openApiYAML.substring(start, end);
 
         assertEquals(extractedYAML, expectedYAML);
@@ -104,30 +106,32 @@ public class AnnotatedOperationMethodTest extends AbstractAnnotationTest {
         int start = openApiYAML.indexOf("get:");
         int end = openApiYAML.indexOf("components:");
         String extractedYAML = openApiYAML.substring(start, end);
-        String expectedYAML = "get:\n" +
-                "      summary: Simple get operation\n" +
-                "      description: Defines a simple get operation with no inputs and a complex\n" +
-                "      operationId: getWithPayloadResponse\n" +
-                "      responses:\n" +
-                "        \"200\":\n" +
-                "          description: voila!\n" +
-                "          content:\n" +
-                "            application/json:\n" +
-                "              schema:\n" +
-                "                $ref: \"#/components/schemas/SampleResponseSchema\"\n" +
-                "        default:\n" +
-                "          description: boo\n" +
-                "          content:\n" +
-                "            '*/*':\n" +
-                "              schema:\n" +
-                "                $ref: \"#/components/schemas/GenericError\"\n" +
-                "              examples:\n" +
-                "                boo:\n" +
-                "                  summary: example of boo\n" +
-                "                  description: boo\n" +
-                "                  value: example\n" +
-                "                  externalValue: example of external value\n" +
-                "      deprecated: true\n";
+        String expectedYAML = """
+                get:
+                      summary: Simple get operation
+                      description: Defines a simple get operation with no inputs and a complex
+                      operationId: getWithPayloadResponse
+                      responses:
+                        "200":
+                          description: voila!
+                          content:
+                            application/json:
+                              schema:
+                                $ref: "#/components/schemas/SampleResponseSchema"
+                        default:
+                          description: boo
+                          content:
+                            '*/*':
+                              schema:
+                                $ref: "#/components/schemas/GenericError"
+                              examples:
+                                boo:
+                                  summary: example of boo
+                                  description: boo
+                                  value: example
+                                  externalValue: example of external value
+                      deprecated: true
+                """;
 
         assertEquals(extractedYAML, expectedYAML);
     }
@@ -187,23 +191,25 @@ public class AnnotatedOperationMethodTest extends AbstractAnnotationTest {
         int start = openApiYAML.indexOf("get:");
         int end = openApiYAML.indexOf("components:");
         String extractedYAML = openApiYAML.substring(start, end);
-        String expectedYAML = "get:\n" +
-                "      summary: Simple get operation\n" +
-                "      description: Defines a simple get operation with no inputs and a complex output\n" +
-                "      operationId: getWithPayloadResponse\n" +
-                "      responses:\n" +
-                "        \"200\":\n" +
-                "          description: voila!\n" +
-                "          content:\n" +
-                "            application/json:\n" +
-                "              schema:\n" +
-                "                $ref: \"#/components/schemas/SampleResponseSchema\"\n" +
-                "              examples:\n" +
-                "                basic:\n" +
-                "                  summary: shows a basic example\n" +
-                "                  description: basic\n" +
-                "                  value: \"{id: 19877734}\"\n" +
-                "      deprecated: true\n";
+        String expectedYAML = """
+                get:
+                      summary: Simple get operation
+                      description: Defines a simple get operation with no inputs and a complex output
+                      operationId: getWithPayloadResponse
+                      responses:
+                        "200":
+                          description: voila!
+                          content:
+                            application/json:
+                              schema:
+                                $ref: "#/components/schemas/SampleResponseSchema"
+                              examples:
+                                basic:
+                                  summary: shows a basic example
+                                  description: basic
+                                  value: "{id: 19877734}"
+                      deprecated: true
+                """;
         assertEquals(extractedYAML, expectedYAML);
     }
 
@@ -213,29 +219,31 @@ public class AnnotatedOperationMethodTest extends AbstractAnnotationTest {
         int start = openApiYAML.indexOf("get:");
         int end = openApiYAML.indexOf("components:");
         String extractedYAML = openApiYAML.substring(start, end);
-        String expectedYAML = "get:\n" +
-                "      summary: Simple get operation\n" +
-                "      description: Defines a simple get operation with a parameter example\n" +
-                "      operationId: getWithPayloadResponse\n" +
-                "      parameters:\n" +
-                "      - in: query\n" +
-                "        schema:\n" +
-                "          type: string\n" +
-                "        example:\n" +
-                "          id: 19877734\n" +
-                "      responses:\n" +
-                "        \"200\":\n" +
-                "          description: voila!\n" +
-                "          content:\n" +
-                "            application/json:\n" +
-                "              schema:\n" +
-                "                $ref: \"#/components/schemas/SampleResponseSchema\"\n" +
-                "              examples:\n" +
-                "                basic:\n" +
-                "                  summary: shows a basic example\n" +
-                "                  description: basic\n" +
-                "                  value: \"{id: 19877734}\"\n" +
-                "      deprecated: true\n";
+        String expectedYAML = """
+                get:
+                      summary: Simple get operation
+                      description: Defines a simple get operation with a parameter example
+                      operationId: getWithPayloadResponse
+                      parameters:
+                      - in: query
+                        schema:
+                          type: string
+                        example:
+                          id: 19877734
+                      responses:
+                        "200":
+                          description: voila!
+                          content:
+                            application/json:
+                              schema:
+                                $ref: "#/components/schemas/SampleResponseSchema"
+                              examples:
+                                basic:
+                                  summary: shows a basic example
+                                  description: basic
+                                  value: "{id: 19877734}"
+                      deprecated: true
+                """;
         assertEquals(extractedYAML, expectedYAML);
     }
 
@@ -323,20 +331,22 @@ public class AnnotatedOperationMethodTest extends AbstractAnnotationTest {
         String openApiYAML = readIntoYaml(GetOperationWithResponseSingleHeader.class);
         int start = openApiYAML.indexOf("get:");
         String extractedYAML = openApiYAML.substring(start);
-        String expectedYAML = "get:\n" +
-                "      summary: Simple get operation\n" +
-                "      description: Defines a simple get operation with no inputs and a complex output\n" +
-                "      operationId: getWithPayloadResponse\n" +
-                "      responses:\n" +
-                "        \"200\":\n" +
-                "          description: voila!\n" +
-                "          headers:\n" +
-                "            Rate-Limit-Limit:\n" +
-                "              description: The number of allowed requests in the current period\n" +
-                "              style: simple\n" +
-                "              schema:\n" +
-                "                type: integer\n" +
-                "      deprecated: true\n";
+        String expectedYAML = """
+                get:
+                      summary: Simple get operation
+                      description: Defines a simple get operation with no inputs and a complex output
+                      operationId: getWithPayloadResponse
+                      responses:
+                        "200":
+                          description: voila!
+                          headers:
+                            Rate-Limit-Limit:
+                              description: The number of allowed requests in the current period
+                              style: simple
+                              schema:
+                                type: integer
+                      deprecated: true
+                """;
         assertEquals(expectedYAML, extractedYAML);
     }
 
@@ -371,24 +381,26 @@ public class AnnotatedOperationMethodTest extends AbstractAnnotationTest {
         String openApiYAML = readIntoYaml(GetOperationResponseHeaderWithArraySchema.class);
         int start = openApiYAML.indexOf("get:");
         String extractedYAML = openApiYAML.substring(start);
-        String expectedYAML = "get:\n" +
-                "      summary: Simple get operation\n" +
-                "      description: Defines a simple get operation with no inputs and a complex output\n" +
-                "      operationId: getWithPayloadResponse\n" +
-                "      responses:\n" +
-                "        \"200\":\n" +
-                "          description: voila!\n" +
-                "          headers:\n" +
-                "            Rate-Limit-Limit:\n" +
-                "              description: The number of allowed requests in the current period\n" +
-                "              style: simple\n" +
-                "              schema:\n" +
-                "                maxItems: 10\n" +
-                "                minItems: 1\n" +
-                "                type: array\n" +
-                "                items:\n" +
-                "                  type: integer\n" +
-                "      deprecated: true\n";
+        String expectedYAML = """
+                get:
+                      summary: Simple get operation
+                      description: Defines a simple get operation with no inputs and a complex output
+                      operationId: getWithPayloadResponse
+                      responses:
+                        "200":
+                          description: voila!
+                          headers:
+                            Rate-Limit-Limit:
+                              description: The number of allowed requests in the current period
+                              style: simple
+                              schema:
+                                maxItems: 10
+                                minItems: 1
+                                type: array
+                                items:
+                                  type: integer
+                      deprecated: true
+                """;
         assertEquals(expectedYAML, extractedYAML);
     }
 
@@ -509,25 +521,27 @@ public class AnnotatedOperationMethodTest extends AbstractAnnotationTest {
         String openApiYAML = readIntoYaml(GetOperationWithResponseMultipleHeaders.class);
         int start = openApiYAML.indexOf("get:");
         String extractedYAML = openApiYAML.substring(start);
-        String expectedYAML = "get:\n" +
-                "      summary: Simple get operation\n" +
-                "      description: Defines a simple get operation with no inputs and a complex output\n" +
-                "      operationId: getWithPayloadResponse\n" +
-                "      responses:\n" +
-                "        \"200\":\n" +
-                "          description: voila!\n" +
-                "          headers:\n" +
-                "            X-Rate-Limit-Desc:\n" +
-                "              description: The description of rate limit\n" +
-                "              style: simple\n" +
-                "              schema:\n" +
-                "                type: string\n" +
-                "            Rate-Limit-Limit:\n" +
-                "              description: The number of allowed requests in the current period\n" +
-                "              style: simple\n" +
-                "              schema:\n" +
-                "                type: integer\n" +
-                "      deprecated: true\n";
+        String expectedYAML = """
+                get:
+                      summary: Simple get operation
+                      description: Defines a simple get operation with no inputs and a complex output
+                      operationId: getWithPayloadResponse
+                      responses:
+                        "200":
+                          description: voila!
+                          headers:
+                            X-Rate-Limit-Desc:
+                              description: The description of rate limit
+                              style: simple
+                              schema:
+                                type: string
+                            Rate-Limit-Limit:
+                              description: The number of allowed requests in the current period
+                              style: simple
+                              schema:
+                                type: integer
+                      deprecated: true
+                """;
         assertEquals(expectedYAML, extractedYAML);
     }
 
@@ -565,38 +579,40 @@ public class AnnotatedOperationMethodTest extends AbstractAnnotationTest {
         String openApiYAML = readIntoYaml(GetOperationWithResponseMultipleHeadersWithImplementationSchema.class);
         int start = openApiYAML.indexOf("get:");
         String extractedYAML = openApiYAML.substring(start);
-        String expectedYAML = "get:\n" +
-                "      summary: Simple get operation\n" +
-                "      description: Defines a simple get operation with no inputs and a complex output\n" +
-                "      operationId: getWithPayloadResponse\n" +
-                "      responses:\n" +
-                "        \"200\":\n" +
-                "          description: voila!\n" +
-                "          headers:\n" +
-                "            X-Rate-Limit-Desc:\n" +
-                "              description: The description of rate limit\n" +
-                "              style: simple\n" +
-                "              explode: true\n" +
-                "              schema:\n" +
-                "                $ref: \"#/components/schemas/SampleHeaderSchema\"\n" +
-                "            Rate-Limit-Limit:\n" +
-                "              description: The number of allowed requests in the current period\n" +
-                "              style: simple\n" +
-                "              explode: true\n" +
-                "              schema:\n" +
-                "                maxItems: 10\n" +
-                "                minItems: 1\n" +
-                "                type: array\n" +
-                "                items:\n" +
-                "                  $ref: \"#/components/schemas/SampleHeaderSchema\"\n" +
-                "      deprecated: true\n" +
-                "components:\n" +
-                "  schemas:\n" +
-                "    SampleHeaderSchema:\n" +
-                "      type: object\n" +
-                "      properties:\n" +
-                "        id:\n" +
-                "          type: string\n";
+        String expectedYAML = """
+                get:
+                      summary: Simple get operation
+                      description: Defines a simple get operation with no inputs and a complex output
+                      operationId: getWithPayloadResponse
+                      responses:
+                        "200":
+                          description: voila!
+                          headers:
+                            X-Rate-Limit-Desc:
+                              description: The description of rate limit
+                              style: simple
+                              explode: true
+                              schema:
+                                $ref: "#/components/schemas/SampleHeaderSchema"
+                            Rate-Limit-Limit:
+                              description: The number of allowed requests in the current period
+                              style: simple
+                              explode: true
+                              schema:
+                                maxItems: 10
+                                minItems: 1
+                                type: array
+                                items:
+                                  $ref: "#/components/schemas/SampleHeaderSchema"
+                      deprecated: true
+                components:
+                  schemas:
+                    SampleHeaderSchema:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                """;
         assertEquals(expectedYAML, extractedYAML);
     }
 
@@ -605,27 +621,29 @@ public class AnnotatedOperationMethodTest extends AbstractAnnotationTest {
         String openApiYAML = readIntoYaml(GetOperationResponseWithHeaderExplodeAttribute.class);
         int start = openApiYAML.indexOf("get:");
         String extractedYAML = openApiYAML.substring(start);
-        String expectedYAML = "get:\n" +
-                "      summary: Simple get operation\n" +
-                "      description: Defines a simple get operation with no inputs and a complex output\n" +
-                "      operationId: getWithPayloadResponse\n" +
-                "      responses:\n" +
-                "        \"200\":\n" +
-                "          description: voila!\n" +
-                "          headers:\n" +
-                "            X-Rate-Limit-Desc:\n" +
-                "              description: The description of rate limit\n" +
-                "              style: simple\n" +
-                "              explode: false\n" +
-                "              schema:\n" +
-                "                type: array\n" +
-                "            Rate-Limit-Limit:\n" +
-                "              description: The number of allowed requests in the current period\n" +
-                "              style: simple\n" +
-                "              explode: true\n" +
-                "              schema:\n" +
-                "                type: object\n" +
-                "      deprecated: true\n";
+        String expectedYAML = """
+                get:
+                      summary: Simple get operation
+                      description: Defines a simple get operation with no inputs and a complex output
+                      operationId: getWithPayloadResponse
+                      responses:
+                        "200":
+                          description: voila!
+                          headers:
+                            X-Rate-Limit-Desc:
+                              description: The description of rate limit
+                              style: simple
+                              explode: false
+                              schema:
+                                type: array
+                            Rate-Limit-Limit:
+                              description: The number of allowed requests in the current period
+                              style: simple
+                              explode: true
+                              schema:
+                                type: object
+                      deprecated: true
+                """;
         assertEquals(expectedYAML, extractedYAML);
     }
 
@@ -634,20 +652,22 @@ public class AnnotatedOperationMethodTest extends AbstractAnnotationTest {
         String openApiYAML = readIntoYaml(GetOperationResponseWithoutHiddenHeader.class);
         int start = openApiYAML.indexOf("get:");
         String extractedYAML = openApiYAML.substring(start);
-        String expectedYAML = "get:\n" +
-                "      summary: Simple get operation\n" +
-                "      description: Defines a simple get operation with no inputs and a complex output\n" +
-                "      operationId: getWithPayloadResponse\n" +
-                "      responses:\n" +
-                "        \"200\":\n" +
-                "          description: voila!\n" +
-                "          headers:\n" +
-                "            X-Rate-Limit-Desc:\n" +
-                "              description: The description of rate limit\n" +
-                "              style: simple\n" +
-                "              schema:\n" +
-                "                type: string\n" +
-                "      deprecated: true\n";
+        String expectedYAML = """
+                get:
+                      summary: Simple get operation
+                      description: Defines a simple get operation with no inputs and a complex output
+                      operationId: getWithPayloadResponse
+                      responses:
+                        "200":
+                          description: voila!
+                          headers:
+                            X-Rate-Limit-Desc:
+                              description: The description of rate limit
+                              style: simple
+                              schema:
+                                type: string
+                      deprecated: true
+                """;
         assertEquals(expectedYAML, extractedYAML);
     }
 
@@ -656,285 +676,288 @@ public class AnnotatedOperationMethodTest extends AbstractAnnotationTest {
         String openApiYAML = readIntoYaml(GetOperationWithResponseMultipleHeadersAndExamples.class);
         int start = openApiYAML.indexOf("get:");
         String extractedYAML = openApiYAML.substring(start);
-        String expectedYAML = "get:\n" +
-                "      summary: Simple get operation\n" +
-                "      description: Defines a simple get operation with no inputs and a complex output\n" +
-                "      operationId: getWithPayloadResponse\n" +
-                "      responses:\n" +
-                "        \"200\":\n" +
-                "          description: voila!\n" +
-                "          headers:\n" +
-                "            X-Rate-Limit-Desc:\n" +
-                "              description: The description of rate limit\n" +
-                "              style: simple\n" +
-                "              example: example1\n" +
-                "            Rate-Limit-Limit:\n" +
-                "              description: The number of allowed requests in the current period\n" +
-                "              style: simple\n" +
-                "              schema:\n" +
-                "                type: object\n" +
-                "              examples:\n" +
-                "                ex 1:\n" +
-                "                  description: example description\n" +
-                "                  value: example value\n" +
-                "                ex 2:\n" +
-                "                  description: example description 2\n" +
-                "                  value: example value 2\n" +
-                "      deprecated: true\n";
+        String expectedYAML = """
+                get:
+                      summary: Simple get operation
+                      description: Defines a simple get operation with no inputs and a complex output
+                      operationId: getWithPayloadResponse
+                      responses:
+                        "200":
+                          description: voila!
+                          headers:
+                            X-Rate-Limit-Desc:
+                              description: The description of rate limit
+                              style: simple
+                              example: example1
+                            Rate-Limit-Limit:
+                              description: The number of allowed requests in the current period
+                              style: simple
+                              schema:
+                                type: object
+                              examples:
+                                ex 1:
+                                  description: example description
+                                  value: example value
+                                ex 2:
+                                  description: example description 2
+                                  value: example value 2
+                      deprecated: true
+                """;
         assertEquals(expectedYAML, extractedYAML);
     }
 
     @Test(description = "reads the pet resource from sample")
     public void testCompletePetResource() throws IOException {
-        String expectedYAML = "openapi: 3.0.1\n" +
-                "paths:\n" +
-                "  /pet/findByTags:\n" +
-                "    get:\n" +
-                "      summary: Finds Pets by tags\n" +
-                "      description: Multiple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing.\n" +
-                "      operationId: findPetsByTags\n" +
-                "      parameters:\n" +
-                "      - name: tags\n" +
-                "        in: query\n" +
-                "        description: Tags to filter by\n" +
-                "        required: true\n" +
-                "        schema:\n" +
-                "          type: string\n" +
-                "      responses:\n" +
-                "        default:\n" +
-                "          description: Pets matching criteria\n" +
-                "          content:\n" +
-                "            application/json:\n" +
-                "              schema:\n" +
-                "                $ref: \"#/components/schemas/Pet\"\n" +
-                "        \"400\":\n" +
-                "          description: Invalid tag value\n" +
-                "      deprecated: true\n" +
-                "  /pet/findByCategory/{category}:\n" +
-                "    get:\n" +
-                "      summary: Finds Pets by category\n" +
-                "      operationId: findPetsByCategory\n" +
-                "      parameters:\n" +
-                "      - name: category\n" +
-                "        in: path\n" +
-                "        description: Category value that need to be considered for filter\n" +
-                "        required: true\n" +
-                "        style: matrix\n" +
-                "        schema:\n" +
-                "          $ref: \"#/components/schemas/Category\"\n" +
-                "      - name: skip\n" +
-                "        in: query\n" +
-                "        schema:\n" +
-                "          type: integer\n" +
-                "          format: int32\n" +
-                "      - name: limit\n" +
-                "        in: query\n" +
-                "        schema:\n" +
-                "          type: integer\n" +
-                "          format: int32\n" +
-                "      responses:\n" +
-                "        default:\n" +
-                "          content:\n" +
-                "            application/json:\n" +
-                "              schema:\n" +
-                "                $ref: \"#/components/schemas/Pet\"\n" +
-                "        \"400\":\n" +
-                "          description: Invalid category value\n" +
-                "  /pet/{petId}:\n" +
-                "    get:\n" +
-                "      summary: Find pet by ID\n" +
-                "      description: Returns a pet when 0 < ID <= 10.  ID > 10 or nonintegers will simulate API error conditions\n" +
-                "      operationId: getPetById\n" +
-                "      parameters:\n" +
-                "      - name: petId\n" +
-                "        in: path\n" +
-                "        description: ID of pet that needs to be fetched\n" +
-                "        required: true\n" +
-                "        schema:\n" +
-                "          type: integer\n" +
-                "          format: int64\n" +
-                "      responses:\n" +
-                "        default:\n" +
-                "          description: The pet\n" +
-                "          content:\n" +
-                "            application/json:\n" +
-                "              schema:\n" +
-                "                $ref: \"#/components/schemas/Pet\"\n" +
-                "            application/xml:\n" +
-                "              schema:\n" +
-                "                $ref: \"#/components/schemas/Pet\"\n" +
-                "        \"400\":\n" +
-                "          description: Invalid ID supplied\n" +
-                "        \"404\":\n" +
-                "          description: Pet not found\n" +
-                "  /pet/bodynoannotation:\n" +
-                "    post:\n" +
-                "      summary: Add a new pet to the store no annotation\n" +
-                "      operationId: addPetNoAnnotation\n" +
-                "      requestBody:\n" +
-                "        content:\n" +
-                "          application/json:\n" +
-                "            schema:\n" +
-                "              $ref: \"#/components/schemas/Pet\"\n" +
-                "          application/xml:\n" +
-                "            schema:\n" +
-                "              $ref: \"#/components/schemas/Pet\"\n" +
-                "      responses:\n" +
-                "        \"405\":\n" +
-                "          description: Invalid input\n" +
-                "  /pet/bodyid:\n" +
-                "    post:\n" +
-                "      summary: Add a new pet to the store passing an integer with generic parameter annotation\n" +
-                "      operationId: addPetByInteger\n" +
-                "      requestBody:\n" +
-                "        description: Pet object that needs to be added to the store\n" +
-                "        content:\n" +
-                "          application/json:\n" +
-                "            schema:\n" +
-                "              type: integer\n" +
-                "              format: int32\n" +
-                "          application/xml:\n" +
-                "            schema:\n" +
-                "              type: integer\n" +
-                "              format: int32\n" +
-                "        required: true\n" +
-                "      responses:\n" +
-                "        \"405\":\n" +
-                "          description: Invalid input\n" +
-                "  /pet/bodyidnoannotation:\n" +
-                "    post:\n" +
-                "      summary: Add a new pet to the store passing an integer without parameter annotation\n" +
-                "      operationId: addPetByIntegerNoAnnotation\n" +
-                "      requestBody:\n" +
-                "        content:\n" +
-                "          application/json:\n" +
-                "            schema:\n" +
-                "              type: integer\n" +
-                "              format: int32\n" +
-                "          application/xml:\n" +
-                "            schema:\n" +
-                "              type: integer\n" +
-                "              format: int32\n" +
-                "      responses:\n" +
-                "        \"405\":\n" +
-                "          description: Invalid input\n" +
-                "  /pet:\n" +
-                "    put:\n" +
-                "      summary: Update an existing pet\n" +
-                "      operationId: updatePet\n" +
-                "      requestBody:\n" +
-                "        description: Pet object that needs to be added to the store\n" +
-                "        content:\n" +
-                "          application/json:\n" +
-                "            schema:\n" +
-                "              $ref: \"#/components/schemas/Pet\"\n" +
-                "        required: true\n" +
-                "      responses:\n" +
-                "        \"400\":\n" +
-                "          description: Invalid ID supplied\n" +
-                "        \"404\":\n" +
-                "          description: Pet not found\n" +
-                "        \"405\":\n" +
-                "          description: Validation exception\n" +
-                "    post:\n" +
-                "      summary: Add a new pet to the store\n" +
-                "      operationId: addPet\n" +
-                "      requestBody:\n" +
-                "        description: Pet object that needs to be added to the store\n" +
-                "        content:\n" +
-                "          application/json:\n" +
-                "            schema:\n" +
-                "              $ref: \"#/components/schemas/Pet\"\n" +
-                "          application/xml:\n" +
-                "            schema:\n" +
-                "              $ref: \"#/components/schemas/Pet\"\n" +
-                "        required: true\n" +
-                "      responses:\n" +
-                "        \"405\":\n" +
-                "          description: Invalid input\n" +
-                "  /pet/findByStatus:\n" +
-                "    get:\n" +
-                "      summary: Finds Pets by status\n" +
-                "      description: Multiple status values can be provided with comma separated strings\n" +
-                "      operationId: findPetsByStatus\n" +
-                "      parameters:\n" +
-                "      - name: status\n" +
-                "        in: query\n" +
-                "        description: Status values that need to be considered for filter\n" +
-                "        required: true\n" +
-                "        schema:\n" +
-                "          type: string\n" +
-                "      - name: skip\n" +
-                "        in: query\n" +
-                "        schema:\n" +
-                "          type: integer\n" +
-                "          format: int32\n" +
-                "      - name: limit\n" +
-                "        in: query\n" +
-                "        schema:\n" +
-                "          type: integer\n" +
-                "          format: int32\n" +
-                "      responses:\n" +
-                "        default:\n" +
-                "          content:\n" +
-                "            application/json:\n" +
-                "              schema:\n" +
-                "                $ref: \"#/components/schemas/Pet\"\n" +
-                "        \"400\":\n" +
-                "          description: Invalid status value\n" +
-                "components:\n" +
-                "  schemas:\n" +
-                "    Category:\n" +
-                "      type: object\n" +
-                "      properties:\n" +
-                "        id:\n" +
-                "          type: integer\n" +
-                "          format: int64\n" +
-                "        name:\n" +
-                "          type: string\n" +
-                "      xml:\n" +
-                "        name: Category\n" +
-                "    Tag:\n" +
-                "      type: object\n" +
-                "      properties:\n" +
-                "        id:\n" +
-                "          type: integer\n" +
-                "          format: int64\n" +
-                "        name:\n" +
-                "          type: string\n" +
-                "      xml:\n" +
-                "        name: Tag\n" +
-                "    Pet:\n" +
-                "      type: object\n" +
-                "      properties:\n" +
-                "        id:\n" +
-                "          type: integer\n" +
-                "          format: int64\n" +
-                "        category:\n" +
-                "          $ref: \"#/components/schemas/Category\"\n" +
-                "        name:\n" +
-                "          type: string\n" +
-                "        photoUrls:\n" +
-                "          type: array\n" +
-                "          xml:\n" +
-                "            wrapped: true\n" +
-                "          items:\n" +
-                "            type: string\n" +
-                "            xml:\n" +
-                "              name: photoUrl\n" +
-                "        tags:\n" +
-                "          type: array\n" +
-                "          xml:\n" +
-                "            wrapped: true\n" +
-                "          items:\n" +
-                "            $ref: \"#/components/schemas/Tag\"\n" +
-                "        status:\n" +
-                "          type: string\n" +
-                "          description: pet status in the store\n" +
-                "          enum:\n" +
-                "          - available,pending,sold\n" +
-                "      xml:\n" +
-                "        name: Pet";
+        String expectedYAML = """
+                openapi: 3.0.1
+                paths:
+                  /pet/findByTags:
+                    get:
+                      summary: Finds Pets by tags
+                      description: Multiple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing.
+                      operationId: findPetsByTags
+                      parameters:
+                      - name: tags
+                        in: query
+                        description: Tags to filter by
+                        required: true
+                        schema:
+                          type: string
+                      responses:
+                        default:
+                          description: Pets matching criteria
+                          content:
+                            application/json:
+                              schema:
+                                $ref: "#/components/schemas/Pet"
+                        "400":
+                          description: Invalid tag value
+                      deprecated: true
+                  /pet/findByCategory/{category}:
+                    get:
+                      summary: Finds Pets by category
+                      operationId: findPetsByCategory
+                      parameters:
+                      - name: category
+                        in: path
+                        description: Category value that need to be considered for filter
+                        required: true
+                        style: matrix
+                        schema:
+                          $ref: "#/components/schemas/Category"
+                      - name: skip
+                        in: query
+                        schema:
+                          type: integer
+                          format: int32
+                      - name: limit
+                        in: query
+                        schema:
+                          type: integer
+                          format: int32
+                      responses:
+                        default:
+                          content:
+                            application/json:
+                              schema:
+                                $ref: "#/components/schemas/Pet"
+                        "400":
+                          description: Invalid category value
+                  /pet/{petId}:
+                    get:
+                      summary: Find pet by ID
+                      description: Returns a pet when 0 < ID <= 10.  ID > 10 or nonintegers will simulate API error conditions
+                      operationId: getPetById
+                      parameters:
+                      - name: petId
+                        in: path
+                        description: ID of pet that needs to be fetched
+                        required: true
+                        schema:
+                          type: integer
+                          format: int64
+                      responses:
+                        default:
+                          description: The pet
+                          content:
+                            application/json:
+                              schema:
+                                $ref: "#/components/schemas/Pet"
+                            application/xml:
+                              schema:
+                                $ref: "#/components/schemas/Pet"
+                        "400":
+                          description: Invalid ID supplied
+                        "404":
+                          description: Pet not found
+                  /pet/bodynoannotation:
+                    post:
+                      summary: Add a new pet to the store no annotation
+                      operationId: addPetNoAnnotation
+                      requestBody:
+                        content:
+                          application/json:
+                            schema:
+                              $ref: "#/components/schemas/Pet"
+                          application/xml:
+                            schema:
+                              $ref: "#/components/schemas/Pet"
+                      responses:
+                        "405":
+                          description: Invalid input
+                  /pet/bodyid:
+                    post:
+                      summary: Add a new pet to the store passing an integer with generic parameter annotation
+                      operationId: addPetByInteger
+                      requestBody:
+                        description: Pet object that needs to be added to the store
+                        content:
+                          application/json:
+                            schema:
+                              type: integer
+                              format: int32
+                          application/xml:
+                            schema:
+                              type: integer
+                              format: int32
+                        required: true
+                      responses:
+                        "405":
+                          description: Invalid input
+                  /pet/bodyidnoannotation:
+                    post:
+                      summary: Add a new pet to the store passing an integer without parameter annotation
+                      operationId: addPetByIntegerNoAnnotation
+                      requestBody:
+                        content:
+                          application/json:
+                            schema:
+                              type: integer
+                              format: int32
+                          application/xml:
+                            schema:
+                              type: integer
+                              format: int32
+                      responses:
+                        "405":
+                          description: Invalid input
+                  /pet:
+                    put:
+                      summary: Update an existing pet
+                      operationId: updatePet
+                      requestBody:
+                        description: Pet object that needs to be added to the store
+                        content:
+                          application/json:
+                            schema:
+                              $ref: "#/components/schemas/Pet"
+                        required: true
+                      responses:
+                        "400":
+                          description: Invalid ID supplied
+                        "404":
+                          description: Pet not found
+                        "405":
+                          description: Validation exception
+                    post:
+                      summary: Add a new pet to the store
+                      operationId: addPet
+                      requestBody:
+                        description: Pet object that needs to be added to the store
+                        content:
+                          application/json:
+                            schema:
+                              $ref: "#/components/schemas/Pet"
+                          application/xml:
+                            schema:
+                              $ref: "#/components/schemas/Pet"
+                        required: true
+                      responses:
+                        "405":
+                          description: Invalid input
+                  /pet/findByStatus:
+                    get:
+                      summary: Finds Pets by status
+                      description: Multiple status values can be provided with comma separated strings
+                      operationId: findPetsByStatus
+                      parameters:
+                      - name: status
+                        in: query
+                        description: Status values that need to be considered for filter
+                        required: true
+                        schema:
+                          type: string
+                      - name: skip
+                        in: query
+                        schema:
+                          type: integer
+                          format: int32
+                      - name: limit
+                        in: query
+                        schema:
+                          type: integer
+                          format: int32
+                      responses:
+                        default:
+                          content:
+                            application/json:
+                              schema:
+                                $ref: "#/components/schemas/Pet"
+                        "400":
+                          description: Invalid status value
+                components:
+                  schemas:
+                    Category:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          format: int64
+                        name:
+                          type: string
+                      xml:
+                        name: Category
+                    Tag:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          format: int64
+                        name:
+                          type: string
+                      xml:
+                        name: Tag
+                    Pet:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          format: int64
+                        category:
+                          $ref: "#/components/schemas/Category"
+                        name:
+                          type: string
+                        photoUrls:
+                          type: array
+                          xml:
+                            wrapped: true
+                          items:
+                            type: string
+                            xml:
+                              name: photoUrl
+                        tags:
+                          type: array
+                          xml:
+                            wrapped: true
+                          items:
+                            $ref: "#/components/schemas/Tag"
+                        status:
+                          type: string
+                          description: pet status in the store
+                          enum:
+                          - available,pending,sold
+                      xml:
+                        name: Pet""";
 
         compareAsYaml(PetResource.class, expectedYAML);
         compareAsYaml(PetResourceSlashesinPath.class, expectedYAML);
@@ -943,372 +966,376 @@ public class AnnotatedOperationMethodTest extends AbstractAnnotationTest {
 
     @Test(description = "reads the resource with generic response from sample")
     public void testGenericResponseResource() throws IOException {
-        String yaml = "openapi: 3.0.1\n" +
-                "paths:\n" +
-                "  /:\n" +
-                "    get:\n" +
-                "      summary: Returns a list of somethings\n" +
-                "      operationId: getSomethings\n" +
-                "      responses:\n" +
-                "        default:\n" +
-                "          content:\n" +
-                "            '*/*':\n" +
-                "              schema:\n" +
-                "                $ref: \"#/components/schemas/SomethingResponse\"\n" +
-                "  /overridden:\n" +
-                "    get:\n" +
-                "      summary: Returns a list of somethings\n" +
-                "      operationId: getSomethingsOverridden\n" +
-                "      responses:\n" +
-                "        default:\n" +
-                "          content:\n" +
-                "            '*/*':\n" +
-                "              schema:\n" +
-                "                $ref: \"#/components/schemas/Something\"\n" +
-                "components:\n" +
-                "  schemas:\n" +
-                "    SomethingResponse:\n" +
-                "      type: object\n" +
-                "      properties:\n" +
-                "        data:\n" +
-                "          $ref: \"#/components/schemas/DataSomething\"\n" +
-                "    DataSomething:\n" +
-                "      type: object\n" +
-                "      properties:\n" +
-                "        items:\n" +
-                "          type: array\n" +
-                "          items:\n" +
-                "            $ref: \"#/components/schemas/Something\"\n" +
-                "    Something:\n" +
-                "      type: object\n" +
-                "      properties:\n" +
-                "        id:\n" +
-                "          type: string\n";
+        String yaml = """
+                openapi: 3.0.1
+                paths:
+                  /:
+                    get:
+                      summary: Returns a list of somethings
+                      operationId: getSomethings
+                      responses:
+                        default:
+                          content:
+                            '*/*':
+                              schema:
+                                $ref: "#/components/schemas/SomethingResponse"
+                  /overridden:
+                    get:
+                      summary: Returns a list of somethings
+                      operationId: getSomethingsOverridden
+                      responses:
+                        default:
+                          content:
+                            '*/*':
+                              schema:
+                                $ref: "#/components/schemas/Something"
+                components:
+                  schemas:
+                    SomethingResponse:
+                      type: object
+                      properties:
+                        data:
+                          $ref: "#/components/schemas/DataSomething"
+                    DataSomething:
+                      type: object
+                      properties:
+                        items:
+                          type: array
+                          items:
+                            $ref: "#/components/schemas/Something"
+                    Something:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                """;
         compareAsYaml(GenericResponsesResource.class, yaml);
     }
 
     @Test(description = "reads the user resource from sample")
     public void testCompleteUserResource() throws IOException {
-        String expectedYAML = "openapi: 3.0.1\n" +
-                "paths:\n" +
-                "  /user:\n" +
-                "    post:\n" +
-                "      summary: Create user\n" +
-                "      description: This can only be done by the logged in user.\n" +
-                "      operationId: createUser\n" +
-                "      requestBody:\n" +
-                "        description: Created user object\n" +
-                "        content:\n" +
-                "          '*/*':\n" +
-                "            schema:\n" +
-                "              $ref: \"#/components/schemas/User\"\n" +
-                "        required: true\n" +
-                "      responses:\n" +
-                "        default:\n" +
-                "          description: default response\n" +
-                "          content:\n" +
-                "            'application/json': {}\n" +
-                "            'application/xml': {}\n" +
-                "  /user/createWithArray:\n" +
-                "    post:\n" +
-                "      summary: Creates list of users with given input array\n" +
-                "      operationId: createUsersWithArrayInput\n" +
-                "      requestBody:\n" +
-                "        description: List of user object\n" +
-                "        content:\n" +
-                "          '*/*':\n" +
-                "            schema:\n" +
-                "              type: array\n" +
-                "              items:\n" +
-                "                $ref: \"#/components/schemas/User\"\n" +
-                "        required: true\n" +
-                "      responses:\n" +
-                "        default:\n" +
-                "          description: default response\n" +
-                "          content:\n" +
-                "            'application/json': {}\n" +
-                "            'application/xml': {}\n" +
-                "  /user/createWithList:\n" +
-                "    post:\n" +
-                "      summary: Creates list of users with given input array\n" +
-                "      operationId: createUsersWithListInput\n" +
-                "      requestBody:\n" +
-                "        description: List of user object\n" +
-                "        content:\n" +
-                "          '*/*':\n" +
-                "            schema:\n" +
-                "              type: array\n" +
-                "              items:\n" +
-                "                $ref: \"#/components/schemas/User\"\n" +
-                "        required: true\n" +
-                "      responses:\n" +
-                "        default:\n" +
-                "          description: default response\n" +
-                "          content:\n" +
-                "            'application/json': {}\n" +
-                "            'application/xml': {}\n" +
-                "  /user/{username}:\n" +
-                "    get:\n" +
-                "      summary: Get user by user name\n" +
-                "      operationId: getUserByName\n" +
-                "      parameters:\n" +
-                "      - name: username\n" +
-                "        in: path\n" +
-                "        description: 'The name that needs to be fetched. Use user1 for testing. '\n" +
-                "        required: true\n" +
-                "        schema:\n" +
-                "          type: string\n" +
-                "      responses:\n" +
-                "        default:\n" +
-                "          description: The user\n" +
-                "          content:\n" +
-                "            application/json:\n" +
-                "              schema:\n" +
-                "                $ref: \"#/components/schemas/User\"\n" +
-                "        \"400\":\n" +
-                "          description: User not found\n" +
-                "    put:\n" +
-                "      summary: Updated user\n" +
-                "      description: This can only be done by the logged in user.\n" +
-                "      operationId: updateUser\n" +
-                "      parameters:\n" +
-                "      - name: username\n" +
-                "        in: path\n" +
-                "        description: name that need to be deleted\n" +
-                "        required: true\n" +
-                "        schema:\n" +
-                "          type: string\n" +
-                "        examples:\n" +
-                "          example2:\n" +
-                "            summary: Summary example 2\n" +
-                "            description: example2\n" +
-                "            value: example2\n" +
-                "            externalValue: external value 2\n" +
-                "          example1:\n" +
-                "            summary: Summary example 1\n" +
-                "            description: example1\n" +
-                "            value: example1\n" +
-                "            externalValue: external value 1\n" +
-                "      requestBody:\n" +
-                "        description: Updated user object\n" +
-                "        content:\n" +
-                "          '*/*':\n" +
-                "            schema:\n" +
-                "              $ref: \"#/components/schemas/User\"\n" +
-                "        required: true\n" +
-                "      responses:\n" +
-                "        \"200\":\n" +
-                "          description: user updated\n" +
-                "        \"400\":\n" +
-                "          description: Invalid user supplied\n" +
-                "        \"404\":\n" +
-                "          description: User not found\n" +
-                "    delete:\n" +
-                "      summary: Delete user\n" +
-                "      description: This can only be done by the logged in user.\n" +
-                "      operationId: deleteUser\n" +
-                "      parameters:\n" +
-                "      - name: username\n" +
-                "        in: path\n" +
-                "        description: The name that needs to be deleted\n" +
-                "        required: true\n" +
-                "        schema:\n" +
-                "          type: string\n" +
-                "      responses:\n" +
-                "        \"200\":\n" +
-                "          description: user deteled\n" +
-                "        \"400\":\n" +
-                "          description: Invalid username supplied\n" +
-                "        \"404\":\n" +
-                "          description: User not found\n" +
-                "  /user/login:\n" +
-                "    get:\n" +
-                "      summary: Logs user into the system\n" +
-                "      operationId: loginUser\n" +
-                "      parameters:\n" +
-                "      - name: username\n" +
-                "        in: query\n" +
-                "        description: The user name for login\n" +
-                "        required: true\n" +
-                "        schema:\n" +
-                "          type: string\n" +
-                "      - name: password\n" +
-                "        in: query\n" +
-                "        description: The password for login in clear text\n" +
-                "        required: true\n" +
-                "        schema:\n" +
-                "          type: string\n" +
-                "      responses:\n" +
-                "        default:\n" +
-                "          description: Successfully logged in\n" +
-                "          content:\n" +
-                "            application/json:\n" +
-                "              schema:\n" +
-                "                type: string\n" +
-                "            application/xml:\n" +
-                "              schema:\n" +
-                "                type: string\n" +
-                "        \"400\":\n" +
-                "          description: Invalid username/password supplied\n" +
-                "  /user/logout:\n" +
-                "    get:\n" +
-                "      summary: Logs out current logged in user session\n" +
-                "      operationId: logoutUser\n" +
-                "      responses:\n" +
-                "        default:\n" +
-                "          description: default response\n" +
-                "          content:\n" +
-                "            'application/json': {}\n" +
-                "            'application/xml': {}\n" +
-                "components:\n" +
-                "  schemas:\n" +
-                "    User:\n" +
-                "      type: object\n" +
-                "      properties:\n" +
-                "        id:\n" +
-                "          type: integer\n" +
-                "          format: int64\n" +
-                "        username:\n" +
-                "          type: string\n" +
-                "        firstName:\n" +
-                "          type: string\n" +
-                "        lastName:\n" +
-                "          type: string\n" +
-                "        email:\n" +
-                "          type: string\n" +
-                "        password:\n" +
-                "          type: string\n" +
-                "        phone:\n" +
-                "          type: string\n" +
-                "        userStatus:\n" +
-                "          type: integer\n" +
-                "          description: User Status\n" +
-                "          format: int32\n" +
-                "      xml:\n" +
-                "        name: User";
+        String expectedYAML = """
+                openapi: 3.0.1
+                paths:
+                  /user:
+                    post:
+                      summary: Create user
+                      description: This can only be done by the logged in user.
+                      operationId: createUser
+                      requestBody:
+                        description: Created user object
+                        content:
+                          '*/*':
+                            schema:
+                              $ref: "#/components/schemas/User"
+                        required: true
+                      responses:
+                        default:
+                          description: default response
+                          content:
+                            'application/json': {}
+                            'application/xml': {}
+                  /user/createWithArray:
+                    post:
+                      summary: Creates list of users with given input array
+                      operationId: createUsersWithArrayInput
+                      requestBody:
+                        description: List of user object
+                        content:
+                          '*/*':
+                            schema:
+                              type: array
+                              items:
+                                $ref: "#/components/schemas/User"
+                        required: true
+                      responses:
+                        default:
+                          description: default response
+                          content:
+                            'application/json': {}
+                            'application/xml': {}
+                  /user/createWithList:
+                    post:
+                      summary: Creates list of users with given input array
+                      operationId: createUsersWithListInput
+                      requestBody:
+                        description: List of user object
+                        content:
+                          '*/*':
+                            schema:
+                              type: array
+                              items:
+                                $ref: "#/components/schemas/User"
+                        required: true
+                      responses:
+                        default:
+                          description: default response
+                          content:
+                            'application/json': {}
+                            'application/xml': {}
+                  /user/{username}:
+                    get:
+                      summary: Get user by user name
+                      operationId: getUserByName
+                      parameters:
+                      - name: username
+                        in: path
+                        description: 'The name that needs to be fetched. Use user1 for testing. '
+                        required: true
+                        schema:
+                          type: string
+                      responses:
+                        default:
+                          description: The user
+                          content:
+                            application/json:
+                              schema:
+                                $ref: "#/components/schemas/User"
+                        "400":
+                          description: User not found
+                    put:
+                      summary: Updated user
+                      description: This can only be done by the logged in user.
+                      operationId: updateUser
+                      parameters:
+                      - name: username
+                        in: path
+                        description: name that need to be deleted
+                        required: true
+                        schema:
+                          type: string
+                        examples:
+                          example2:
+                            summary: Summary example 2
+                            description: example2
+                            value: example2
+                            externalValue: external value 2
+                          example1:
+                            summary: Summary example 1
+                            description: example1
+                            value: example1
+                            externalValue: external value 1
+                      requestBody:
+                        description: Updated user object
+                        content:
+                          '*/*':
+                            schema:
+                              $ref: "#/components/schemas/User"
+                        required: true
+                      responses:
+                        "200":
+                          description: user updated
+                        "400":
+                          description: Invalid user supplied
+                        "404":
+                          description: User not found
+                    delete:
+                      summary: Delete user
+                      description: This can only be done by the logged in user.
+                      operationId: deleteUser
+                      parameters:
+                      - name: username
+                        in: path
+                        description: The name that needs to be deleted
+                        required: true
+                        schema:
+                          type: string
+                      responses:
+                        "200":
+                          description: user deteled
+                        "400":
+                          description: Invalid username supplied
+                        "404":
+                          description: User not found
+                  /user/login:
+                    get:
+                      summary: Logs user into the system
+                      operationId: loginUser
+                      parameters:
+                      - name: username
+                        in: query
+                        description: The user name for login
+                        required: true
+                        schema:
+                          type: string
+                      - name: password
+                        in: query
+                        description: The password for login in clear text
+                        required: true
+                        schema:
+                          type: string
+                      responses:
+                        default:
+                          description: Successfully logged in
+                          content:
+                            application/json:
+                              schema:
+                                type: string
+                            application/xml:
+                              schema:
+                                type: string
+                        "400":
+                          description: Invalid username/password supplied
+                  /user/logout:
+                    get:
+                      summary: Logs out current logged in user session
+                      operationId: logoutUser
+                      responses:
+                        default:
+                          description: default response
+                          content:
+                            'application/json': {}
+                            'application/xml': {}
+                components:
+                  schemas:
+                    User:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          format: int64
+                        username:
+                          type: string
+                        firstName:
+                          type: string
+                        lastName:
+                          type: string
+                        email:
+                          type: string
+                        password:
+                          type: string
+                        phone:
+                          type: string
+                        userStatus:
+                          type: integer
+                          description: User Status
+                          format: int32
+                      xml:
+                        name: User""";
         compareAsYaml(UserResource.class, expectedYAML);
     }
 
     @Test(description = "reads the simple user resource from sample")
     public void testSimpleUserResource() throws IOException {
 
-        String expectedYAML = "openapi: 3.0.1\n" +
-                "paths:\n" +
-                "  /user:\n" +
-                "    post:\n" +
-                "      summary: Create user\n" +
-                "      description: This can only be done by the logged in user.\n" +
-                "      operationId: createUser\n" +
-                "      requestBody:\n" +
-                "        description: Created user object\n" +
-                "        content:\n" +
-                "          application/json:\n" +
-                "            schema:\n" +
-                "              $ref: \"#/components/schemas/User\"\n" +
-                "          application/xml:\n" +
-                "            schema:\n" +
-                "              $ref: \"#/components/schemas/User\"\n" +
-                "        required: true\n" +
-                "      responses:\n" +
-                "        default:\n" +
-                "          description: default response\n" +
-                "          content:\n" +
-                "            'application/json': {}\n" +
-                "            'application/xml': {}\n" +
-                "  /user/createUserWithReturnType:\n" +
-                "    post:\n" +
-                "      summary: Create user with return type\n" +
-                "      description: This can only be done by the logged in user.\n" +
-                "      operationId: createUserWithReturnType\n" +
-                "      requestBody:\n" +
-                "        description: Created user object\n" +
-                "        content:\n" +
-                "          application/json:\n" +
-                "            schema:\n" +
-                "              $ref: \"#/components/schemas/User\"\n" +
-                "          application/xml:\n" +
-                "            schema:\n" +
-                "              $ref: \"#/components/schemas/User\"\n" +
-                "        required: true\n" +
-                "      responses:\n" +
-                "        default:\n" +
-                "          description: default response\n" +
-                "          content:\n" +
-                "            application/json:\n" +
-                "              schema:\n" +
-                "                $ref: \"#/components/schemas/User\"\n" +
-                "            application/xml:\n" +
-                "              schema:\n" +
-                "                $ref: \"#/components/schemas/User\"\n" +
-                "  /user/createUserWithResponseAnnotation:\n" +
-                "    post:\n" +
-                "      summary: Create user with response annotation\n" +
-                "      description: This can only be done by the logged in user.\n" +
-                "      operationId: createUserWithResponseAnnotation\n" +
-                "      requestBody:\n" +
-                "        description: Created user object\n" +
-                "        content:\n" +
-                "          application/json:\n" +
-                "            schema:\n" +
-                "              $ref: \"#/components/schemas/User\"\n" +
-                "          application/xml:\n" +
-                "            schema:\n" +
-                "              $ref: \"#/components/schemas/User\"\n" +
-                "        required: true\n" +
-                "      responses:\n" +
-                "        \"200\":\n" +
-                "          description: aaa\n" +
-                "          content:\n" +
-                "            application/json:\n" +
-                "              schema:\n" +
-                "                $ref: \"#/components/schemas/User\"\n" +
-                "            application/xml:\n" +
-                "              schema:\n" +
-                "                $ref: \"#/components/schemas/User\"\n" +
-                "  /user/createUserWithReturnTypeAndResponseAnnotation:\n" +
-                "    post:\n" +
-                "      summary: Create user with return type and response annotation\n" +
-                "      description: This can only be done by the logged in user.\n" +
-                "      operationId: createUserWithReturnTypeAndResponseAnnotation\n" +
-                "      requestBody:\n" +
-                "        description: Created user object\n" +
-                "        content:\n" +
-                "          application/json:\n" +
-                "            schema:\n" +
-                "              $ref: \"#/components/schemas/User\"\n" +
-                "          application/xml:\n" +
-                "            schema:\n" +
-                "              $ref: \"#/components/schemas/User\"\n" +
-                "        required: true\n" +
-                "      responses:\n" +
-                "        \"200\":\n" +
-                "          description: aaa\n" +
-                "components:\n" +
-                "  schemas:\n" +
-                "    User:\n" +
-                "      type: object\n" +
-                "      properties:\n" +
-                "        id:\n" +
-                "          type: integer\n" +
-                "          format: int64\n" +
-                "        username:\n" +
-                "          type: string\n" +
-                "        firstName:\n" +
-                "          type: string\n" +
-                "        lastName:\n" +
-                "          type: string\n" +
-                "        email:\n" +
-                "          type: string\n" +
-                "        password:\n" +
-                "          type: string\n" +
-                "        phone:\n" +
-                "          type: string\n" +
-                "        userStatus:\n" +
-                "          type: integer\n" +
-                "          description: User Status\n" +
-                "          format: int32\n" +
-                "      xml:\n" +
-                "        name: User";
+        String expectedYAML = """
+                openapi: 3.0.1
+                paths:
+                  /user:
+                    post:
+                      summary: Create user
+                      description: This can only be done by the logged in user.
+                      operationId: createUser
+                      requestBody:
+                        description: Created user object
+                        content:
+                          application/json:
+                            schema:
+                              $ref: "#/components/schemas/User"
+                          application/xml:
+                            schema:
+                              $ref: "#/components/schemas/User"
+                        required: true
+                      responses:
+                        default:
+                          description: default response
+                          content:
+                            'application/json': {}
+                            'application/xml': {}
+                  /user/createUserWithReturnType:
+                    post:
+                      summary: Create user with return type
+                      description: This can only be done by the logged in user.
+                      operationId: createUserWithReturnType
+                      requestBody:
+                        description: Created user object
+                        content:
+                          application/json:
+                            schema:
+                              $ref: "#/components/schemas/User"
+                          application/xml:
+                            schema:
+                              $ref: "#/components/schemas/User"
+                        required: true
+                      responses:
+                        default:
+                          description: default response
+                          content:
+                            application/json:
+                              schema:
+                                $ref: "#/components/schemas/User"
+                            application/xml:
+                              schema:
+                                $ref: "#/components/schemas/User"
+                  /user/createUserWithResponseAnnotation:
+                    post:
+                      summary: Create user with response annotation
+                      description: This can only be done by the logged in user.
+                      operationId: createUserWithResponseAnnotation
+                      requestBody:
+                        description: Created user object
+                        content:
+                          application/json:
+                            schema:
+                              $ref: "#/components/schemas/User"
+                          application/xml:
+                            schema:
+                              $ref: "#/components/schemas/User"
+                        required: true
+                      responses:
+                        "200":
+                          description: aaa
+                          content:
+                            application/json:
+                              schema:
+                                $ref: "#/components/schemas/User"
+                            application/xml:
+                              schema:
+                                $ref: "#/components/schemas/User"
+                  /user/createUserWithReturnTypeAndResponseAnnotation:
+                    post:
+                      summary: Create user with return type and response annotation
+                      description: This can only be done by the logged in user.
+                      operationId: createUserWithReturnTypeAndResponseAnnotation
+                      requestBody:
+                        description: Created user object
+                        content:
+                          application/json:
+                            schema:
+                              $ref: "#/components/schemas/User"
+                          application/xml:
+                            schema:
+                              $ref: "#/components/schemas/User"
+                        required: true
+                      responses:
+                        "200":
+                          description: aaa
+                components:
+                  schemas:
+                    User:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          format: int64
+                        username:
+                          type: string
+                        firstName:
+                          type: string
+                        lastName:
+                          type: string
+                        email:
+                          type: string
+                        password:
+                          type: string
+                        phone:
+                          type: string
+                        userStatus:
+                          type: integer
+                          description: User Status
+                          format: int32
+                      xml:
+                        name: User""";
         compareAsYaml(SimpleUserResource.class, expectedYAML);
     }
 
@@ -1322,33 +1349,34 @@ public class AnnotatedOperationMethodTest extends AbstractAnnotationTest {
     public void testHiddenAnnotatedUserResource() throws IOException {
         String openApiYAML = readIntoYaml(HiddenAnnotatedUserResource.class);
         assertEquals(openApiYAML, "openapi: 3.0.1\n");
-        compareAsYaml(HiddenAnnotatedUserResource.HiddenAnnotatedUserResourceMethodAndData.class, "openapi: 3.0.1\n" +
-                "paths:\n" +
-                "  /user/2:\n" +
-                "    post:\n" +
-                "      summary: Create user\n" +
-                "      description: This can only be done by the logged in user.\n" +
-                "      operationId: createUserWithHiddenBeanProperty\n" +
-                "      requestBody:\n" +
-                "        description: Created user object\n" +
-                "        content:\n" +
-                "          '*/*':\n" +
-                "            schema:\n" +
-                "              $ref: \"#/components/schemas/UserResourceBean\"\n" +
-                "        required: true\n" +
-                "      responses:\n" +
-                "        default:\n" +
-                "          description: default response\n" +
-                "          content:\n" +
-                "            'application/json': {}\n" +
-                "            'application/xml': {}\n" +
-                "components:\n" +
-                "  schemas:\n" +
-                "    UserResourceBean:\n" +
-                "      type: object\n" +
-                "      properties:\n" +
-                "        foo:\n" +
-                "          type: string");
+        compareAsYaml(HiddenAnnotatedUserResource.HiddenAnnotatedUserResourceMethodAndData.class, """
+                openapi: 3.0.1
+                paths:
+                  /user/2:
+                    post:
+                      summary: Create user
+                      description: This can only be done by the logged in user.
+                      operationId: createUserWithHiddenBeanProperty
+                      requestBody:
+                        description: Created user object
+                        content:
+                          '*/*':
+                            schema:
+                              $ref: "#/components/schemas/UserResourceBean"
+                        required: true
+                      responses:
+                        default:
+                          description: default response
+                          content:
+                            'application/json': {}
+                            'application/xml': {}
+                components:
+                  schemas:
+                    UserResourceBean:
+                      type: object
+                      properties:
+                        foo:
+                          type: string""");
 
     }
 
@@ -1359,16 +1387,17 @@ public class AnnotatedOperationMethodTest extends AbstractAnnotationTest {
         int start = openApiYAML.indexOf("get:");
         int end = openApiYAML.length() - 1;
 
-        String expectedYAML = "get:\n" +
-                "      summary: Simple get operation\n" +
-                "      description: Defines a simple get operation with no inputs and a complex\n" +
-                "      operationId: getWithNoParameters\n" +
-                "      responses:\n" +
-                "        \"200\":\n" +
-                "          description: voila!\n" +
-                "      security:\n" +
-                "      - petstore-auth:\n" +
-                "        - write:pets";
+        String expectedYAML = """
+                get:
+                      summary: Simple get operation
+                      description: Defines a simple get operation with no inputs and a complex
+                      operationId: getWithNoParameters
+                      responses:
+                        "200":
+                          description: voila!
+                      security:
+                      - petstore-auth:
+                        - write:pets""";
         String extractedYAML = openApiYAML.substring(start, end);
 
         assertEquals(expectedYAML, extractedYAML);
@@ -1400,17 +1429,18 @@ public class AnnotatedOperationMethodTest extends AbstractAnnotationTest {
         int start = openApiYAML.indexOf("get:");
         int end = openApiYAML.length() - 1;
 
-        String expectedYAML = "get:\n" +
-                "      summary: Simple get operation\n" +
-                "      description: Defines a simple get operation with no inputs and a complex\n" +
-                "      operationId: getWithNoParameters\n" +
-                "      responses:\n" +
-                "        \"200\":\n" +
-                "          description: voila!\n" +
-                "      security:\n" +
-                "      - petstore-auth:\n" +
-                "        - write:pets\n" +
-                "        - read:pets";
+        String expectedYAML = """
+                get:
+                      summary: Simple get operation
+                      description: Defines a simple get operation with no inputs and a complex
+                      operationId: getWithNoParameters
+                      responses:
+                        "200":
+                          description: voila!
+                      security:
+                      - petstore-auth:
+                        - write:pets
+                        - read:pets""";
         String extractedYAML = openApiYAML.substring(start, end);
 
         assertEquals(extractedYAML, expectedYAML);
@@ -1442,20 +1472,21 @@ public class AnnotatedOperationMethodTest extends AbstractAnnotationTest {
         int start = openApiYAML.indexOf("get:");
         int end = openApiYAML.length() - 1;
 
-        String expectedYAML = "get:\n" +
-                "      summary: Simple get operation\n" +
-                "      description: Defines a simple get operation with no inputs and a complex\n" +
-                "      operationId: getWithNoParameters\n" +
-                "      responses:\n" +
-                "        \"200\":\n" +
-                "          description: voila!\n" +
-                "      security:\n" +
-                "      - review-auth:\n" +
-                "        - write:review\n" +
-                "      - petstore-auth:\n" +
-                "        - write:pets\n" +
-                "        - read:pets\n" +
-                "      - api_key: []";
+        String expectedYAML = """
+                get:
+                      summary: Simple get operation
+                      description: Defines a simple get operation with no inputs and a complex
+                      operationId: getWithNoParameters
+                      responses:
+                        "200":
+                          description: voila!
+                      security:
+                      - review-auth:
+                        - write:review
+                      - petstore-auth:
+                        - write:pets
+                        - read:pets
+                      - api_key: []""";
         String extractedYAML = openApiYAML.substring(start, end);
 
         assertEquals(extractedYAML, expectedYAML);
@@ -1490,14 +1521,15 @@ public class AnnotatedOperationMethodTest extends AbstractAnnotationTest {
         int start = openApiYAML.indexOf("get:");
         int end = openApiYAML.length() - 1;
 
-        String expectedYAML = "get:\n" +
-                "      summary: Deprecated get operation\n" +
-                "      description: Defines a deprecated get operation with no inputs and a complex\n" +
-                "      operationId: getWithNoParameters\n" +
-                "      responses:\n" +
-                "        \"200\":\n" +
-                "          description: voila!\n" +
-                "      deprecated: true";
+        String expectedYAML = """
+                get:
+                      summary: Deprecated get operation
+                      description: Defines a deprecated get operation with no inputs and a complex
+                      operationId: getWithNoParameters
+                      responses:
+                        "200":
+                          description: voila!
+                      deprecated: true""";
         String extractedYAML = openApiYAML.substring(start, end);
 
         assertEquals(extractedYAML, expectedYAML);
@@ -1527,14 +1559,15 @@ public class AnnotatedOperationMethodTest extends AbstractAnnotationTest {
         int start = openApiYAML.indexOf("get:");
         int end = openApiYAML.length() - 1;
 
-        String expectedYAML = "get:\n" +
-                "      summary: Simple get operation in deprecated class\n" +
-                "      description: Defines a simple get operation in a deprecated class with no inputs\n" +
-                "      operationId: getWithNoParameters\n" +
-                "      responses:\n" +
-                "        \"200\":\n" +
-                "          description: voila!\n" +
-                "      deprecated: true";
+        String expectedYAML = """
+                get:
+                      summary: Simple get operation in deprecated class
+                      description: Defines a simple get operation in a deprecated class with no inputs
+                      operationId: getWithNoParameters
+                      responses:
+                        "200":
+                          description: voila!
+                      deprecated: true""";
         String extractedYAML = openApiYAML.substring(start, end);
 
         assertEquals(extractedYAML, expectedYAML);

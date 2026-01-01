@@ -28,19 +28,20 @@ public class Ticket3030Test extends SwaggerTestBase {
     public void testTicket3030() throws Exception {
         final Schema model = context.resolve(new AnnotatedType(Child.class));
         assertNotNull(model);
-        String yaml = "Child:\n" +
-                "  type: object\n" +
-                "  allOf:\n" +
-                "  - $ref: \"#/components/schemas/Parent\"\n" +
-                "  - type: object\n" +
-                "    properties:\n" +
-                "      property:\n" +
-                "        type: string\n" +
-                "Parent:\n" +
-                "  type: object\n" +
-                "  properties:\n" +
-                "    sharedProperty:\n" +
-                "      type: string";
+        String yaml = """
+                Child:
+                  type: object
+                  allOf:
+                  - $ref: "#/components/schemas/Parent"
+                  - type: object
+                    properties:
+                      property:
+                        type: string
+                Parent:
+                  type: object
+                  properties:
+                    sharedProperty:
+                      type: string""";
 
         SerializationMatchers.assertEqualsToYaml(context.getDefinedModels(), yaml);
     }

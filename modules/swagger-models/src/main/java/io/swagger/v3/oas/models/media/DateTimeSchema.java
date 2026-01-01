@@ -37,12 +37,12 @@ public class DateTimeSchema extends Schema<OffsetDateTime> {
     protected OffsetDateTime cast(Object value) {
         if (value != null) {
             try {
-                if (value instanceof Date) {
-                    return ((Date)value).toInstant().atOffset(ZoneOffset.UTC);
-                } else if (value instanceof String) {
-                    return OffsetDateTime.parse((String)value);
-                } else if (value instanceof OffsetDateTime) {
-                    return (OffsetDateTime)value;
+                if (value instanceof Date date) {
+                    return date.toInstant().atOffset(ZoneOffset.UTC);
+                } else if (value instanceof String string) {
+                    return OffsetDateTime.parse(string);
+                } else if (value instanceof OffsetDateTime time) {
+                    return time;
                 }
             } catch (Exception e) {
             }

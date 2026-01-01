@@ -20,17 +20,18 @@ public class Ticket2972Test extends SwaggerTestBase {
         Schema model = context
                 .resolve(new AnnotatedType(TestObject2972.class));
 
-        SerializationMatchers.assertEqualsToYaml(context.getDefinedModels(), "TestObject2972:\n" +
-                "  type: object\n" +
-                "  properties:\n" +
-                "    myField1:\n" +
-                "      type: object\n" +
-                "      additionalProperties:\n" +
-                "        type: string\n" +
-                "    myField2:\n" +
-                "      type: object\n" +
-                "      additionalProperties:\n" +
-                "        type: string");
+        SerializationMatchers.assertEqualsToYaml(context.getDefinedModels(), """
+                TestObject2972:
+                  type: object
+                  properties:
+                    myField1:
+                      type: object
+                      additionalProperties:
+                        type: string
+                    myField2:
+                      type: object
+                      additionalProperties:
+                        type: string""");
     }
 
 }

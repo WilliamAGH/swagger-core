@@ -14,77 +14,83 @@ public class Ticket4771Test {
         ModelConverters.reset();
         System.clearProperty(Schema.APPLY_SCHEMA_RESOLUTION_PROPERTY);
         ResolvedSchema schema = ModelConverters.getInstance(false, Schema.SchemaResolution.INLINE).resolveAsResolvedSchema(new AnnotatedType().type(CustomClass[].class));
-        String expectedJson = "{\n" +
-                "  \"schema\" : {\n" +
-                "    \"type\" : \"array\",\n" +
-                "    \"items\" : {\n" +
-                "      \"type\" : \"object\",\n" +
-                "      \"properties\" : {\n" +
-                "        \"foo\" : {\n" +
-                "          \"type\" : \"string\"\n" +
-                "        }\n" +
-                "      }\n" +
-                "    }\n" +
-                "  },\n" +
-                "  \"referencedSchemas\" : {\n" +
-                "    \"CustomClass\" : {\n" +
-                "      \"type\" : \"object\",\n" +
-                "      \"properties\" : {\n" +
-                "        \"foo\" : {\n" +
-                "          \"type\" : \"string\"\n" +
-                "        }\n" +
-                "      }\n" +
-                "    }\n" +
-                "  }\n" +
-                "}";
+        String expectedJson = """
+                {
+                  "schema" : {
+                    "type" : "array",
+                    "items" : {
+                      "type" : "object",
+                      "properties" : {
+                        "foo" : {
+                          "type" : "string"
+                        }
+                      }
+                    }
+                  },
+                  "referencedSchemas" : {
+                    "CustomClass" : {
+                      "type" : "object",
+                      "properties" : {
+                        "foo" : {
+                          "type" : "string"
+                        }
+                      }
+                    }
+                  }
+                }\
+                """;
         SerializationMatchers.assertEqualsToJson(schema, expectedJson);
         ModelConverters.reset();
         schema = ModelConverters.getInstance(true, Schema.SchemaResolution.INLINE).resolveAsResolvedSchema(new AnnotatedType().type(CustomClass[].class));
-        expectedJson = "{\n" +
-                "  \"schema\" : {\n" +
-                "    \"type\" : \"array\",\n" +
-                "    \"items\" : {\n" +
-                "      \"$ref\" : \"#/components/schemas/CustomClass\"\n" +
-                "    }\n" +
-                "  },\n" +
-                "  \"referencedSchemas\" : {\n" +
-                "    \"CustomClass\" : {\n" +
-                "      \"type\" : \"object\",\n" +
-                "      \"properties\" : {\n" +
-                "        \"foo\" : {\n" +
-                "          \"type\" : \"string\"\n" +
-                "        }\n" +
-                "      }\n" +
-                "    }\n" +
-                "  }\n" +
-                "}";
+        expectedJson = """
+                {
+                  "schema" : {
+                    "type" : "array",
+                    "items" : {
+                      "$ref" : "#/components/schemas/CustomClass"
+                    }
+                  },
+                  "referencedSchemas" : {
+                    "CustomClass" : {
+                      "type" : "object",
+                      "properties" : {
+                        "foo" : {
+                          "type" : "string"
+                        }
+                      }
+                    }
+                  }
+                }\
+                """;
         SerializationMatchers.assertEqualsToJson31(schema, expectedJson);
         ModelConverters.reset();
         System.setProperty(Schema.APPLY_SCHEMA_RESOLUTION_PROPERTY, "true");
         schema = ModelConverters.getInstance(true, Schema.SchemaResolution.INLINE).resolveAsResolvedSchema(new AnnotatedType().type(CustomClass[].class));
-        expectedJson = "{\n" +
-                "  \"schema\" : {\n" +
-                "    \"type\" : \"array\",\n" +
-                "    \"items\" : {\n" +
-                "      \"type\" : \"object\",\n" +
-                "      \"properties\" : {\n" +
-                "        \"foo\" : {\n" +
-                "          \"type\" : \"string\"\n" +
-                "        }\n" +
-                "      }\n" +
-                "    }\n" +
-                "  },\n" +
-                "  \"referencedSchemas\" : {\n" +
-                "    \"CustomClass\" : {\n" +
-                "      \"type\" : \"object\",\n" +
-                "      \"properties\" : {\n" +
-                "        \"foo\" : {\n" +
-                "          \"type\" : \"string\"\n" +
-                "        }\n" +
-                "      }\n" +
-                "    }\n" +
-                "  }\n" +
-                "}";
+        expectedJson = """
+                {
+                  "schema" : {
+                    "type" : "array",
+                    "items" : {
+                      "type" : "object",
+                      "properties" : {
+                        "foo" : {
+                          "type" : "string"
+                        }
+                      }
+                    }
+                  },
+                  "referencedSchemas" : {
+                    "CustomClass" : {
+                      "type" : "object",
+                      "properties" : {
+                        "foo" : {
+                          "type" : "string"
+                        }
+                      }
+                    }
+                  }
+                }\
+                """;
         SerializationMatchers.assertEqualsToJson31(schema, expectedJson);
         System.clearProperty(Schema.APPLY_SCHEMA_RESOLUTION_PROPERTY);
         ModelConverters.reset();

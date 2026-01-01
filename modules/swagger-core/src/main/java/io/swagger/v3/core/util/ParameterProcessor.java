@@ -172,8 +172,7 @@ public class ParameterProcessor {
         }
 
         for (Annotation annotation : annotations) {
-            if (annotation instanceof io.swagger.v3.oas.annotations.Parameter) {
-                io.swagger.v3.oas.annotations.Parameter p = (io.swagger.v3.oas.annotations.Parameter) annotation;
+            if (annotation instanceof io.swagger.v3.oas.annotations.Parameter p) {
                 if (p.hidden()) {
                     return null;
                 }
@@ -343,12 +342,11 @@ public class ParameterProcessor {
         io.swagger.v3.oas.annotations.media.Schema paramSchema = null;
         io.swagger.v3.oas.annotations.media.ArraySchema paramArraySchema = null;
         for (Annotation annotation : annotations) {
-            if (annotation instanceof io.swagger.v3.oas.annotations.media.Schema) {
-                rootSchema = (io.swagger.v3.oas.annotations.media.Schema) annotation;
-            } else if (annotation instanceof io.swagger.v3.oas.annotations.media.ArraySchema) {
-                rootArraySchema = (io.swagger.v3.oas.annotations.media.ArraySchema) annotation;
-            } else if (annotation instanceof io.swagger.v3.oas.annotations.Parameter) {
-                io.swagger.v3.oas.annotations.Parameter paramAnnotation = (io.swagger.v3.oas.annotations.Parameter) annotation;
+            if (annotation instanceof io.swagger.v3.oas.annotations.media.Schema schema) {
+                rootSchema = schema;
+            } else if (annotation instanceof io.swagger.v3.oas.annotations.media.ArraySchema schema) {
+                rootArraySchema = schema;
+            } else if (annotation instanceof io.swagger.v3.oas.annotations.Parameter paramAnnotation) {
                 if (paramAnnotation.content().length > 0) {
                     if (AnnotationsUtils.hasSchemaAnnotation(paramAnnotation.content()[0].schema())) {
                         contentSchema = paramAnnotation.content()[0].schema();

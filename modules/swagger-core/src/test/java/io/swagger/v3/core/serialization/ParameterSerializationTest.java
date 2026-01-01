@@ -65,13 +65,15 @@ public class ParameterSerializationTest {
         final String json = "{\"in\":\"path\",\"required\":true,\"schema\":{\"type\":\"array\",\"items\":{\"type\":\"string\"}}}";
         SerializationMatchers.assertEqualsToJson(p, json);
 
-        final String yaml = "---\n" +
-                "in: \"path\"\n" +
-                "required: true\n" +
-                "schema:\n" +
-                "  type: \"array\"\n" +
-                "  items:\n" +
-                "    type: \"string\"";
+        final String yaml = """
+                ---
+                in: "path"
+                required: true
+                schema:
+                  type: "array"
+                  items:
+                    type: "string"\
+                """;
         SerializationMatchers.assertEqualsToYaml(p, yaml);
     }
 
@@ -89,10 +91,12 @@ public class ParameterSerializationTest {
                 .schema(new StringSchema());
         final String json = "{\"in\":\"header\",\"schema\":{\"type\":\"string\"}}";
         SerializationMatchers.assertEqualsToJson(p, json);
-        final String yaml = "---\n" +
-                "in: \"header\"\n" +
-                "schema:\n" +
-                "  type: \"string\"";
+        final String yaml = """
+                ---
+                in: "header"
+                schema:
+                  type: "string"\
+                """;
         SerializationMatchers.assertEqualsToYaml(p, yaml);
     }
 
@@ -126,14 +130,15 @@ public class ParameterSerializationTest {
         final RequestBody p = new RequestBody()
                 .content(new Content().addMediaType("*/*",
                         new MediaType().schema(model)));
-        final String yaml = "---\n" +
-                "content:\n" +
-                "  '*/*':\n" +
-                "    schema:\n" +
-                "      title: Cat\n" +
-                "      properties:\n" +
-                "        name:\n" +
-                "          type: string";
+        final String yaml = """
+                ---
+                content:
+                  '*/*':
+                    schema:
+                      title: Cat
+                      properties:
+                        name:
+                          type: string""";
         SerializationMatchers.assertEqualsToYaml(p, yaml);
     }
 
@@ -180,26 +185,27 @@ public class ParameterSerializationTest {
     @Test(description = "should serialize correctly typed numeric enums")
     public void testIssue1765() throws Exception {
         String yaml =
-                "openapi: '3.0.1'\n" +
-                        "paths:\n" +
-                        "  /test:\n" +
-                        "    get:\n" +
-                        "      parameters:\n" +
-                        "      - name: \"days\"\n" +
-                        "        in: \"path\"\n" +
-                        "        required: true\n" +
-                        "        schema:\n" +
-                        "          type: \"integer\"\n" +
-                        "          format: \"int32\"\n" +
-                        "          enum:\n" +
-                        "          - 1\n" +
-                        "          - 2\n" +
-                        "          - 3\n" +
-                        "          - 4\n" +
-                        "          - 5\n" +
-                        "      responses:\n" +
-                        "        default:\n" +
-                        "          description: great";
+                """
+                openapi: '3.0.1'
+                paths:
+                  /test:
+                    get:
+                      parameters:
+                      - name: "days"
+                        in: "path"
+                        required: true
+                        schema:
+                          type: "integer"
+                          format: "int32"
+                          enum:
+                          - 1
+                          - 2
+                          - 3
+                          - 4
+                          - 5
+                      responses:
+                        default:
+                          description: great""";
 
         OpenAPI swagger = Yaml.mapper().readValue(yaml, OpenAPI.class);
         SerializationMatchers.assertEqualsToYaml(swagger, yaml);

@@ -631,8 +631,8 @@ public class GenericOpenApiContext<T extends GenericOpenApiContext> implements O
 
         SwaggerConfiguration merged = null;
 
-        if (config instanceof SwaggerConfiguration) {
-            merged = (SwaggerConfiguration) config;
+        if (config instanceof SwaggerConfiguration configuration) {
+            merged = configuration;
         } else {
             merged = (SwaggerConfiguration) ContextUtils.deepCopy(config);
         }

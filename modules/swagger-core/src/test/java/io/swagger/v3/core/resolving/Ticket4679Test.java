@@ -14,14 +14,16 @@ public class Ticket4679Test extends SwaggerTestBase{
     @Test(description = "Custom schema implementation in property overrides type value")
     public void testCustomSchemaImplementation() {
 
-        String expectedYaml = "ModelWithCustomSchemaImplementationInProperty:\n" +
-                "  type: object\n" +
-                "  properties:\n" +
-                "    exampleField:\n" +
-                "      type: integer\n" +
-                "      format: int32\n" +
-                "    secondExampleField:\n" +
-                "      type: string\n";
+        String expectedYaml = """
+                ModelWithCustomSchemaImplementationInProperty:
+                  type: object
+                  properties:
+                    exampleField:
+                      type: integer
+                      format: int32
+                    secondExampleField:
+                      type: string
+                """;
 
         Map<String, io.swagger.v3.oas.models.media.Schema> stringSchemaMap = ModelConverters.getInstance(true).readAll(ModelWithCustomSchemaImplementationInProperty.class);
         SerializationMatchers.assertEqualsToYaml31(stringSchemaMap, expectedYaml);

@@ -520,7 +520,7 @@ public enum PrimitiveType {
         if (StringUtils.isNotBlank(type) && type.equals("object")) {
             return null;
         }
-        return fromName(datatypeMappings.get(String.format("%s_%s", StringUtils.isBlank(type) ? "" : type, StringUtils.isBlank(format) ? "" : format)));
+        return fromName(datatypeMappings.get("%s_%s".formatted(StringUtils.isBlank(type) ? "" : type, StringUtils.isBlank(format) ? "" : format)));
     }
 
     public static Schema createProperty(Type type) {

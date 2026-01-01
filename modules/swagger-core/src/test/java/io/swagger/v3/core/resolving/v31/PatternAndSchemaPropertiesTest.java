@@ -32,139 +32,142 @@ public class PatternAndSchemaPropertiesTest extends SwaggerTestBase {
         assertEquals(((Schema)model.getProperties().get("anotherCategory")).get$ref(), "#/components/schemas/Category");
         assertEquals(((Schema)model.getProperties().get("anotherInteger")).getFormat(), "int32");
 
-        SerializationMatchers.assertEqualsToYaml(context.getDefinedModels(), "AnnotatedPet:\n" +
-                "  type: object\n" +
-                "  properties:\n" +
-                "    id:\n" +
-                "      type: integer\n" +
-                "      format: int64\n" +
-                "    category:\n" +
-                "      $ref: \"#/components/schemas/Category\"\n" +
-                "    name:\n" +
-                "      type: string\n" +
-                "    photoUrls:\n" +
-                "      type: array\n" +
-                "      xml:\n" +
-                "        wrapped: true\n" +
-                "      items:\n" +
-                "        type: string\n" +
-                "        xml:\n" +
-                "          name: photoUrl\n" +
-                "    tags:\n" +
-                "      type: array\n" +
-                "      xml:\n" +
-                "        wrapped: true\n" +
-                "      items:\n" +
-                "        $ref: \"#/components/schemas/Tag\"\n" +
-                "    status:\n" +
-                "      type: string\n" +
-                "      description: pet status in the store\n" +
-                "      enum:\n" +
-                "      - available\n" +
-                "      - pending\n" +
-                "      - sold\n" +
-                "    anotherCategory:\n" +
-                "      $ref: \"#/components/schemas/Category\"\n" +
-                "    anotherInteger:\n" +
-                "      maximum: 10\n" +
-                "      type: integer\n" +
-                "      description: prop schema 1\n" +
-                "      format: int32\n" +
-                "  description: Annotated Pet\n" +
-                "  nullable: true\n" +
-                "Category:\n" +
-                "  type: object\n" +
-                "  properties:\n" +
-                "    id:\n" +
-                "      type: integer\n" +
-                "      format: int64\n" +
-                "    name:\n" +
-                "      type: string\n" +
-                "  description: prop schema 2\n" +
-                "  xml:\n" +
-                "    name: Category\n" +
-                "Tag:\n" +
-                "  type: object\n" +
-                "  properties:\n" +
-                "    id:\n" +
-                "      type: integer\n" +
-                "      format: int64\n" +
-                "    name:\n" +
-                "      type: string\n" +
-                "  xml:\n" +
-                "    name: Tag");
+        SerializationMatchers.assertEqualsToYaml(context.getDefinedModels(), """
+                AnnotatedPet:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      format: int64
+                    category:
+                      $ref: "#/components/schemas/Category"
+                    name:
+                      type: string
+                    photoUrls:
+                      type: array
+                      xml:
+                        wrapped: true
+                      items:
+                        type: string
+                        xml:
+                          name: photoUrl
+                    tags:
+                      type: array
+                      xml:
+                        wrapped: true
+                      items:
+                        $ref: "#/components/schemas/Tag"
+                    status:
+                      type: string
+                      description: pet status in the store
+                      enum:
+                      - available
+                      - pending
+                      - sold
+                    anotherCategory:
+                      $ref: "#/components/schemas/Category"
+                    anotherInteger:
+                      maximum: 10
+                      type: integer
+                      description: prop schema 1
+                      format: int32
+                  description: Annotated Pet
+                  nullable: true
+                Category:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      format: int64
+                    name:
+                      type: string
+                  description: prop schema 2
+                  xml:
+                    name: Category
+                Tag:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      format: int64
+                    name:
+                      type: string
+                  xml:
+                    name: Tag""");
         context.getDefinedModels().values().forEach(s -> new OpenAPISchema2JsonSchema().process(s));
 
-        SerializationMatchers.assertEqualsToYaml31(context.getDefinedModels(), "AnnotatedPet:\n" +
-                "  type:\n" +
-                "  - object\n" +
-                "  - \"null\"\n" +
-                "  properties:\n" +
-                "    id:\n" +
-                "      type: integer\n" +
-                "      format: int64\n" +
-                "    category:\n" +
-                "      $ref: \"#/components/schemas/Category\"\n" +
-                "    name:\n" +
-                "      type: string\n" +
-                "    photoUrls:\n" +
-                "      type: array\n" +
-                "      xml:\n" +
-                "        wrapped: true\n" +
-                "      items:\n" +
-                "        type: string\n" +
-                "        xml:\n" +
-                "          name: photoUrl\n" +
-                "    tags:\n" +
-                "      type: array\n" +
-                "      xml:\n" +
-                "        wrapped: true\n" +
-                "      items:\n" +
-                "        $ref: \"#/components/schemas/Tag\"\n" +
-                "    status:\n" +
-                "      type: string\n" +
-                "      description: pet status in the store\n" +
-                "      enum:\n" +
-                "      - available\n" +
-                "      - pending\n" +
-                "      - sold\n" +
-                "    anotherCategory:\n" +
-                "      $ref: \"#/components/schemas/Category\"\n" +
-                "    anotherInteger:\n" +
-                "      maximum: 10\n" +
-                "      type: integer\n" +
-                "      description: prop schema 1\n" +
-                "      format: int32\n" +
-                "  patternProperties:\n" +
-                "    what.*ever:\n" +
-                "      maximum: 10\n" +
-                "      type: integer\n" +
-                "      description: prop schema 1\n" +
-                "      format: int32\n" +
-                "    it.*takes:\n" +
-                "      $ref: \"#/components/schemas/Category\"\n" +
-                "  description: Annotated Pet\n" +
-                "Category:\n" +
-                "  type: object\n" +
-                "  properties:\n" +
-                "    id:\n" +
-                "      type: integer\n" +
-                "      format: int64\n" +
-                "    name:\n" +
-                "      type: string\n" +
-                "  description: prop schema 2\n" +
-                "  xml:\n" +
-                "    name: Category\n" +
-                "Tag:\n" +
-                "  type: object\n" +
-                "  properties:\n" +
-                "    id:\n" +
-                "      type: integer\n" +
-                "      format: int64\n" +
-                "    name:\n" +
-                "      type: string\n" +
-                "  xml:\n" +
-                "    name: Tag\n");
+        SerializationMatchers.assertEqualsToYaml31(context.getDefinedModels(), """
+                AnnotatedPet:
+                  type:
+                  - object
+                  - "null"
+                  properties:
+                    id:
+                      type: integer
+                      format: int64
+                    category:
+                      $ref: "#/components/schemas/Category"
+                    name:
+                      type: string
+                    photoUrls:
+                      type: array
+                      xml:
+                        wrapped: true
+                      items:
+                        type: string
+                        xml:
+                          name: photoUrl
+                    tags:
+                      type: array
+                      xml:
+                        wrapped: true
+                      items:
+                        $ref: "#/components/schemas/Tag"
+                    status:
+                      type: string
+                      description: pet status in the store
+                      enum:
+                      - available
+                      - pending
+                      - sold
+                    anotherCategory:
+                      $ref: "#/components/schemas/Category"
+                    anotherInteger:
+                      maximum: 10
+                      type: integer
+                      description: prop schema 1
+                      format: int32
+                  patternProperties:
+                    what.*ever:
+                      maximum: 10
+                      type: integer
+                      description: prop schema 1
+                      format: int32
+                    it.*takes:
+                      $ref: "#/components/schemas/Category"
+                  description: Annotated Pet
+                Category:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      format: int64
+                    name:
+                      type: string
+                  description: prop schema 2
+                  xml:
+                    name: Category
+                Tag:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      format: int64
+                    name:
+                      type: string
+                  xml:
+                    name: Tag
+                """);
     }
 
     @Test

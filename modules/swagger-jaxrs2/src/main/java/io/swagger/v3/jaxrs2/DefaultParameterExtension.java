@@ -56,46 +56,41 @@ public class DefaultParameterExtension extends AbstractOpenAPIExtension {
 
         Parameter parameter = null;
         for (Annotation annotation : annotations) {
-            if (annotation instanceof QueryParam) {
-                QueryParam param = (QueryParam) annotation;
+            if (annotation instanceof QueryParam param) {
                 Parameter qp = new Parameter();
                 qp.setIn(QUERY_PARAM);
                 qp.setName(param.value());
                 parameter = qp;
-            } else if (annotation instanceof PathParam) {
-                PathParam param = (PathParam) annotation;
+            } else if (annotation instanceof PathParam param) {
                 Parameter pp = new Parameter();
                 pp.setIn(PATH_PARAM);
                 pp.setName(param.value());
                 parameter = pp;
-            } else if (annotation instanceof MatrixParam) {
-                MatrixParam param = (MatrixParam) annotation;
+            } else if (annotation instanceof MatrixParam param) {
                 Parameter pp = new Parameter();
                 pp.setIn(PATH_PARAM);
                 pp.setStyle(Parameter.StyleEnum.MATRIX);
                 pp.setName(param.value());
                 parameter = pp;
-            } else if (annotation instanceof HeaderParam) {
-                HeaderParam param = (HeaderParam) annotation;
+            } else if (annotation instanceof HeaderParam param) {
                 Parameter pp = new Parameter();
                 pp.setIn(HEADER_PARAM);
                 pp.setName(param.value());
                 parameter = pp;
-            } else if (annotation instanceof CookieParam) {
-                CookieParam param = (CookieParam) annotation;
+            } else if (annotation instanceof CookieParam param) {
                 Parameter pp = new Parameter();
                 pp.setIn(COOKIE_PARAM);
                 pp.setName(param.value());
                 parameter = pp;
-            } else if (annotation instanceof io.swagger.v3.oas.annotations.Parameter) {
-                if (((io.swagger.v3.oas.annotations.Parameter) annotation).hidden()) {
+            } else if (annotation instanceof io.swagger.v3.oas.annotations.Parameter parameter1) {
+                if (parameter1.hidden()) {
                     return new ResolvedParameter();
                 }
                 if (parameter == null) {
                     parameter = new Parameter();
                 }
-                if (StringUtils.isNotBlank(((io.swagger.v3.oas.annotations.Parameter) annotation).ref())) {
-                    parameter.$ref(((io.swagger.v3.oas.annotations.Parameter) annotation).ref());
+                if (StringUtils.isNotBlank(parameter1.ref())) {
+                    parameter.$ref(parameter1.ref());
                 }
             } else {
                 List<Parameter> formParameters = new ArrayList<>();
@@ -229,8 +224,8 @@ public class DefaultParameterExtension extends AbstractOpenAPIExtension {
                 // skip hidden properties
                 boolean hidden  = false;
                 for (Annotation a : paramAnnotations) {
-                    if (a instanceof io.swagger.v3.oas.annotations.media.Schema) {
-                        if (((io.swagger.v3.oas.annotations.media.Schema) a).hidden()) {
+                    if (a instanceof io.swagger.v3.oas.annotations.media.Schema schema) {
+                        if (schema.hidden()) {
                             hidden = true;
                             break;
                         };

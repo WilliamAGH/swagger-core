@@ -38,34 +38,36 @@ public class MergedOperationTest extends AbstractAnnotationTest {
         String yaml = readIntoYaml(MethodWithParameters.class);
 
         assertEquals(yaml,
-                "openapi: 3.0.1\n" +
-                        "paths:\n" +
-                        "  /findAll:\n" +
-                        "    get:\n" +
-                        "      description: method with parameters\n" +
-                        "      operationId: getSimpleResponseWithParameters\n" +
-                        "      parameters:\n" +
-                        "      - name: id\n" +
-                        "        in: query\n" +
-                        "        schema:\n" +
-                        "          type: string\n" +
-                        "      - name: x-authorized-by\n" +
-                        "        in: header\n" +
-                        "        schema:\n" +
-                        "          type: array\n" +
-                        "          items:\n" +
-                        "            type: string\n" +
-                        "      responses:\n" +
-                        "        default:\n" +
-                        "          description: default response\n" +
-                        "          content:\n" +
-                        "            '*/*':\n" +
-                        "              schema:\n" +
-                        "                $ref: \"#/components/schemas/SimpleResponse\"\n" +
-                        "components:\n" +
-                        "  schemas:\n" +
-                        "    SimpleResponse:\n" +
-                        "      type: object\n");
+                """
+                openapi: 3.0.1
+                paths:
+                  /findAll:
+                    get:
+                      description: method with parameters
+                      operationId: getSimpleResponseWithParameters
+                      parameters:
+                      - name: id
+                        in: query
+                        schema:
+                          type: string
+                      - name: x-authorized-by
+                        in: header
+                        schema:
+                          type: array
+                          items:
+                            type: string
+                      responses:
+                        default:
+                          description: default response
+                          content:
+                            '*/*':
+                              schema:
+                                $ref: "#/components/schemas/SimpleResponse"
+                components:
+                  schemas:
+                    SimpleResponse:
+                      type: object
+                """);
     }
 
     static class MethodWithParameters {
@@ -82,37 +84,39 @@ public class MergedOperationTest extends AbstractAnnotationTest {
     @Test(description = "shows how annotations can decorate an operation")
     public void testPartiallyAnnotatedMethod() {
         String yaml = readIntoYaml(MethodWithPartialAnnotation.class);
-        String expectedYaml = "openapi: 3.0.1\n" +
-                "paths:\n" +
-                "  /findAll:\n" +
-                "    get:\n" +
-                "      description: returns a value\n" +
-                "      operationId: getSimpleResponseWithParameters\n" +
-                "      parameters:\n" +
-                "      - name: id\n" +
-                "        in: query\n" +
-                "        schema:\n" +
-                "          pattern: \"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\"\n" +
-                "          type: string\n" +
-                "          description: a GUID for the user in uuid-v4 format\n" +
-                "          format: uuid\n" +
-                "      - name: x-authorized-by\n" +
-                "        in: header\n" +
-                "        schema:\n" +
-                "          type: array\n" +
-                "          items:\n" +
-                "            type: string\n" +
-                "      responses:\n" +
-                "        default:\n" +
-                "          description: default response\n" +
-                "          content:\n" +
-                "            '*/*':\n" +
-                "              schema:\n" +
-                "                $ref: \"#/components/schemas/SimpleResponse\"\n" +
-                "components:\n" +
-                "  schemas:\n" +
-                "    SimpleResponse:\n" +
-                "      type: object\n";
+        String expectedYaml = """
+                openapi: 3.0.1
+                paths:
+                  /findAll:
+                    get:
+                      description: returns a value
+                      operationId: getSimpleResponseWithParameters
+                      parameters:
+                      - name: id
+                        in: query
+                        schema:
+                          pattern: "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
+                          type: string
+                          description: a GUID for the user in uuid-v4 format
+                          format: uuid
+                      - name: x-authorized-by
+                        in: header
+                        schema:
+                          type: array
+                          items:
+                            type: string
+                      responses:
+                        default:
+                          description: default response
+                          content:
+                            '*/*':
+                              schema:
+                                $ref: "#/components/schemas/SimpleResponse"
+                components:
+                  schemas:
+                    SimpleResponse:
+                      type: object
+                """;
 
         assertEquals(yaml, expectedYaml);
     }
@@ -136,24 +140,26 @@ public class MergedOperationTest extends AbstractAnnotationTest {
     @Test(description = "shows how a request body is passed")
     public void testRequestBody() {
         String yaml = readIntoYaml(MethodWithRequestBody.class);
-        String expectedYaml = "openapi: 3.0.1\n" +
-                "paths:\n" +
-                "  /add:\n" +
-                "    post:\n" +
-                "      description: receives a body\n" +
-                "      operationId: addValue\n" +
-                "      requestBody:\n" +
-                "        content:\n" +
-                "          '*/*':\n" +
-                "            schema:\n" +
-                "              $ref: \"#/components/schemas/InputValue\"\n" +
-                "      responses:\n" +
-                "        \"201\":\n" +
-                "          description: value successfully processed\n" +
-                "components:\n" +
-                "  schemas:\n" +
-                "    InputValue:\n" +
-                "      type: object\n";
+        String expectedYaml = """
+                openapi: 3.0.1
+                paths:
+                  /add:
+                    post:
+                      description: receives a body
+                      operationId: addValue
+                      requestBody:
+                        content:
+                          '*/*':
+                            schema:
+                              $ref: "#/components/schemas/InputValue"
+                      responses:
+                        "201":
+                          description: value successfully processed
+                components:
+                  schemas:
+                    InputValue:
+                      type: object
+                """;
 
         assertEquals(yaml, expectedYaml);
     }

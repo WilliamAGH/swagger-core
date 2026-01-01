@@ -359,268 +359,269 @@ public class ExtensionsResource {
 
 
     public static final String YAML =
-            "openapi: 3.0.1\n" +
-                    "info:\n" +
-                    "  contact:\n" +
-                    "    x-contact:\n" +
-                    "      name: Josh\n" +
-                    "    x-contact-extensions:\n" +
-                    "      lastName: Hart\n" +
-                    "      address: House\n" +
-                    "  license:\n" +
-                    "    x-license:\n" +
-                    "      name: Josh\n" +
-                    "    x-license-extensions:\n" +
-                    "      lastName: Hart\n" +
-                    "      address: House\n" +
-                    "  x-info:\n" +
-                    "    name: Josh\n" +
-                    "  x-info-extensions:\n" +
-                    "    lastName: Hart\n" +
-                    "    address: House\n" +
-                    "externalDocs:\n" +
-                    "  x-externalDocs:\n" +
-                    "    name: Josh\n" +
-                    "  x-externalDocs-extensions:\n" +
-                    "    lastName: Hart\n" +
-                    "    address: House\n" +
-                    "servers:\n" +
-                    "- variables:\n" +
-                    "    aa:\n" +
-                    "      default: aa\n" +
-                    "      x-servervar:\n" +
-                    "        name: Josh\n" +
-                    "      x-servervar-extensions:\n" +
-                    "        lastName: Hart\n" +
-                    "        address: House\n" +
-                    "  x-server-extensions:\n" +
-                    "    lastName: Hart\n" +
-                    "    address: House\n" +
-                    "  x-server:\n" +
-                    "    name: Josh\n" +
-                    "paths:\n" +
-                    "  /:\n" +
-                    "    get:\n" +
-                    "      tags:\n" +
-                    "      - MyTag\n" +
-                    "      summary: Operation Summary\n" +
-                    "      description: Operation Description\n" +
-                    "      operationId: operationId\n" +
-                    "      parameters:\n" +
-                    "      - name: subscriptionId\n" +
-                    "        in: query\n" +
-                    "        schema:\n" +
-                    "          type: string\n" +
-                    "        examples:\n" +
-                    "          example1:\n" +
-                    "            summary: Summary example 1\n" +
-                    "            description: example1\n" +
-                    "            value: example1\n" +
-                    "            externalValue: external value 1\n" +
-                    "            x-examples-extensions:\n" +
-                    "              lastName: Hart\n" +
-                    "              address: House\n" +
-                    "            x-examples:\n" +
-                    "              name: Josh\n" +
-                    "        x-parameter:\n" +
-                    "          parameter: value\n" +
-                    "      responses:\n" +
-                    "        default:\n" +
-                    "          description: default response\n" +
-                    "          content:\n" +
-                    "            '*/*': {}\n" +
-                    "      security:\n" +
-                    "      - security_key:\n" +
-                    "        - write:pets\n" +
-                    "        - read:pets\n" +
-                    "      - myOauth2Security:\n" +
-                    "        - write:pets\n" +
-                    "      x-name: Josh\n" +
-                    "      x-operation:\n" +
-                    "        name: Josh\n" +
-                    "      x-operation-extensions:\n" +
-                    "        lastName: Hart\n" +
-                    "        address: House\n" +
-                    "      x-codes:\n" +
-                    "      - \"11\"\n" +
-                    "      - \"12\"\n" +
-                    "  /user:\n" +
-                    "    get:\n" +
-                    "      operationId: getUser\n" +
-                    "      requestBody:\n" +
-                    "        description: Request Body in Param\n" +
-                    "        content:\n" +
-                    "          application/json:\n" +
-                    "            schema:\n" +
-                    "              type: string\n" +
-                    "              x-schema:\n" +
-                    "                name: Josh\n" +
-                    "              x-schema-extensions:\n" +
-                    "                lastName: Hart\n" +
-                    "                address: House\n" +
-                    "            encoding:\n" +
-                    "              application/xml:\n" +
-                    "                x-encoding-extensions:\n" +
-                    "                  lastName: Hart\n" +
-                    "                  address: House\n" +
-                    "                x-encoding:\n" +
-                    "                  name: Josh\n" +
-                    "            x-content:\n" +
-                    "              name: Josh\n" +
-                    "            x-content-extensions:\n" +
-                    "              lastName: Hart\n" +
-                    "              address: House\n" +
-                    "        x-extension:\n" +
-                    "          name: param\n" +
-                    "        x-extension2:\n" +
-                    "          another: val\n" +
-                    "      responses:\n" +
-                    "        default:\n" +
-                    "          description: default response\n" +
-                    "          content:\n" +
-                    "            '*/*': {}\n" +
-                    "      callbacks:\n" +
-                    "        subscription:\n" +
-                    "          http://$request.query.url:\n" +
-                    "            get:\n" +
-                    "              description: payload data will be received\n" +
-                    "            put:\n" +
-                    "              description: payload data will be sent\n" +
-                    "            post:\n" +
-                    "              description: payload data will be sent\n" +
-                    "              parameters:\n" +
-                    "              - name: subscriptionId\n" +
-                    "                in: path\n" +
-                    "                required: true\n" +
-                    "                schema:\n" +
-                    "                  type: string\n" +
-                    "                  description: the generated UUID\n" +
-                    "                  format: uuid\n" +
-                    "              responses:\n" +
-                    "                \"200\":\n" +
-                    "                  description: Return this code if the callback was received and processed\n" +
-                    "                    successfully\n" +
-                    "                \"205\":\n" +
-                    "                  description: Return this code to unsubscribe from future data updates\n" +
-                    "                default:\n" +
-                    "                  description: All other response codes will disable this callback\n" +
-                    "                    subscription\n" +
-                    "      security:\n" +
-                    "      - security_key:\n" +
-                    "        - write:pets\n" +
-                    "        - read:pets\n" +
-                    "      - myOauth2Security:\n" +
-                    "        - write:pets\n" +
-                    "    post:\n" +
-                    "      operationId: setUser\n" +
-                    "      requestBody:\n" +
-                    "        description: Request Body in Param\n" +
-                    "        content:\n" +
-                    "          '*/*':\n" +
-                    "            schema:\n" +
-                    "              $ref: \"#/components/schemas/ExtensionUser\"\n" +
-                    "        x-extension:\n" +
-                    "          name: param\n" +
-                    "        x-extension2:\n" +
-                    "          another: val\n" +
-                    "      responses:\n" +
-                    "        default:\n" +
-                    "          description: \"200\"\n" +
-                    "          content:\n" +
-                    "            '*/*':\n" +
-                    "              schema:\n" +
-                    "                $ref: \"#/components/schemas/ExtensionUser\"\n" +
-                    "              x-content:\n" +
-                    "                name: Josh\n" +
-                    "              x-content-extensions:\n" +
-                    "                lastName: Hart\n" +
-                    "                address: House\n" +
-                    "          links:\n" +
-                    "            aa:\n" +
-                    "              operationId: getUser\n" +
-                    "              description: aa\n" +
-                    "              x-links-extensions:\n" +
-                    "                lastName: Hart\n" +
-                    "                address: House\n" +
-                    "              x-links:\n" +
-                    "                name: Josh\n" +
-                    "          x-response-extensions:\n" +
-                    "            lastName: Hart\n" +
-                    "            address: House\n" +
-                    "          x-response:\n" +
-                    "            name: Josh\n" +
-                    "      security:\n" +
-                    "      - security_key:\n" +
-                    "        - write:pets\n" +
-                    "        - read:pets\n" +
-                    "      - myOauth2Security:\n" +
-                    "        - write:pets\n" +
-                    "components:\n" +
-                    "  schemas:\n" +
-                    "    ExtensionUser:\n" +
-                    "      type: object\n" +
-                    "      properties:\n" +
-                    "        id:\n" +
-                    "          type: integer\n" +
-                    "          format: int64\n" +
-                    "        username:\n" +
-                    "          type: string\n" +
-                    "        firstName:\n" +
-                    "          type: string\n" +
-                    "        lastName:\n" +
-                    "          type: string\n" +
-                    "        email:\n" +
-                    "          type: string\n" +
-                    "        password:\n" +
-                    "          type: string\n" +
-                    "        phone:\n" +
-                    "          type: string\n" +
-                    "        userStatus:\n" +
-                    "          type: integer\n" +
-                    "          description: User Status\n" +
-                    "          format: int32\n" +
-                    "          x-userStatus:\n" +
-                    "            name: Josh\n" +
-                    "          x-userStatus-extensions:\n" +
-                    "            lastName: Hart\n" +
-                    "            address: House\n" +
-                    "      description: User\n" +
-                    "      xml:\n" +
-                    "        name: User\n" +
-                    "      x-user-extensions:\n" +
-                    "        lastName: Hart\n" +
-                    "        address: House\n" +
-                    "      x-user:\n" +
-                    "        name: Josh\n" +
-                    "  securitySchemes:\n" +
-                    "    myOauth2Security:\n" +
-                    "      type: oauth2\n" +
-                    "      description: myOauthSecurity Description\n" +
-                    "      in: header\n" +
-                    "      flows:\n" +
-                    "        implicit:\n" +
-                    "          authorizationUrl: http://x.com\n" +
-                    "          scopes:\n" +
-                    "            write:pets: modify pets in your account\n" +
-                    "          x-oauthflow-extensions:\n" +
-                    "            lastName: Hart\n" +
-                    "            address: House\n" +
-                    "          x-oauthflow:\n" +
-                    "            name: Josh\n" +
-                    "        x-oauthflows:\n" +
-                    "          name: Josh\n" +
-                    "        x-oauthflows-extensions:\n" +
-                    "          lastName: Hart\n" +
-                    "          address: House\n" +
-                    "      x-security:\n" +
-                    "        name: Josh\n" +
-                    "      x-security-extensions:\n" +
-                    "        lastName: Hart\n" +
-                    "        address: House\n" +
-                    "x-openapi:\n" +
-                    "  name: Josh\n" +
-                    "x-openapi-extensions:\n" +
-                    "  lastName: Hart\n" +
-                    "  address: House";
+            """
+            openapi: 3.0.1
+            info:
+              contact:
+                x-contact:
+                  name: Josh
+                x-contact-extensions:
+                  lastName: Hart
+                  address: House
+              license:
+                x-license:
+                  name: Josh
+                x-license-extensions:
+                  lastName: Hart
+                  address: House
+              x-info:
+                name: Josh
+              x-info-extensions:
+                lastName: Hart
+                address: House
+            externalDocs:
+              x-externalDocs:
+                name: Josh
+              x-externalDocs-extensions:
+                lastName: Hart
+                address: House
+            servers:
+            - variables:
+                aa:
+                  default: aa
+                  x-servervar:
+                    name: Josh
+                  x-servervar-extensions:
+                    lastName: Hart
+                    address: House
+              x-server-extensions:
+                lastName: Hart
+                address: House
+              x-server:
+                name: Josh
+            paths:
+              /:
+                get:
+                  tags:
+                  - MyTag
+                  summary: Operation Summary
+                  description: Operation Description
+                  operationId: operationId
+                  parameters:
+                  - name: subscriptionId
+                    in: query
+                    schema:
+                      type: string
+                    examples:
+                      example1:
+                        summary: Summary example 1
+                        description: example1
+                        value: example1
+                        externalValue: external value 1
+                        x-examples-extensions:
+                          lastName: Hart
+                          address: House
+                        x-examples:
+                          name: Josh
+                    x-parameter:
+                      parameter: value
+                  responses:
+                    default:
+                      description: default response
+                      content:
+                        '*/*': {}
+                  security:
+                  - security_key:
+                    - write:pets
+                    - read:pets
+                  - myOauth2Security:
+                    - write:pets
+                  x-name: Josh
+                  x-operation:
+                    name: Josh
+                  x-operation-extensions:
+                    lastName: Hart
+                    address: House
+                  x-codes:
+                  - "11"
+                  - "12"
+              /user:
+                get:
+                  operationId: getUser
+                  requestBody:
+                    description: Request Body in Param
+                    content:
+                      application/json:
+                        schema:
+                          type: string
+                          x-schema:
+                            name: Josh
+                          x-schema-extensions:
+                            lastName: Hart
+                            address: House
+                        encoding:
+                          application/xml:
+                            x-encoding-extensions:
+                              lastName: Hart
+                              address: House
+                            x-encoding:
+                              name: Josh
+                        x-content:
+                          name: Josh
+                        x-content-extensions:
+                          lastName: Hart
+                          address: House
+                    x-extension:
+                      name: param
+                    x-extension2:
+                      another: val
+                  responses:
+                    default:
+                      description: default response
+                      content:
+                        '*/*': {}
+                  callbacks:
+                    subscription:
+                      http://$request.query.url:
+                        get:
+                          description: payload data will be received
+                        put:
+                          description: payload data will be sent
+                        post:
+                          description: payload data will be sent
+                          parameters:
+                          - name: subscriptionId
+                            in: path
+                            required: true
+                            schema:
+                              type: string
+                              description: the generated UUID
+                              format: uuid
+                          responses:
+                            "200":
+                              description: Return this code if the callback was received and processed
+                                successfully
+                            "205":
+                              description: Return this code to unsubscribe from future data updates
+                            default:
+                              description: All other response codes will disable this callback
+                                subscription
+                  security:
+                  - security_key:
+                    - write:pets
+                    - read:pets
+                  - myOauth2Security:
+                    - write:pets
+                post:
+                  operationId: setUser
+                  requestBody:
+                    description: Request Body in Param
+                    content:
+                      '*/*':
+                        schema:
+                          $ref: "#/components/schemas/ExtensionUser"
+                    x-extension:
+                      name: param
+                    x-extension2:
+                      another: val
+                  responses:
+                    default:
+                      description: "200"
+                      content:
+                        '*/*':
+                          schema:
+                            $ref: "#/components/schemas/ExtensionUser"
+                          x-content:
+                            name: Josh
+                          x-content-extensions:
+                            lastName: Hart
+                            address: House
+                      links:
+                        aa:
+                          operationId: getUser
+                          description: aa
+                          x-links-extensions:
+                            lastName: Hart
+                            address: House
+                          x-links:
+                            name: Josh
+                      x-response-extensions:
+                        lastName: Hart
+                        address: House
+                      x-response:
+                        name: Josh
+                  security:
+                  - security_key:
+                    - write:pets
+                    - read:pets
+                  - myOauth2Security:
+                    - write:pets
+            components:
+              schemas:
+                ExtensionUser:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      format: int64
+                    username:
+                      type: string
+                    firstName:
+                      type: string
+                    lastName:
+                      type: string
+                    email:
+                      type: string
+                    password:
+                      type: string
+                    phone:
+                      type: string
+                    userStatus:
+                      type: integer
+                      description: User Status
+                      format: int32
+                      x-userStatus:
+                        name: Josh
+                      x-userStatus-extensions:
+                        lastName: Hart
+                        address: House
+                  description: User
+                  xml:
+                    name: User
+                  x-user-extensions:
+                    lastName: Hart
+                    address: House
+                  x-user:
+                    name: Josh
+              securitySchemes:
+                myOauth2Security:
+                  type: oauth2
+                  description: myOauthSecurity Description
+                  in: header
+                  flows:
+                    implicit:
+                      authorizationUrl: http://x.com
+                      scopes:
+                        write:pets: modify pets in your account
+                      x-oauthflow-extensions:
+                        lastName: Hart
+                        address: House
+                      x-oauthflow:
+                        name: Josh
+                    x-oauthflows:
+                      name: Josh
+                    x-oauthflows-extensions:
+                      lastName: Hart
+                      address: House
+                  x-security:
+                    name: Josh
+                  x-security-extensions:
+                    lastName: Hart
+                    address: House
+            x-openapi:
+              name: Josh
+            x-openapi-extensions:
+              lastName: Hart
+              address: House""";
 
 }

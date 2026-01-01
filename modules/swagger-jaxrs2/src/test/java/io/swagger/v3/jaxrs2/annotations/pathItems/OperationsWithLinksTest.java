@@ -23,59 +23,60 @@ public class OperationsWithLinksTest extends AbstractAnnotationTest {
     @Test(description = "Shows creating simple links")
     public void createOperationWithLinks() throws IOException {
 
-        String expectedYAML = "openapi: 3.0.1\n" +
-                "paths:\n" +
-                "  /users:\n" +
-                "    get:\n" +
-                "      operationId: getUser\n" +
-                "      parameters:\n" +
-                "      - name: userId\n" +
-                "        in: query\n" +
-                "        schema:\n" +
-                "          type: string\n" +
-                "      responses:\n" +
-                "        default:\n" +
-                "          description: test description\n" +
-                "          content:\n" +
-                "            '*/*':\n" +
-                "              schema:\n" +
-                "                $ref: \"#/components/schemas/User\"\n" +
-                "          links:\n" +
-                "            address:\n" +
-                "              operationId: getAddress\n" +
-                "              parameters:\n" +
-                "                userId: $request.query.userId\n" +
-                "  /addresses:\n" +
-                "    get:\n" +
-                "      operationId: getAddress\n" +
-                "      parameters:\n" +
-                "      - name: userId\n" +
-                "        in: query\n" +
-                "        schema:\n" +
-                "          type: string\n" +
-                "      responses:\n" +
-                "        default:\n" +
-                "          description: test description\n" +
-                "          content:\n" +
-                "            '*/*':\n" +
-                "              schema:\n" +
-                "                $ref: \"#/components/schemas/Address\"\n" +
-                "components:\n" +
-                "  schemas:\n" +
-                "    User:\n" +
-                "      type: object\n" +
-                "      properties:\n" +
-                "        id:\n" +
-                "          type: string\n" +
-                "        username:\n" +
-                "          type: string\n" +
-                "    Address:\n" +
-                "      type: object\n" +
-                "      properties:\n" +
-                "        street:\n" +
-                "          type: string\n" +
-                "        zip:\n" +
-                "          type: string";
+        String expectedYAML = """
+                openapi: 3.0.1
+                paths:
+                  /users:
+                    get:
+                      operationId: getUser
+                      parameters:
+                      - name: userId
+                        in: query
+                        schema:
+                          type: string
+                      responses:
+                        default:
+                          description: test description
+                          content:
+                            '*/*':
+                              schema:
+                                $ref: "#/components/schemas/User"
+                          links:
+                            address:
+                              operationId: getAddress
+                              parameters:
+                                userId: $request.query.userId
+                  /addresses:
+                    get:
+                      operationId: getAddress
+                      parameters:
+                      - name: userId
+                        in: query
+                        schema:
+                          type: string
+                      responses:
+                        default:
+                          description: test description
+                          content:
+                            '*/*':
+                              schema:
+                                $ref: "#/components/schemas/Address"
+                components:
+                  schemas:
+                    User:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        username:
+                          type: string
+                    Address:
+                      type: object
+                      properties:
+                        street:
+                          type: string
+                        zip:
+                          type: string""";
 
         compareAsYaml(ClassWithOperationAndLinks.class, expectedYAML);
     }
@@ -83,60 +84,61 @@ public class OperationsWithLinksTest extends AbstractAnnotationTest {
     @Test(description = "Shows creating simple links with request body")
     public void createOperationWithLinksAndRequestBody() throws IOException {
 
-        String expectedYAML = "openapi: 3.0.1\n" +
-                "paths:\n" +
-                "  /users:\n" +
-                "    get:\n" +
-                "      operationId: getUser\n" +
-                "      parameters:\n" +
-                "      - name: userId\n" +
-                "        in: query\n" +
-                "        schema:\n" +
-                "          type: string\n" +
-                "      responses:\n" +
-                "        default:\n" +
-                "          description: test description\n" +
-                "          content:\n" +
-                "            '*/*':\n" +
-                "              schema:\n" +
-                "                $ref: \"#/components/schemas/User\"\n" +
-                "          links:\n" +
-                "            address:\n" +
-                "              operationId: addAddress\n" +
-                "              requestBody: $request.query.userId\n" +
-                "  /addresses:\n" +
-                "    post:\n" +
-                "      operationId: addAddress\n" +
-                "      requestBody:\n" +
-                "        description: userId\n" +
-                "        content:\n" +
-                "          '*/*':\n" +
-                "            schema:\n" +
-                "              type: string\n" +
-                "        required: true\n" +
-                "      responses:\n" +
-                "        default:\n" +
-                "          description: test description\n" +
-                "          content:\n" +
-                "            '*/*':\n" +
-                "              schema:\n" +
-                "                $ref: \"#/components/schemas/Address\"\n" +
-                "components:\n" +
-                "  schemas:\n" +
-                "    User:\n" +
-                "      type: object\n" +
-                "      properties:\n" +
-                "        id:\n" +
-                "          type: string\n" +
-                "        username:\n" +
-                "          type: string\n" +
-                "    Address:\n" +
-                "      type: object\n" +
-                "      properties:\n" +
-                "        street:\n" +
-                "          type: string\n" +
-                "        zip:\n" +
-                "          type: string";
+        String expectedYAML = """
+                openapi: 3.0.1
+                paths:
+                  /users:
+                    get:
+                      operationId: getUser
+                      parameters:
+                      - name: userId
+                        in: query
+                        schema:
+                          type: string
+                      responses:
+                        default:
+                          description: test description
+                          content:
+                            '*/*':
+                              schema:
+                                $ref: "#/components/schemas/User"
+                          links:
+                            address:
+                              operationId: addAddress
+                              requestBody: $request.query.userId
+                  /addresses:
+                    post:
+                      operationId: addAddress
+                      requestBody:
+                        description: userId
+                        content:
+                          '*/*':
+                            schema:
+                              type: string
+                        required: true
+                      responses:
+                        default:
+                          description: test description
+                          content:
+                            '*/*':
+                              schema:
+                                $ref: "#/components/schemas/Address"
+                components:
+                  schemas:
+                    User:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        username:
+                          type: string
+                    Address:
+                      type: object
+                      properties:
+                        street:
+                          type: string
+                        zip:
+                          type: string""";
 
         compareAsYaml(ClassWithOperationAndLinksWithRequestBody.class, expectedYAML);
     }
@@ -144,32 +146,33 @@ public class OperationsWithLinksTest extends AbstractAnnotationTest {
     @Test(description = "Shows creating operation response without annotation")
     public void createOperationWithResponseNoAnnotation() throws IOException {
 
-        String expectedYAML = "openapi: 3.0.1\n" +
-                "paths:\n" +
-                "  /users:\n" +
-                "    get:\n" +
-                "      operationId: getUser\n" +
-                "      parameters:\n" +
-                "      - name: userId\n" +
-                "        in: query\n" +
-                "        schema:\n" +
-                "          type: string\n" +
-                "      responses:\n" +
-                "        default:\n" +
-                "          description: default response\n" +
-                "          content:\n" +
-                "            '*/*':\n" +
-                "              schema:\n" +
-                "                $ref: \"#/components/schemas/User\"\n" +
-                "components:\n" +
-                "  schemas:\n" +
-                "    User:\n" +
-                "      type: object\n" +
-                "      properties:\n" +
-                "        id:\n" +
-                "          type: string\n" +
-                "        username:\n" +
-                "          type: string";
+        String expectedYAML = """
+                openapi: 3.0.1
+                paths:
+                  /users:
+                    get:
+                      operationId: getUser
+                      parameters:
+                      - name: userId
+                        in: query
+                        schema:
+                          type: string
+                      responses:
+                        default:
+                          description: default response
+                          content:
+                            '*/*':
+                              schema:
+                                $ref: "#/components/schemas/User"
+                components:
+                  schemas:
+                    User:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        username:
+                          type: string""";
 
         compareAsYaml(ClassWithResponseNoAnnotation.class, expectedYAML);
     }
@@ -297,35 +300,36 @@ public class OperationsWithLinksTest extends AbstractAnnotationTest {
         int start = openApiYAML.indexOf("/users:");
         int end = openApiYAML.length() - 1;
 
-        String expectedYaml = "/users:\n" +
-                "    get:\n" +
-                "      operationId: getUser\n" +
-                "      parameters:\n" +
-                "      - name: userId\n" +
-                "        in: query\n" +
-                "        schema:\n" +
-                "          type: string\n" +
-                "      responses:\n" +
-                "        default:\n" +
-                "          description: test description\n" +
-                "          content:\n" +
-                "            '*/*':\n" +
-                "              schema:\n" +
-                "                $ref: \"#/components/schemas/User\"\n" +
-                "          links:\n" +
-                "            user:\n" +
-                "              operationId: getUser\n" +
-                "              parameters:\n" +
-                "                userId: $request.query.userId\n" +
-                "components:\n" +
-                "  schemas:\n" +
-                "    User:\n" +
-                "      type: object\n" +
-                "      properties:\n" +
-                "        id:\n" +
-                "          type: string\n" +
-                "        username:\n" +
-                "          type: string";
+        String expectedYaml = """
+                /users:
+                    get:
+                      operationId: getUser
+                      parameters:
+                      - name: userId
+                        in: query
+                        schema:
+                          type: string
+                      responses:
+                        default:
+                          description: test description
+                          content:
+                            '*/*':
+                              schema:
+                                $ref: "#/components/schemas/User"
+                          links:
+                            user:
+                              operationId: getUser
+                              parameters:
+                                userId: $request.query.userId
+                components:
+                  schemas:
+                    User:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        username:
+                          type: string""";
         String extractedYAML = openApiYAML.substring(start, end);
         assertEquals(extractedYAML, expectedYaml);
     }

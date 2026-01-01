@@ -18,29 +18,30 @@ public class Ticket2915Test extends SwaggerTestBase {
         final Schema model = context
                 .resolve(new AnnotatedType(TestObject2915.class));
 
-        SerializationMatchers.assertEqualsToYaml(context.getDefinedModels(), "QuantitativeValue:\n" +
-                "  required:\n" +
-                "  - value\n" +
-                "  type: object\n" +
-                "  properties:\n" +
-                "    value:\n" +
-                "      type: number\n" +
-                "      format: double\n" +
-                "    unitText:\n" +
-                "      type: string\n" +
-                "    unitCode:\n" +
-                "      type: string\n" +
-                "  description: A combination of a value and associated unit\n" +
-                "TestObject2616:\n" +
-                "  type: object\n" +
-                "  properties:\n" +
-                "    name:\n" +
-                "      type: string\n" +
-                "    perServing:\n" +
-                "      $ref: \"#/components/schemas/QuantitativeValue\"\n" +
-                "    per100Gram:\n" +
-                "      $ref: \"#/components/schemas/QuantitativeValue\"\n" +
-                "  description: Nutritional value specification");
+        SerializationMatchers.assertEqualsToYaml(context.getDefinedModels(), """
+                QuantitativeValue:
+                  required:
+                  - value
+                  type: object
+                  properties:
+                    value:
+                      type: number
+                      format: double
+                    unitText:
+                      type: string
+                    unitCode:
+                      type: string
+                  description: A combination of a value and associated unit
+                TestObject2616:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    perServing:
+                      $ref: "#/components/schemas/QuantitativeValue"
+                    per100Gram:
+                      $ref: "#/components/schemas/QuantitativeValue"
+                  description: Nutritional value specification""");
     }
 
 }

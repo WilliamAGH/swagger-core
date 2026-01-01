@@ -18,16 +18,17 @@ public class Ticket4290Test extends SwaggerTestBase {
         final Schema model = context
                 .resolve(new AnnotatedType(Issue4290.class));
 
-        SerializationMatchers.assertEqualsToYaml(context.getDefinedModels(), "Issue4290:\n" +
-                "  type: object\n" +
-                "  properties:\n" +
-                "    value:\n" +
-                "      type: object\n" +
-                "      description: \"A string, a number or a boolean\"\n" +
-                "      anyOf:\n" +
-                "      - type: string\n" +
-                "      - type: number\n" +
-                "      - type: boolean");
+        SerializationMatchers.assertEqualsToYaml(context.getDefinedModels(), """
+                Issue4290:
+                  type: object
+                  properties:
+                    value:
+                      type: object
+                      description: "A string, a number or a boolean"
+                      anyOf:
+                      - type: string
+                      - type: number
+                      - type: boolean""");
     }
 
 }

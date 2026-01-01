@@ -191,136 +191,140 @@ public class SortedOutputTest {
         assertEquals(notSorted, expectedNotSorted);
 
     }
-    String expectedSorted = "openapi: 3.0.1\n" +
-            "paths:\n" +
-            "  /sorted/pet:\n" +
-            "    get:\n" +
-            "      operationId: foo\n" +
-            "      responses:\n" +
-            "        default:\n" +
-            "          content:\n" +
-            "            '*/*':\n" +
-            "              schema:\n" +
-            "                $ref: \"#/components/schemas/Pet\"\n" +
-            "          description: default response\n" +
-            "components:\n" +
-            "  schemas:\n" +
-            "    Category:\n" +
-            "      type: object\n" +
-            "      properties:\n" +
-            "        id:\n" +
-            "          type: integer\n" +
-            "          format: int64\n" +
-            "        name:\n" +
-            "          type: string\n" +
-            "      xml:\n" +
-            "        name: Category\n" +
-            "    Pet:\n" +
-            "      type: object\n" +
-            "      properties:\n" +
-            "        category:\n" +
-            "          $ref: \"#/components/schemas/Category\"\n" +
-            "        id:\n" +
-            "          type: integer\n" +
-            "          format: int64\n" +
-            "        name:\n" +
-            "          type: string\n" +
-            "        photoUrls:\n" +
-            "          type: array\n" +
-            "          items:\n" +
-            "            type: string\n" +
-            "            xml:\n" +
-            "              name: photoUrl\n" +
-            "          xml:\n" +
-            "            wrapped: true\n" +
-            "        status:\n" +
-            "          type: string\n" +
-            "          description: pet status in the store\n" +
-            "          enum:\n" +
-            "          - \"available,pending,sold\"\n" +
-            "        tags:\n" +
-            "          type: array\n" +
-            "          items:\n" +
-            "            $ref: \"#/components/schemas/Tag\"\n" +
-            "          xml:\n" +
-            "            wrapped: true\n" +
-            "      xml:\n" +
-            "        name: Pet\n" +
-            "    Tag:\n" +
-            "      type: object\n" +
-            "      properties:\n" +
-            "        id:\n" +
-            "          type: integer\n" +
-            "          format: int64\n" +
-            "        name:\n" +
-            "          type: string\n" +
-            "      xml:\n" +
-            "        name: Tag\n";
+    String expectedSorted = """
+            openapi: 3.0.1
+            paths:
+              /sorted/pet:
+                get:
+                  operationId: foo
+                  responses:
+                    default:
+                      content:
+                        '*/*':
+                          schema:
+                            $ref: "#/components/schemas/Pet"
+                      description: default response
+            components:
+              schemas:
+                Category:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      format: int64
+                    name:
+                      type: string
+                  xml:
+                    name: Category
+                Pet:
+                  type: object
+                  properties:
+                    category:
+                      $ref: "#/components/schemas/Category"
+                    id:
+                      type: integer
+                      format: int64
+                    name:
+                      type: string
+                    photoUrls:
+                      type: array
+                      items:
+                        type: string
+                        xml:
+                          name: photoUrl
+                      xml:
+                        wrapped: true
+                    status:
+                      type: string
+                      description: pet status in the store
+                      enum:
+                      - "available,pending,sold"
+                    tags:
+                      type: array
+                      items:
+                        $ref: "#/components/schemas/Tag"
+                      xml:
+                        wrapped: true
+                  xml:
+                    name: Pet
+                Tag:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      format: int64
+                    name:
+                      type: string
+                  xml:
+                    name: Tag
+            """;
 
-    String expectedNotSorted = "openapi: 3.0.1\n" +
-            "paths:\n" +
-            "  /sorted/pet:\n" +
-            "    get:\n" +
-            "      operationId: foo\n" +
-            "      responses:\n" +
-            "        default:\n" +
-            "          description: default response\n" +
-            "          content:\n" +
-            "            '*/*':\n" +
-            "              schema:\n" +
-            "                $ref: \"#/components/schemas/Pet\"\n" +
-            "components:\n" +
-            "  schemas:\n" +
-            "    Category:\n" +
-            "      type: object\n" +
-            "      properties:\n" +
-            "        id:\n" +
-            "          type: integer\n" +
-            "          format: int64\n" +
-            "        name:\n" +
-            "          type: string\n" +
-            "      xml:\n" +
-            "        name: Category\n" +
-            "    Pet:\n" +
-            "      type: object\n" +
-            "      properties:\n" +
-            "        id:\n" +
-            "          type: integer\n" +
-            "          format: int64\n" +
-            "        category:\n" +
-            "          $ref: \"#/components/schemas/Category\"\n" +
-            "        name:\n" +
-            "          type: string\n" +
-            "        photoUrls:\n" +
-            "          type: array\n" +
-            "          xml:\n" +
-            "            wrapped: true\n" +
-            "          items:\n" +
-            "            type: string\n" +
-            "            xml:\n" +
-            "              name: photoUrl\n" +
-            "        tags:\n" +
-            "          type: array\n" +
-            "          xml:\n" +
-            "            wrapped: true\n" +
-            "          items:\n" +
-            "            $ref: \"#/components/schemas/Tag\"\n" +
-            "        status:\n" +
-            "          type: string\n" +
-            "          description: pet status in the store\n" +
-            "          enum:\n" +
-            "          - \"available,pending,sold\"\n" +
-            "      xml:\n" +
-            "        name: Pet\n" +
-            "    Tag:\n" +
-            "      type: object\n" +
-            "      properties:\n" +
-            "        id:\n" +
-            "          type: integer\n" +
-            "          format: int64\n" +
-            "        name:\n" +
-            "          type: string\n" +
-            "      xml:\n" +
-            "        name: Tag\n";
+    String expectedNotSorted = """
+            openapi: 3.0.1
+            paths:
+              /sorted/pet:
+                get:
+                  operationId: foo
+                  responses:
+                    default:
+                      description: default response
+                      content:
+                        '*/*':
+                          schema:
+                            $ref: "#/components/schemas/Pet"
+            components:
+              schemas:
+                Category:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      format: int64
+                    name:
+                      type: string
+                  xml:
+                    name: Category
+                Pet:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      format: int64
+                    category:
+                      $ref: "#/components/schemas/Category"
+                    name:
+                      type: string
+                    photoUrls:
+                      type: array
+                      xml:
+                        wrapped: true
+                      items:
+                        type: string
+                        xml:
+                          name: photoUrl
+                    tags:
+                      type: array
+                      xml:
+                        wrapped: true
+                      items:
+                        $ref: "#/components/schemas/Tag"
+                    status:
+                      type: string
+                      description: pet status in the store
+                      enum:
+                      - "available,pending,sold"
+                  xml:
+                    name: Pet
+                Tag:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      format: int64
+                    name:
+                      type: string
+                  xml:
+                    name: Tag
+            """;
 
 }

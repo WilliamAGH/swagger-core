@@ -30,21 +30,22 @@ public class Ticket2189Test extends SwaggerTestBase {
     public void testTicket2189() {
         final Schema model = context.resolve(new AnnotatedType(BaseClass.class));
         assertNotNull(model);
-        String yaml = "BaseClass:\n" +
-                      "  type: object\n" +
-                      "  properties:\n" +
-                      "    property:\n" +
-                      "      type: string\n" +
-                      "    type:\n" +
-                      "      type: string\n" +
-                      "SubClass:\n" +
-                      "  type: object\n" +
-                      "  allOf:\n" +
-                      "  - $ref: \"#/components/schemas/BaseClass\"\n" +
-                      "  - type: object\n" +
-                      "    properties:\n" +
-                      "      subClassProperty:\n" +
-                      "        type: string";
+        String yaml = """
+                      BaseClass:
+                        type: object
+                        properties:
+                          property:
+                            type: string
+                          type:
+                            type: string
+                      SubClass:
+                        type: object
+                        allOf:
+                        - $ref: "#/components/schemas/BaseClass"
+                        - type: object
+                          properties:
+                            subClassProperty:
+                              type: string""";
 
         SerializationMatchers.assertEqualsToYaml(context.getDefinedModels(), yaml);
     }

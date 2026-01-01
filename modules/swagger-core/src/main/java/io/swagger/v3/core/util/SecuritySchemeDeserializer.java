@@ -37,7 +37,7 @@ public class SecuritySchemeDeserializer extends JsonDeserializer<SecurityScheme>
             String type = inNode.asText();
             if (Arrays.stream(SecurityScheme.Type.values()).noneMatch(t -> t.toString().equals(type))) {
                 // wrong type, throw exception
-                throw new JsonParseException(jp, String.format("SecurityScheme type %s not allowed", type));
+                throw new JsonParseException(jp, "SecurityScheme type %s not allowed".formatted(type));
             }
             result = new SecurityScheme()
                     .description(getFieldText("description", node));

@@ -157,9 +157,9 @@ public class ModelDeserializer extends JsonDeserializer<Schema> {
             schema = Json31.mapper().convertValue(node, JsonSchema.class);
             if (type instanceof TextNode) {
                 schema.types(new LinkedHashSet<>(Arrays.asList(type.textValue())));
-            } else if (type instanceof ArrayNode){
+            } else if (type instanceof ArrayNode arrayNode){
                 Set<String> types = new LinkedHashSet<>();
-                ((ArrayNode)type).elements().forEachRemaining( n -> {
+                arrayNode.elements().forEachRemaining( n -> {
                     types.add(n.textValue());
                 });
                 schema.types(types);

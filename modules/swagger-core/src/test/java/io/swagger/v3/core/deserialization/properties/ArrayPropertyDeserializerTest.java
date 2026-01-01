@@ -14,23 +14,25 @@ import static org.testng.Assert.assertTrue;
 
 public class ArrayPropertyDeserializerTest {
     private static final String yaml =
-            "      operationId: something\n" +
-                    "      responses:\n" +
-                    "        \"200\":\n" +
-                    "          content:\n" +
-                    "            '*/*':\n" +
-                    "              examples:\n" +
-                    "                simple:\n" +
-                    "                  value: Array example\n" +
-                    "                more:\n" +
-                    "                  value: with two items\n" +
-                    "              description: OK\n" +
-                    "              schema:\n" +
-                    "                type: array\n" +
-                    "                minItems: 3\n" +
-                    "                maxItems: 100\n" +
-                    "                items:\n" +
-                    "                  type: string\n";
+            """
+                  operationId: something
+                  responses:
+                    "200":
+                      content:
+                        '*/*':
+                          examples:
+                            simple:
+                              value: Array example
+                            more:
+                              value: with two items
+                          description: OK
+                          schema:
+                            type: array
+                            minItems: 3
+                            maxItems: 100
+                            items:
+                              type: string
+            """;
 
     @Test(description = "it should includes the example in the arrayproperty")
     public void testArrayDeserialization() throws Exception {
@@ -46,7 +48,7 @@ public class ArrayPropertyDeserializerTest {
         assertTrue(responseSchema instanceof ArraySchema);
 
         ArraySchema mp = (ArraySchema) responseSchema;
-        assertEquals(mp.getMinItems(), new Integer(3));
-        assertEquals(mp.getMaxItems(), new Integer(100));
+        assertEquals(mp.getMinItems(), Integer.valueOf(3));
+        assertEquals(mp.getMaxItems(), Integer.valueOf(100));
     }
 }

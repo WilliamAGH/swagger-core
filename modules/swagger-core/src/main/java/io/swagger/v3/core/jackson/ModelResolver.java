@@ -179,15 +179,15 @@ public class ModelResolver extends AbstractModelConverter implements ModelConver
         final io.swagger.v3.oas.annotations.media.Schema resolvedSchemaAnnotation =
                 resolvedSchemaOrArrayAnnotation == null ?
                         null :
-                        resolvedSchemaOrArrayAnnotation instanceof io.swagger.v3.oas.annotations.media.ArraySchema ?
-                                ((io.swagger.v3.oas.annotations.media.ArraySchema) resolvedSchemaOrArrayAnnotation).schema() :
+                        resolvedSchemaOrArrayAnnotation instanceof io.swagger.v3.oas.annotations.media.ArraySchema as1 ?
+                                as1.schema() :
                                 (io.swagger.v3.oas.annotations.media.Schema) resolvedSchemaOrArrayAnnotation;
 
         final io.swagger.v3.oas.annotations.media.ArraySchema resolvedArrayAnnotation =
                 resolvedSchemaOrArrayAnnotation == null ?
                         null :
-                        resolvedSchemaOrArrayAnnotation instanceof io.swagger.v3.oas.annotations.media.ArraySchema ?
-                                (io.swagger.v3.oas.annotations.media.ArraySchema) resolvedSchemaOrArrayAnnotation :
+                        resolvedSchemaOrArrayAnnotation instanceof io.swagger.v3.oas.annotations.media.ArraySchema as1 ?
+                                as1 :
                                 null;
 
         final BeanDescription beanDesc;
@@ -551,8 +551,7 @@ public class ModelResolver extends AbstractModelConverter implements ModelConver
                 if (annotatedType.isSchemaProperty() && annotatedType.getCtxAnnotations() != null && annotatedType.getCtxAnnotations().length > 0) {
                     if (!"object".equals(items.getType())) {
                         for (Annotation annotation : annotatedType.getCtxAnnotations()) {
-                            if (annotation instanceof XmlElement) {
-                                XmlElement xmlElement = (XmlElement) annotation;
+                            if (annotation instanceof XmlElement xmlElement) {
                                 if (xmlElement != null && xmlElement.name() != null && !"".equals(xmlElement.name()) && !JAXB_DEFAULT.equals(xmlElement.name())) {
                                     XML xml = items.getXml() != null ? items.getXml() : new XML();
                                     xml.setName(xmlElement.name());
@@ -714,8 +713,8 @@ public class ModelResolver extends AbstractModelConverter implements ModelConver
 
                 JavaType propType = member.getType();
                 if (propType != null && "void".equals(propType.getRawClass().getName())) {
-                    if (member instanceof AnnotatedMethod) {
-                        propType = ((AnnotatedMethod) member).getParameterType(0);
+                    if (member instanceof AnnotatedMethod method) {
+                        propType = method.getParameterType(0);
                     }
 
                 }
@@ -744,8 +743,8 @@ public class ModelResolver extends AbstractModelConverter implements ModelConver
                 final io.swagger.v3.oas.annotations.media.Schema propResolvedSchemaAnnotation =
                         propSchemaOrArray == null ?
                                 null :
-                                propSchemaOrArray instanceof io.swagger.v3.oas.annotations.media.ArraySchema ?
-                                        ((io.swagger.v3.oas.annotations.media.ArraySchema) propSchemaOrArray).arraySchema() :
+                                propSchemaOrArray instanceof io.swagger.v3.oas.annotations.media.ArraySchema as1 ?
+                                        as1.arraySchema() :
                                         (io.swagger.v3.oas.annotations.media.Schema) propSchemaOrArray;
 
                 io.swagger.v3.oas.annotations.media.Schema.AccessMode accessMode = resolveAccessMode(propDef, type, propResolvedSchemaAnnotation);
@@ -2423,8 +2422,8 @@ public class ModelResolver extends AbstractModelConverter implements ModelConver
         if (elem == null) {
             if (annotations != null) {
                 for (Annotation ann : annotations) {
-                    if (ann instanceof XmlElement) {
-                        elem = (XmlElement) ann;
+                    if (ann instanceof XmlElement element) {
+                        elem = element;
                         break;
                     }
                 }
@@ -2476,8 +2475,8 @@ public class ModelResolver extends AbstractModelConverter implements ModelConver
             return null;
         }
         JsonProperty.Access access = null;
-        if (propDef instanceof POJOPropertyBuilder) {
-            access = ((POJOPropertyBuilder) propDef).findAccess();
+        if (propDef instanceof POJOPropertyBuilder builder) {
+            access = builder.findAccess();
         }
         boolean hasGetter = propDef.hasGetter();
         boolean hasSetter = propDef.hasSetter();
@@ -2489,8 +2488,8 @@ public class ModelResolver extends AbstractModelConverter implements ModelConver
             List<BeanPropertyDefinition> properties = beanDesc.findProperties();
             for (BeanPropertyDefinition prop : properties) {
                 if (StringUtils.isNotBlank(prop.getInternalName()) && prop.getInternalName().equals(propDef.getInternalName())) {
-                    if (prop instanceof POJOPropertyBuilder) {
-                        access = ((POJOPropertyBuilder) prop).findAccess();
+                    if (prop instanceof POJOPropertyBuilder builder) {
+                        access = builder.findAccess();
                     }
                     hasGetter = hasGetter || prop.hasGetter();
                     hasSetter = hasSetter || prop.hasSetter();
@@ -2803,8 +2802,8 @@ public class ModelResolver extends AbstractModelConverter implements ModelConver
         if (rootAnnotation == null) {
             if (annotations != null) {
                 for (Annotation ann : annotations) {
-                    if (ann instanceof XmlRootElement) {
-                        rootAnnotation = (XmlRootElement) ann;
+                    if (ann instanceof XmlRootElement element) {
+                        rootAnnotation = element;
                         break;
                     }
                 }
@@ -2847,9 +2846,9 @@ public class ModelResolver extends AbstractModelConverter implements ModelConver
         Set<String> propertiesToIgnore = new HashSet<>();
         if (annotations != null) {
             for (Annotation annotation : annotations) {
-                if (annotation instanceof JsonIgnoreProperties) {
-                    if (!((JsonIgnoreProperties) annotation).allowGetters()) {
-                        propertiesToIgnore.addAll(Arrays.asList(((JsonIgnoreProperties) annotation).value()));
+                if (annotation instanceof JsonIgnoreProperties properties) {
+                    if (!properties.allowGetters()) {
+                        propertiesToIgnore.addAll(Arrays.asList(properties.value()));
                         break;
                     }
                 }
@@ -3118,8 +3117,8 @@ public class ModelResolver extends AbstractModelConverter implements ModelConver
         final io.swagger.v3.oas.annotations.media.Schema schemaAnnotation =
                 resolvedSchemaOrArrayAnnotation == null ?
                         null :
-                        resolvedSchemaOrArrayAnnotation instanceof io.swagger.v3.oas.annotations.media.ArraySchema ?
-                                ((io.swagger.v3.oas.annotations.media.ArraySchema) resolvedSchemaOrArrayAnnotation).schema() :
+                        resolvedSchemaOrArrayAnnotation instanceof io.swagger.v3.oas.annotations.media.ArraySchema as1 ?
+                                as1.schema() :
                                 (io.swagger.v3.oas.annotations.media.Schema) resolvedSchemaOrArrayAnnotation;
 
         final BeanDescription beanDesc = _mapper.getSerializationConfig().introspect(type);
@@ -3388,14 +3387,12 @@ public class ModelResolver extends AbstractModelConverter implements ModelConver
     }
 
     protected boolean shouldIgnoreClass(Type type) {
-        if (type instanceof Class) {
-            Class<?> cls = (Class<?>) type;
+        if (type instanceof Class<?> cls) {
             if (cls.getName().equals("javax.ws.rs.Response")) {
                 return true;
             }
         } else {
-            if (type instanceof com.fasterxml.jackson.core.type.ResolvedType) {
-                com.fasterxml.jackson.core.type.ResolvedType rt = (com.fasterxml.jackson.core.type.ResolvedType) type;
+            if (type instanceof com.fasterxml.jackson.core.type.ResolvedType rt) {
                 LOGGER.trace("Can't check class {}, {}", type, rt.getRawClass().getName());
                 if (rt.getRawClass().equals(Class.class)) {
                     return true;
@@ -3445,9 +3442,9 @@ public class ModelResolver extends AbstractModelConverter implements ModelConver
         Class<?>[] filters = jsonView.value();
         boolean containsJsonViewAnnotation = !type.isIncludePropertiesWithoutJSONView();
         for (Annotation ant : annotations) {
-            if (ant instanceof JsonView) {
+            if (ant instanceof JsonView view) {
                 containsJsonViewAnnotation = true;
-                Class<?>[] views = ((JsonView) ant).value();
+                Class<?>[] views = view.value();
                 for (Class<?> f : filters) {
                     for (Class<?> v : views) {
                         if (v == f || v.isAssignableFrom(f)) {

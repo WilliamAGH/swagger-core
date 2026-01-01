@@ -142,8 +142,8 @@ public class ModelPropertyTest {
 
         IntegerSchema is = (IntegerSchema) model.getProperties().get("intValue");
         assertTrue(is.getEnum().size() == 2);
-        assertEquals(is.getEnum().get(0), new Integer(1));
-        assertEquals(is.getEnum().get(1), new Integer(2));
+        assertEquals(is.getEnum().get(0), Integer.valueOf(1));
+        assertEquals(is.getEnum().get(1), Integer.valueOf(2));
     }
 
     @Test

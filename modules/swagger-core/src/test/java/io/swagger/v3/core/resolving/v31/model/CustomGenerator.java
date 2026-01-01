@@ -3,7 +3,10 @@ package io.swagger.v3.core.resolving.v31.model;
 import com.fasterxml.jackson.annotation.ObjectIdGenerator;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+import java.io.Serial;
+
 public class CustomGenerator extends ObjectIdGenerators.PropertyGenerator {
+    @Serial
     private static final long serialVersionUID = 1L;
 
     protected CustomGenerator(Class<?> scope) {

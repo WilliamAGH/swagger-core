@@ -15,97 +15,99 @@ public class SchemaResolutionAllOfRefTest {
         ModelConverters.reset();
         Reader reader = new Reader(new SwaggerConfiguration().openAPI(new OpenAPI()).schemaResolution(Schema.SchemaResolution.ALL_OF_REF));
         OpenAPI openAPI = reader.read(SchemaResolutionResource.class);
-        String yaml = "openapi: 3.0.1\n" +
-                "paths:\n" +
-                "  /test/inlineSchemaFirst:\n" +
-                "    get:\n" +
-                "      operationId: inlineSchemaFirst\n" +
-                "      responses:\n" +
-                "        default:\n" +
-                "          description: default response\n" +
-                "          content:\n" +
-                "            '*/*':\n" +
-                "              schema:\n" +
-                "                $ref: \"#/components/schemas/InlineSchemaFirst\"\n" +
-                "  /test/inlineSchemaSecond:\n" +
-                "    get:\n" +
-                "      operationId: inlineSchemaSecond\n" +
-                "      requestBody:\n" +
-                "        content:\n" +
-                "          '*/*':\n" +
-                "            schema:\n" +
-                "              description: InlineSchemaSecond API\n" +
-                "              allOf:\n" +
-                "              - $ref: \"#/components/schemas/InlineSchemaSecond\"\n" +
-                "      responses:\n" +
-                "        default:\n" +
-                "          description: default response\n" +
-                "          content:\n" +
-                "            '*/*':\n" +
-                "              schema:\n" +
-                "                $ref: \"#/components/schemas/InlineSchemaSecond\"\n" +
-                "components:\n" +
-                "  schemas:\n" +
-                "    InlineSchemaFirst:\n" +
-                "      type: object\n" +
-                "      properties:\n" +
-                "        property1:\n" +
-                "          description: InlineSchemaFirst property 1\n" +
-                "          nullable: true\n" +
-                "          allOf:\n" +
-                "          - $ref: \"#/components/schemas/InlineSchemaPropertyFirst\"\n" +
-                "        property2:\n" +
-                "          description: ' InlineSchemaFirst property 2'\n" +
-                "          example: example 2\n" +
-                "          allOf:\n" +
-                "          - $ref: \"#/components/schemas/InlineSchemaPropertyFirst\"\n" +
-                "    InlineSchemaPropertyFirst:\n" +
-                "      type: object\n" +
-                "      properties:\n" +
-                "        bar:\n" +
-                "          type: string\n" +
-                "      description: property\n" +
-                "      example: example\n" +
-                "    InlineSchemaPropertySecond:\n" +
-                "      type: object\n" +
-                "      properties:\n" +
-                "        bar:\n" +
-                "          $ref: \"#/components/schemas/InlineSchemaSimple\"\n" +
-                "      description: propertysecond\n" +
-                "      example: examplesecond\n" +
-                "    InlineSchemaPropertySimple:\n" +
-                "      type: object\n" +
-                "      properties:\n" +
-                "        bar:\n" +
-                "          type: string\n" +
-                "      description: property\n" +
-                "    InlineSchemaSecond:\n" +
-                "      type: object\n" +
-                "      properties:\n" +
-                "        foo:\n" +
-                "          type: string\n" +
-                "        propertySecond1:\n" +
-                "          description: InlineSchemaSecond property 1\n" +
-                "          nullable: true\n" +
-                "          allOf:\n" +
-                "          - $ref: \"#/components/schemas/InlineSchemaPropertySecond\"\n" +
-                "        property2:\n" +
-                "          description: InlineSchemaSecond property 2\n" +
-                "          example: InlineSchemaSecond example 2\n" +
-                "          allOf:\n" +
-                "          - $ref: \"#/components/schemas/InlineSchemaPropertyFirst\"\n" +
-                "    InlineSchemaSimple:\n" +
-                "      type: object\n" +
-                "      properties:\n" +
-                "        property1:\n" +
-                "          description: property 1\n" +
-                "          allOf:\n" +
-                "          - $ref: \"#/components/schemas/InlineSchemaPropertySimple\"\n" +
-                "        property2:\n" +
-                "          description: property 2\n" +
-                "          example: example\n" +
-                "          allOf:\n" +
-                "          - $ref: \"#/components/schemas/InlineSchemaPropertySimple\"\n";
+        String yaml = """
+                openapi: 3.0.1
+                paths:
+                  /test/inlineSchemaFirst:
+                    get:
+                      operationId: inlineSchemaFirst
+                      responses:
+                        default:
+                          description: default response
+                          content:
+                            '*/*':
+                              schema:
+                                $ref: "#/components/schemas/InlineSchemaFirst"
+                  /test/inlineSchemaSecond:
+                    get:
+                      operationId: inlineSchemaSecond
+                      requestBody:
+                        content:
+                          '*/*':
+                            schema:
+                              description: InlineSchemaSecond API
+                              allOf:
+                              - $ref: "#/components/schemas/InlineSchemaSecond"
+                      responses:
+                        default:
+                          description: default response
+                          content:
+                            '*/*':
+                              schema:
+                                $ref: "#/components/schemas/InlineSchemaSecond"
+                components:
+                  schemas:
+                    InlineSchemaFirst:
+                      type: object
+                      properties:
+                        property1:
+                          description: InlineSchemaFirst property 1
+                          nullable: true
+                          allOf:
+                          - $ref: "#/components/schemas/InlineSchemaPropertyFirst"
+                        property2:
+                          description: ' InlineSchemaFirst property 2'
+                          example: example 2
+                          allOf:
+                          - $ref: "#/components/schemas/InlineSchemaPropertyFirst"
+                    InlineSchemaPropertyFirst:
+                      type: object
+                      properties:
+                        bar:
+                          type: string
+                      description: property
+                      example: example
+                    InlineSchemaPropertySecond:
+                      type: object
+                      properties:
+                        bar:
+                          $ref: "#/components/schemas/InlineSchemaSimple"
+                      description: propertysecond
+                      example: examplesecond
+                    InlineSchemaPropertySimple:
+                      type: object
+                      properties:
+                        bar:
+                          type: string
+                      description: property
+                    InlineSchemaSecond:
+                      type: object
+                      properties:
+                        foo:
+                          type: string
+                        propertySecond1:
+                          description: InlineSchemaSecond property 1
+                          nullable: true
+                          allOf:
+                          - $ref: "#/components/schemas/InlineSchemaPropertySecond"
+                        property2:
+                          description: InlineSchemaSecond property 2
+                          example: InlineSchemaSecond example 2
+                          allOf:
+                          - $ref: "#/components/schemas/InlineSchemaPropertyFirst"
+                    InlineSchemaSimple:
+                      type: object
+                      properties:
+                        property1:
+                          description: property 1
+                          allOf:
+                          - $ref: "#/components/schemas/InlineSchemaPropertySimple"
+                        property2:
+                          description: property 2
+                          example: example
+                          allOf:
+                          - $ref: "#/components/schemas/InlineSchemaPropertySimple"
+                """;
         SerializationMatchers.assertEqualsToYaml(openAPI, yaml);
         ModelConverters.reset();
     }

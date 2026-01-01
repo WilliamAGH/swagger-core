@@ -99,7 +99,7 @@ public abstract class AnnotationsUtils {
                 && schema.oneOf().length == 0
                 && schema.anyOf().length == 0
                 && schema.subTypes().length == 0
-                && !getExternalDocumentation(schema.externalDocs()).isPresent()
+                && getExternalDocumentation(schema.externalDocs()).isEmpty()
                 && StringUtils.isBlank(schema.discriminatorProperty())
                 && schema.discriminatorMapping().length == 0
                 && schema.extensions().length == 0
@@ -144,10 +144,10 @@ public abstract class AnnotationsUtils {
         if (!thisAnnotation.annotationType().equals(thatAnnotation.annotationType())) {
             return false;
         }
-        if (thisAnnotation instanceof io.swagger.v3.oas.annotations.media.Schema) {
-            return equals((io.swagger.v3.oas.annotations.media.Schema) thisAnnotation, (io.swagger.v3.oas.annotations.media.Schema) thatAnnotation);
-        } else if (thisAnnotation instanceof io.swagger.v3.oas.annotations.media.ArraySchema) {
-            return equals((io.swagger.v3.oas.annotations.media.ArraySchema)thisAnnotation, (io.swagger.v3.oas.annotations.media.ArraySchema)thatAnnotation);
+        if (thisAnnotation instanceof io.swagger.v3.oas.annotations.media.Schema schema) {
+            return equals(schema, (io.swagger.v3.oas.annotations.media.Schema) thatAnnotation);
+        } else if (thisAnnotation instanceof io.swagger.v3.oas.annotations.media.ArraySchema schema) {
+            return equals(schema, (io.swagger.v3.oas.annotations.media.ArraySchema)thatAnnotation);
         }
         return true;
     }
@@ -500,8 +500,8 @@ public abstract class AnnotationsUtils {
         }
         Schema arraySchemaObject = null;
         if (!openapi31) {
-            if (existingSchema != null && existingSchema instanceof ArraySchema) {
-                return Optional.of((ArraySchema) existingSchema);
+            if (existingSchema != null && existingSchema instanceof ArraySchema schema) {
+                return Optional.of(schema);
             }
             arraySchemaObject = new ArraySchema();
         } else {
@@ -1935,8 +1935,8 @@ public abstract class AnnotationsUtils {
             return null;
         }
         for (Annotation annotation : annotations) {
-            if (annotation instanceof io.swagger.v3.oas.annotations.media.Schema) {
-                return (io.swagger.v3.oas.annotations.media.Schema) annotation;
+            if (annotation instanceof io.swagger.v3.oas.annotations.media.Schema schema) {
+                return schema;
             }
         }
         return null;
@@ -1947,8 +1947,8 @@ public abstract class AnnotationsUtils {
             return null;
         }
         for (Annotation annotation : annotations) {
-            if (annotation instanceof io.swagger.v3.oas.annotations.media.ArraySchema) {
-                return (io.swagger.v3.oas.annotations.media.ArraySchema) annotation;
+            if (annotation instanceof io.swagger.v3.oas.annotations.media.ArraySchema schema) {
+                return schema;
             }
         }
         return null;
@@ -2330,7 +2330,7 @@ public abstract class AnnotationsUtils {
 
             @Override
             public io.swagger.v3.oas.annotations.ExternalDocumentation externalDocs() {
-                if (getExternalDocumentation(master.externalDocs()).isPresent() || !getExternalDocumentation(patch.externalDocs()).isPresent()) {
+                if (getExternalDocumentation(master.externalDocs()).isPresent() || getExternalDocumentation(patch.externalDocs()).isEmpty()) {
                     return master.externalDocs();
                 }
                 return patch.externalDocs();

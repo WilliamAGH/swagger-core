@@ -11,137 +11,141 @@ public class JsonPropertyTest {
     @Test(description = "test ticket 2169")
     public void testTicket2169() {
 
-        SerializationMatchers.assertEqualsToYaml(ModelConverters.getInstance().read(User2169.class), "User2169:\n" +
-                "  required:\n" +
-                "  - Age\n" +
-                "  - GetterJsonPropertyOnField\n" +
-                "  - GetterJsonPropertyOnFieldReadOnly\n" +
-                "  - GetterJsonPropertyOnFieldReadWrite\n" +
-                "  - GetterJsonPropertyOnFieldReadWriteCreatorSchemaReadOnlyFalse\n" +
-                "  - GetterJsonPropertyOnFieldReadWriteSchemaReadOnlyFalse\n" +
-                "  - GetterJsonPropertyOnFieldSchemaReadOnlyTrue\n" +
-                "  - Name\n" +
-                "  type: object\n" +
-                "  properties:\n" +
-                "    Name:\n" +
-                "      type: string\n" +
-                "    Age:\n" +
-                "      type: integer\n" +
-                "      format: int32\n" +
-                "    GetterJsonPropertyOnFieldReadWriteCreatorSchemaReadOnlyFalse:\n" +
-                "      type: string\n" +
-                "    publi:\n" +
-                "      type: string\n" +
-                "    getter:\n" +
-                "      type: string\n" +
-                "    setter:\n" +
-                "      type: string\n" +
-                "      writeOnly: true\n" +
-                "    getterSetter:\n" +
-                "      type: string\n" +
-                "    jsonProp:\n" +
-                "      type: string\n" +
-                "    jsonPropReadOnly:\n" +
-                "      type: string\n" +
-                "      readOnly: true\n" +
-                "    jsonPropWriteOnly:\n" +
-                "      type: string\n" +
-                "      writeOnly: true\n" +
-                "    jsonPropReadWrite:\n" +
-                "      type: string\n" +
-                "    getter_jsonProp:\n" +
-                "      type: string\n" +
-                "    getter_jsonPropReadOnly:\n" +
-                "      type: string\n" +
-                "      readOnly: true\n" +
-                "    getter_jsonPropWriteOnly:\n" +
-                "      type: string\n" +
-                "    getter_jsonPropReadWrite:\n" +
-                "      type: string\n" +
-                "    setter_jsonProp:\n" +
-                "      type: string\n" +
-                "      writeOnly: true\n" +
-                "    setter_jsonPropReadOnly:\n" +
-                "      type: string\n" +
-                "    setter_jsonPropWriteOnly:\n" +
-                "      type: string\n" +
-                "      writeOnly: true\n" +
-                "    setter_jsonPropReadWrite:\n" +
-                "      type: string\n" +
-                "    gettersetter_jsonPropGet:\n" +
-                "      type: string\n" +
-                "    gettersetter_jsonPropReadOnlyGet:\n" +
-                "      type: string\n" +
-                "      readOnly: true\n" +
-                "    gettersetter_jsonPropWriteOnlyGet:\n" +
-                "      type: string\n" +
-                "    gettersetter_jsonPropReadWriteGet:\n" +
-                "      type: string\n" +
-                "    gettersetter_jsonPropSet:\n" +
-                "      type: string\n" +
-                "    gettersetter_jsonPropReadOnlySet:\n" +
-                "      type: string\n" +
-                "    gettersetter_jsonPropWriteOnlySet:\n" +
-                "      type: string\n" +
-                "      writeOnly: true\n" +
-                "    gettersetter_jsonPropReadWriteSet:\n" +
-                "      type: string\n" +
-                "    getterIgnore_jsonPropSet:\n" +
-                "      type: string\n" +
-                "      writeOnly: true\n" +
-                "    getterIgnore_jsonPropReadOnlySet:\n" +
-                "      type: string\n" +
-                "    getterIgnore_jsonPropWriteOnlySet:\n" +
-                "      type: string\n" +
-                "      writeOnly: true\n" +
-                "    getterIgnore_jsonPropReadWriteSet:\n" +
-                "      type: string\n" +
-                "    setterIgnore_jsonPropGet:\n" +
-                "      type: string\n" +
-                "    setterIgnore_jsonPropReadOnlyGet:\n" +
-                "      type: string\n" +
-                "      readOnly: true\n" +
-                "    setterIgnore_jsonPropWriteOnlyGet:\n" +
-                "      type: string\n" +
-                "    setterIgnore_jsonPropReadWriteGet:\n" +
-                "      type: string\n" +
-                "    getterSchemaReadOnlyTrue:\n" +
-                "      type: string\n" +
-                "      readOnly: true\n" +
-                "    data:\n" +
-                "      $ref: \"#/components/schemas/Data\"\n" +
-                "    GetterJsonPropertyOnField:\n" +
-                "      type: string\n" +
-                "    GetterJsonPropertyOnFieldReadWrite:\n" +
-                "      type: string\n" +
-                "    GetterJsonPropertyOnFieldReadWriteSchemaReadOnlyFalse:\n" +
-                "      type: string\n" +
-                "    GetterJsonPropertyOnFieldReadOnly:\n" +
-                "      type: string\n" +
-                "      readOnly: true\n" +
-                "    GetterJsonPropertyOnFieldSchemaReadOnlyTrue:\n" +
-                "      type: string\n" +
-                "      readOnly: true\n" +
-                "    approvePairing:\n" +
-                "      type: boolean\n" +
-                "      writeOnly: true\n");
+        SerializationMatchers.assertEqualsToYaml(ModelConverters.getInstance().read(User2169.class), """
+                User2169:
+                  required:
+                  - Age
+                  - GetterJsonPropertyOnField
+                  - GetterJsonPropertyOnFieldReadOnly
+                  - GetterJsonPropertyOnFieldReadWrite
+                  - GetterJsonPropertyOnFieldReadWriteCreatorSchemaReadOnlyFalse
+                  - GetterJsonPropertyOnFieldReadWriteSchemaReadOnlyFalse
+                  - GetterJsonPropertyOnFieldSchemaReadOnlyTrue
+                  - Name
+                  type: object
+                  properties:
+                    Name:
+                      type: string
+                    Age:
+                      type: integer
+                      format: int32
+                    GetterJsonPropertyOnFieldReadWriteCreatorSchemaReadOnlyFalse:
+                      type: string
+                    publi:
+                      type: string
+                    getter:
+                      type: string
+                    setter:
+                      type: string
+                      writeOnly: true
+                    getterSetter:
+                      type: string
+                    jsonProp:
+                      type: string
+                    jsonPropReadOnly:
+                      type: string
+                      readOnly: true
+                    jsonPropWriteOnly:
+                      type: string
+                      writeOnly: true
+                    jsonPropReadWrite:
+                      type: string
+                    getter_jsonProp:
+                      type: string
+                    getter_jsonPropReadOnly:
+                      type: string
+                      readOnly: true
+                    getter_jsonPropWriteOnly:
+                      type: string
+                    getter_jsonPropReadWrite:
+                      type: string
+                    setter_jsonProp:
+                      type: string
+                      writeOnly: true
+                    setter_jsonPropReadOnly:
+                      type: string
+                    setter_jsonPropWriteOnly:
+                      type: string
+                      writeOnly: true
+                    setter_jsonPropReadWrite:
+                      type: string
+                    gettersetter_jsonPropGet:
+                      type: string
+                    gettersetter_jsonPropReadOnlyGet:
+                      type: string
+                      readOnly: true
+                    gettersetter_jsonPropWriteOnlyGet:
+                      type: string
+                    gettersetter_jsonPropReadWriteGet:
+                      type: string
+                    gettersetter_jsonPropSet:
+                      type: string
+                    gettersetter_jsonPropReadOnlySet:
+                      type: string
+                    gettersetter_jsonPropWriteOnlySet:
+                      type: string
+                      writeOnly: true
+                    gettersetter_jsonPropReadWriteSet:
+                      type: string
+                    getterIgnore_jsonPropSet:
+                      type: string
+                      writeOnly: true
+                    getterIgnore_jsonPropReadOnlySet:
+                      type: string
+                    getterIgnore_jsonPropWriteOnlySet:
+                      type: string
+                      writeOnly: true
+                    getterIgnore_jsonPropReadWriteSet:
+                      type: string
+                    setterIgnore_jsonPropGet:
+                      type: string
+                    setterIgnore_jsonPropReadOnlyGet:
+                      type: string
+                      readOnly: true
+                    setterIgnore_jsonPropWriteOnlyGet:
+                      type: string
+                    setterIgnore_jsonPropReadWriteGet:
+                      type: string
+                    getterSchemaReadOnlyTrue:
+                      type: string
+                      readOnly: true
+                    data:
+                      $ref: "#/components/schemas/Data"
+                    GetterJsonPropertyOnField:
+                      type: string
+                    GetterJsonPropertyOnFieldReadWrite:
+                      type: string
+                    GetterJsonPropertyOnFieldReadWriteSchemaReadOnlyFalse:
+                      type: string
+                    GetterJsonPropertyOnFieldReadOnly:
+                      type: string
+                      readOnly: true
+                    GetterJsonPropertyOnFieldSchemaReadOnlyTrue:
+                      type: string
+                      readOnly: true
+                    approvePairing:
+                      type: boolean
+                      writeOnly: true
+                """);
     }
 
     @Test(description = "test ticket 2845")
     public void testTicket2845() {
 
-        SerializationMatchers.assertEqualsToYaml(ModelConverters.getInstance().readAll(Ticket2845Holder.class), "Ticket2845Child:\n" +
-                "  type: object\n" +
-                "  properties:\n" +
-                "    bar:\n" +
-                "      type: string\n" +
-                "    meow:\n" +
-                "      type: string\n" +
-                "Ticket2845Holder:\n" +
-                "  type: object\n" +
-                "  properties:\n" +
-                "    child:\n" +
-                "      $ref: \"#/components/schemas/Ticket2845Child\"");
+        SerializationMatchers.assertEqualsToYaml(ModelConverters.getInstance().readAll(Ticket2845Holder.class), """
+                Ticket2845Child:
+                  type: object
+                  properties:
+                    bar:
+                      type: string
+                    meow:
+                      type: string
+                Ticket2845Holder:
+                  type: object
+                  properties:
+                    child:
+                      $ref: "#/components/schemas/Ticket2845Child"\
+                """);
 
         /*
             TODO: Test demonstrating annotation not being resolved when class is used/refernces elsewhere with different annotations
@@ -152,22 +156,24 @@ public class JsonPropertyTest {
          */
         SerializationMatchers.assertEqualsToYaml(
                 ModelConverters.getInstance().readAll(Ticket2845HolderNoAnnotationNotWorking.class),
-                "Ticket2845Child:\n" +
-                        "  type: object\n" +
-                        "  properties:\n" +
-                        "    foo:\n" +
-                        "      type: string\n" +
-                        "    bar:\n" +
-                        "      type: string\n" +
-                        "    meow:\n" +
-                        "      type: string\n" +
-                        "Ticket2845HolderNoAnnotationNotWorking:\n" +
-                        "  type: object\n" +
-                        "  properties:\n" +
-                        "    child:\n" +
-                        "      $ref: \"#/components/schemas/Ticket2845Child\"\n" +
-                        "    childNoAnnotation:\n" +
-                        "      $ref: \"#/components/schemas/Ticket2845Child\"");
+                """
+                Ticket2845Child:
+                  type: object
+                  properties:
+                    foo:
+                      type: string
+                    bar:
+                      type: string
+                    meow:
+                      type: string
+                Ticket2845HolderNoAnnotationNotWorking:
+                  type: object
+                  properties:
+                    child:
+                      $ref: "#/components/schemas/Ticket2845Child"
+                    childNoAnnotation:
+                      $ref: "#/components/schemas/Ticket2845Child"\
+                """);
     }
 
     static class Ticket2845Parent {

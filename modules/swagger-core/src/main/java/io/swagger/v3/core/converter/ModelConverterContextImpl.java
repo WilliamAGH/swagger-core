@@ -55,7 +55,7 @@ public class ModelConverterContextImpl implements ModelConverterContext {
     @Override
     public void defineModel(String name, Schema model, AnnotatedType type, String prevName) {
         if (LOGGER.isTraceEnabled()) {
-            LOGGER.trace(String.format("defineModel %s %s", name, model));
+            LOGGER.trace("defineModel %s %s".formatted(name, model));
         }
         modelByName.put(name, model);
 
@@ -87,7 +87,7 @@ public class ModelConverterContextImpl implements ModelConverterContext {
             processedTypes.add(type);
         }
         if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug(String.format("resolve %s", type.getType()));
+            LOGGER.debug("resolve %s".formatted(type.getType()));
         }
         Iterator<ModelConverter> converters = this.getConverters();
         Schema resolved = null;

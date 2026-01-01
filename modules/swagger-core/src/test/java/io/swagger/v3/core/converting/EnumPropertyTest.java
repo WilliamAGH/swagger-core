@@ -91,36 +91,38 @@ public class EnumPropertyTest {
     public void testEnumRefProperty() {
         Schema schema = context.resolve(new AnnotatedType(ModelWithEnumRefProperty.class));
         final Map<String, Schema> models = context.getDefinedModels();
-        final String yaml = "ModelWithEnumRefProperty:\n" +
-                "  type: object\n" +
-                "  properties:\n" +
-                "    a:\n" +
-                "      $ref: \"#/components/schemas/TestEnum\"\n" +
-                "    b:\n" +
-                "      $ref: \"#/components/schemas/TestEnum\"\n" +
-                "    c:\n" +
-                "      $ref: \"#/components/schemas/TestSecondEnum\"\n" +
-                "    d:\n" +
-                "      type: string\n" +
-                "      enum:\n" +
-                "      - A_PRIVATE\n" +
-                "      - A_PUBLIC\n" +
-                "      - A_SYSTEM\n" +
-                "      - A_INVITE_ONLY\n" +
-                "TestEnum:\n" +
-                "  type: string\n" +
-                "  enum:\n" +
-                "  - PRIVATE\n" +
-                "  - PUBLIC\n" +
-                "  - SYSTEM\n" +
-                "  - INVITE_ONLY\n" +
-                "TestSecondEnum:\n" +
-                "  type: string\n" +
-                "  enum:\n" +
-                "  - A_PRIVATE\n" +
-                "  - A_PUBLIC\n" +
-                "  - A_SYSTEM\n" +
-                "  - A_INVITE_ONLY\n";
+        final String yaml = """
+                ModelWithEnumRefProperty:
+                  type: object
+                  properties:
+                    a:
+                      $ref: "#/components/schemas/TestEnum"
+                    b:
+                      $ref: "#/components/schemas/TestEnum"
+                    c:
+                      $ref: "#/components/schemas/TestSecondEnum"
+                    d:
+                      type: string
+                      enum:
+                      - A_PRIVATE
+                      - A_PUBLIC
+                      - A_SYSTEM
+                      - A_INVITE_ONLY
+                TestEnum:
+                  type: string
+                  enum:
+                  - PRIVATE
+                  - PUBLIC
+                  - SYSTEM
+                  - INVITE_ONLY
+                TestSecondEnum:
+                  type: string
+                  enum:
+                  - A_PRIVATE
+                  - A_PUBLIC
+                  - A_SYSTEM
+                  - A_INVITE_ONLY
+                """;
         SerializationMatchers.assertEqualsToYaml(models, yaml);
 
     }
@@ -130,36 +132,38 @@ public class EnumPropertyTest {
         TypeNameResolver.std.setUseFqn(true);
         Schema schema = context.resolve(new AnnotatedType(ModelWithEnumRefProperty.class));
         final Map<String, Schema> models = context.getDefinedModels();
-        final String yaml = "io.swagger.v3.core.oas.models.ModelWithEnumRefProperty:\n" +
-                "  type: object\n" +
-                "  properties:\n" +
-                "    a:\n" +
-                "      $ref: \"#/components/schemas/io.swagger.v3.core.oas.models.TestEnum\"\n" +
-                "    b:\n" +
-                "      $ref: \"#/components/schemas/io.swagger.v3.core.oas.models.TestEnum\"\n" +
-                "    c:\n" +
-                "      $ref: \"#/components/schemas/io.swagger.v3.core.oas.models.TestSecondEnum\"\n" +
-                "    d:\n" +
-                "      type: string\n" +
-                "      enum:\n" +
-                "      - A_PRIVATE\n" +
-                "      - A_PUBLIC\n" +
-                "      - A_SYSTEM\n" +
-                "      - A_INVITE_ONLY\n" +
-                "io.swagger.v3.core.oas.models.TestEnum:\n" +
-                "  type: string\n" +
-                "  enum:\n" +
-                "  - PRIVATE\n" +
-                "  - PUBLIC\n" +
-                "  - SYSTEM\n" +
-                "  - INVITE_ONLY\n" +
-                "io.swagger.v3.core.oas.models.TestSecondEnum:\n" +
-                "  type: string\n" +
-                "  enum:\n" +
-                "  - A_PRIVATE\n" +
-                "  - A_PUBLIC\n" +
-                "  - A_SYSTEM\n" +
-                "  - A_INVITE_ONLY\n";
+        final String yaml = """
+                io.swagger.v3.core.oas.models.ModelWithEnumRefProperty:
+                  type: object
+                  properties:
+                    a:
+                      $ref: "#/components/schemas/io.swagger.v3.core.oas.models.TestEnum"
+                    b:
+                      $ref: "#/components/schemas/io.swagger.v3.core.oas.models.TestEnum"
+                    c:
+                      $ref: "#/components/schemas/io.swagger.v3.core.oas.models.TestSecondEnum"
+                    d:
+                      type: string
+                      enum:
+                      - A_PRIVATE
+                      - A_PUBLIC
+                      - A_SYSTEM
+                      - A_INVITE_ONLY
+                io.swagger.v3.core.oas.models.TestEnum:
+                  type: string
+                  enum:
+                  - PRIVATE
+                  - PUBLIC
+                  - SYSTEM
+                  - INVITE_ONLY
+                io.swagger.v3.core.oas.models.TestSecondEnum:
+                  type: string
+                  enum:
+                  - A_PRIVATE
+                  - A_PUBLIC
+                  - A_SYSTEM
+                  - A_INVITE_ONLY
+                """;
         TypeNameResolver.std.setUseFqn(false);
         SerializationMatchers.assertEqualsToYaml(models, yaml);
 
@@ -170,18 +174,20 @@ public class EnumPropertyTest {
         ModelResolver.enumsAsRef = true;
         Schema schema = context.resolve(new AnnotatedType(ModelWithEnumProperty.class));
         final Map<String, Schema> models = context.getDefinedModels();
-        final String yaml = "ModelWithEnumProperty:\n" +
-                "  type: object\n" +
-                "  properties:\n" +
-                "    enumValue:\n" +
-                "      $ref: \"#/components/schemas/TestEnum\"\n" +
-                "TestEnum:\n" +
-                "  type: string\n" +
-                "  enum:\n" +
-                "  - PRIVATE\n" +
-                "  - PUBLIC\n" +
-                "  - SYSTEM\n" +
-                "  - INVITE_ONLY\n";
+        final String yaml = """
+                ModelWithEnumProperty:
+                  type: object
+                  properties:
+                    enumValue:
+                      $ref: "#/components/schemas/TestEnum"
+                TestEnum:
+                  type: string
+                  enum:
+                  - PRIVATE
+                  - PUBLIC
+                  - SYSTEM
+                  - INVITE_ONLY
+                """;
         SerializationMatchers.assertEqualsToYaml(models, yaml);
         ModelResolver.enumsAsRef = false;
     }
@@ -191,12 +197,13 @@ public class EnumPropertyTest {
         ModelResolver.enumsAsRef = true;
         Schema schema = context.resolve(new AnnotatedType(Model1979.class));
         final Map<String, Schema> models = context.getDefinedModels();
-        final String yaml = "Model1979:\n" +
-                "  type: object\n" +
-                "  properties:\n" +
-                "    id:\n" +
-                "      type: string\n" +
-                "      nullable: true";
+        final String yaml = """
+                Model1979:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      nullable: true""";
         SerializationMatchers.assertEqualsToYaml(models, yaml);
         ModelResolver.enumsAsRef = false;
     }

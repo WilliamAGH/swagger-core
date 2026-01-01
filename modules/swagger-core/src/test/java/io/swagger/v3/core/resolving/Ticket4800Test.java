@@ -12,20 +12,22 @@ public class Ticket4800Test extends SwaggerTestBase{
     @Test(description = "Custom schema implementation in property and enum as ref type value")
     public void testCustomSchemaImplementation() {
 
-        String expectedYaml = "ModelWithCustomSchemaImplementationInProperty:\n" +
-                "  type: object\n" +
-                "  properties:\n" +
-                "    enumExampleFieldWithImplementationProp:\n" +
-                "      $ref: \"#/components/schemas/MyEnum\"\n" +
-                "      default: \"yes\"\n" +
-                "      description: Prop description\n" +
-                "    secondExampleFieldWithTypeProp:\n" +
-                "      type: string\n" +
-                "MyEnum:\n" +
-                "  type: string\n" +
-                "  enum:\n" +
-                "  - \"yes\"\n" +
-                "  - \"no\"";
+        String expectedYaml = """
+                ModelWithCustomSchemaImplementationInProperty:
+                  type: object
+                  properties:
+                    enumExampleFieldWithImplementationProp:
+                      $ref: "#/components/schemas/MyEnum"
+                      default: "yes"
+                      description: Prop description
+                    secondExampleFieldWithTypeProp:
+                      type: string
+                MyEnum:
+                  type: string
+                  enum:
+                  - "yes"
+                  - "no"\
+                """;
 
         Map<String, Schema> stringSchemaMap = ModelConverters.getInstance(true).readAll(Ticket4800Test.ModelWithCustomSchemaImplementationInProperty.class);
         SerializationMatchers.assertEqualsToYaml31(stringSchemaMap, expectedYaml);

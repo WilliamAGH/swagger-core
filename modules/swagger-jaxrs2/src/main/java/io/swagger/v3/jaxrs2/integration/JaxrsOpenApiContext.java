@@ -32,8 +32,8 @@ public class JaxrsOpenApiContext<T extends JaxrsOpenApiContext> extends GenericO
         } else {
             reader = new Reader();
         }
-        if (reader instanceof Reader) {
-            ((Reader) reader).setApplication(app);
+        if (reader instanceof Reader reader1) {
+            reader1.setApplication(app);
         }
         reader.setConfiguration(openApiConfiguration);
         return reader;
@@ -50,8 +50,8 @@ public class JaxrsOpenApiContext<T extends JaxrsOpenApiContext> extends GenericO
             scanner = new JaxrsApplicationAndAnnotationScanner();
         }
         scanner.setConfiguration(openApiConfiguration);
-        if (scanner instanceof JaxrsOpenApiScanner) {
-            ((JaxrsOpenApiScanner) scanner).setApplication(app);
+        if (scanner instanceof JaxrsOpenApiScanner apiScanner) {
+            apiScanner.setApplication(app);
         }
         return scanner;
     }

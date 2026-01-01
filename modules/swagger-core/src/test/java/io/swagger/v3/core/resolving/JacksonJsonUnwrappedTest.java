@@ -12,25 +12,27 @@ public class JacksonJsonUnwrappedTest {
 
     SerializationMatchers
         .assertEqualsToYaml(ModelConverters.getInstance().read(
-            JacksonUnwrappedRequiredProperty.class), "InnerTypeRequired:\n" +
-            "  required:\n" +
-            "  - name\n" +
-            "  type: object\n" +
-            "  properties:\n" +
-            "    foo:\n" +
-            "      type: integer\n" +
-            "      format: int32\n" +
-            "    name:\n" +
-            "      type: string\n" +
-            "JacksonUnwrappedRequiredProperty:\n" +
-            "  required:\n" +
-            "  - name\n" +
-            "  type: object\n" +
-            "  properties:\n" +
-                "    foo:\n" +
-                "      type: integer\n" +
-                "      format: int32\n" +
-                "    name:\n" +
-                "      type: string\n");
+            JacksonUnwrappedRequiredProperty.class), """
+            InnerTypeRequired:
+              required:
+              - name
+              type: object
+              properties:
+                foo:
+                  type: integer
+                  format: int32
+                name:
+                  type: string
+            JacksonUnwrappedRequiredProperty:
+              required:
+              - name
+              type: object
+              properties:
+                foo:
+                  type: integer
+                  format: int32
+                name:
+                  type: string
+            """);
     }
 }

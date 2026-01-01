@@ -30,31 +30,32 @@ public class Ticket3063Test extends SwaggerTestBase {
     public void testTicket3063() throws Exception {
         final Schema model = context.resolve(new AnnotatedType(BaseClass.class));
         assertNotNull(model);
-        String yaml = "BaseClass:\n" +
-                "  required:\n" +
-                "  - type\n" +
-                "  type: object\n" +
-                "  properties:\n" +
-                "    type:\n" +
-                "      type: string\n" +
-                "      description: Type\n" +
-                "      example: AndroidDeviceRequirements\n" +
-                "  description: test\n" +
-                "  discriminator:\n" +
-                "    propertyName: type\n" +
-                "SubClass:\n" +
-                "  required:\n" +
-                "  - type\n" +
-                "  type: object\n" +
-                "  description: SubClass\n" +
-                "  allOf:\n" +
-                "  - $ref: \"#/components/schemas/BaseClass\"\n" +
-                "  - type: object\n" +
-                "    properties:\n" +
-                "      additionalPropertyWhichShouldBeThere:\n" +
-                "        type: integer\n" +
-                "        description: Test\n" +
-                "        format: int32";
+        String yaml = """
+                BaseClass:
+                  required:
+                  - type
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                      description: Type
+                      example: AndroidDeviceRequirements
+                  description: test
+                  discriminator:
+                    propertyName: type
+                SubClass:
+                  required:
+                  - type
+                  type: object
+                  description: SubClass
+                  allOf:
+                  - $ref: "#/components/schemas/BaseClass"
+                  - type: object
+                    properties:
+                      additionalPropertyWhichShouldBeThere:
+                        type: integer
+                        description: Test
+                        format: int32""";
 
         SerializationMatchers.assertEqualsToYaml(context.getDefinedModels(), yaml);
     }

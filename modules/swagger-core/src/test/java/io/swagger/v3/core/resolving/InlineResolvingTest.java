@@ -17,95 +17,99 @@ public class InlineResolvingTest extends SwaggerTestBase{
         // ModelConverters c = ModelConverters.getInstance(false, io.swagger.v3.oas.models.media.Schema.SchemaResolution.INLINE);
         c.resolve(new AnnotatedType(InlineSchemaFirst.class));
 
-        String expectedYaml = "InlineSchemaFirst:\n" +
-                "  type: object\n" +
-                "  properties:\n" +
-                "    property1:\n" +
-                "      type: object\n" +
-                "      description: InlineSchemaFirst property 1\n" +
-                "      nullable: true\n" +
-                "      example: example\n" +
-                "    property2:\n" +
-                "      type: object\n" +
-                "      description: ' InlineSchemaFirst property 2'\n" +
-                "      example: example 2\n" +
-                "InlineSchemaPropertyFirst:\n" +
-                "  type: object\n" +
-                "  description: property\n" +
-                "  example: example\n";
+        String expectedYaml = """
+                InlineSchemaFirst:
+                  type: object
+                  properties:
+                    property1:
+                      type: object
+                      description: InlineSchemaFirst property 1
+                      nullable: true
+                      example: example
+                    property2:
+                      type: object
+                      description: ' InlineSchemaFirst property 2'
+                      example: example 2
+                InlineSchemaPropertyFirst:
+                  type: object
+                  description: property
+                  example: example
+                """;
 
         SerializationMatchers.assertEqualsToYaml(c.getDefinedModels(), expectedYaml);
         // stringSchemaMap = c.readAll(InlineSchemaSecond.class);
         c.resolve(new AnnotatedType(InlineSchemaSecond.class));
-        expectedYaml = "InlineSchemaFirst:\n" +
-                "  type: object\n" +
-                "  properties:\n" +
-                "    property1:\n" +
-                "      type: object\n" +
-                "      description: InlineSchemaFirst property 1\n" +
-                "      nullable: true\n" +
-                "      example: example\n" +
-                "    property2:\n" +
-                "      type: object\n" +
-                "      description: ' InlineSchemaFirst property 2'\n" +
-                "      example: example 2\n" +
-                "InlineSchemaPropertyFirst:\n" +
-                "  type: object\n" +
-                "  description: property\n" +
-                "  example: example\n" +
-                "InlineSchemaPropertySecond:\n" +
-                "  type: object\n" +
-                "  properties:\n" +
-                "    bar:\n" +
-                "      type: object\n" +
-                "      properties:\n" +
-                "        property1:\n" +
-                "          type: object\n" +
-                "          description: property 1\n" +
-                "        property2:\n" +
-                "          type: object\n" +
-                "          description: property 2\n" +
-                "          example: example\n" +
-                "  description: propertysecond\n" +
-                "  nullable: true\n" +
-                "  example: examplesecond\n" +
-                "InlineSchemaPropertySimple:\n" +
-                "  type: object\n" +
-                "  description: property\n" +
-                "  example: example\n" +
-                "InlineSchemaSecond:\n" +
-                "  type: object\n" +
-                "  properties:\n" +
-                "    propertySecond1:\n" +
-                "      type: object\n" +
-                "      properties:\n" +
-                "        bar:\n" +
-                "          type: object\n" +
-                "          properties:\n" +
-                "            property1:\n" +
-                "              type: object\n" +
-                "              description: property 1\n" +
-                "            property2:\n" +
-                "              type: object\n" +
-                "              description: property 2\n" +
-                "              example: example\n" +
-                "      description: InlineSchemaSecond property 1\n" +
-                "      nullable: true\n" +
-                "      example: examplesecond\n" +
-                "    property2:\n" +
-                "      type: object\n" +
-                "      description: InlineSchemaSecond property 2\n" +
-                "      example: InlineSchemaSecond example 2\n" +
-                "InlineSchemaSimple:\n" +
-                "  type: object\n" +
-                "  properties:\n" +
-                "    property1:\n" +
-                "      type: object\n" +
-                "      description: property 1\n" +
-                "    property2:\n" +
-                "      type: object\n" +
-                "      description: property 2\n" +
-                "      example: example\n";
+        expectedYaml = """
+                InlineSchemaFirst:
+                  type: object
+                  properties:
+                    property1:
+                      type: object
+                      description: InlineSchemaFirst property 1
+                      nullable: true
+                      example: example
+                    property2:
+                      type: object
+                      description: ' InlineSchemaFirst property 2'
+                      example: example 2
+                InlineSchemaPropertyFirst:
+                  type: object
+                  description: property
+                  example: example
+                InlineSchemaPropertySecond:
+                  type: object
+                  properties:
+                    bar:
+                      type: object
+                      properties:
+                        property1:
+                          type: object
+                          description: property 1
+                        property2:
+                          type: object
+                          description: property 2
+                          example: example
+                  description: propertysecond
+                  nullable: true
+                  example: examplesecond
+                InlineSchemaPropertySimple:
+                  type: object
+                  description: property
+                  example: example
+                InlineSchemaSecond:
+                  type: object
+                  properties:
+                    propertySecond1:
+                      type: object
+                      properties:
+                        bar:
+                          type: object
+                          properties:
+                            property1:
+                              type: object
+                              description: property 1
+                            property2:
+                              type: object
+                              description: property 2
+                              example: example
+                      description: InlineSchemaSecond property 1
+                      nullable: true
+                      example: examplesecond
+                    property2:
+                      type: object
+                      description: InlineSchemaSecond property 2
+                      example: InlineSchemaSecond example 2
+                InlineSchemaSimple:
+                  type: object
+                  properties:
+                    property1:
+                      type: object
+                      description: property 1
+                    property2:
+                      type: object
+                      description: property 2
+                      example: example
+                """;
         SerializationMatchers.assertEqualsToYaml(c.getDefinedModels(), expectedYaml);
     }
 

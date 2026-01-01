@@ -27,28 +27,31 @@ public class Ticket2884Test extends SwaggerTestBase {
         Schema model = context
                 .resolve(new AnnotatedType(Ticket2884Model.class));
 
-        SerializationMatchers.assertEqualsToYaml(context.getDefinedModels(), "Ticket2884Model:\n" +
-                "  type: object\n" +
-                "  properties:\n" +
-                "    Ticket2884Model:\n" +
-                "      type: object");
+        SerializationMatchers.assertEqualsToYaml(context.getDefinedModels(), """
+                Ticket2884Model:
+                  type: object
+                  properties:
+                    Ticket2884Model:
+                      type: object""");
 
         context = new ModelConverterContextImpl(modelResolver);
         model = context
                 .resolve(new AnnotatedType(Ticket2884ModelClass.class));
 
-        SerializationMatchers.assertEqualsToYaml(context.getDefinedModels(), "Ticket2884ModelClass:\n" +
-                "  type: object\n" +
-                "  properties:\n" +
-                "    Ticket2884ModelClass:\n" +
-                "      type: object\n" +
-                "      properties:\n" +
-                "        bar:\n" +
-                "          type: string\n" +
-                "        foo:\n" +
-                "          type: array\n" +
-                "          items:\n" +
-                "            type: string\n");
+        SerializationMatchers.assertEqualsToYaml(context.getDefinedModels(), """
+                Ticket2884ModelClass:
+                  type: object
+                  properties:
+                    Ticket2884ModelClass:
+                      type: object
+                      properties:
+                        bar:
+                          type: string
+                        foo:
+                          type: array
+                          items:
+                            type: string
+                """);
     }
 
     @Test
@@ -57,8 +60,10 @@ public class Ticket2884Test extends SwaggerTestBase {
         Schema o = (Schema)schema.schema.getProperties().get(Ticket2884ModelClass.class.getSimpleName());
         assertNotNull(o);
         assertTrue(o.get$ref().contains(Ticket2884ModelClass.class.getSimpleName()));
-        SerializationMatchers.assertEqualsToYaml(schema.schema.getProperties(), "Ticket2884ModelClass:\n" +
-                "  $ref: \"#/components/schemas/Ticket2884ModelClass\"");
+        SerializationMatchers.assertEqualsToYaml(schema.schema.getProperties(), """
+                Ticket2884ModelClass:
+                  $ref: "#/components/schemas/Ticket2884ModelClass"\
+                """);
 
     }
 }

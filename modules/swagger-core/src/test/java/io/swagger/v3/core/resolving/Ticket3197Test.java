@@ -38,50 +38,52 @@ public class Ticket3197Test extends SwaggerTestBase {
     public void testTicket3197() throws Exception {
         final Schema model = context.resolve(new AnnotatedType(Car.class));
         assertNotNull(model);
-        String yaml = "Car:\n" +
-                "  required:\n" +
-                "  - type\n" +
-                "  type: object\n" +
-                "  properties:\n" +
-                "    carMetaData:\n" +
-                "      type: string\n" +
-                "    type:\n" +
-                "      type: string\n" +
-                "  discriminator:\n" +
-                "    propertyName: type\n" +
-                "    mapping:\n" +
-                "      RaceCar: \"#/components/schemas/RaceCar\"\n" +
-                "      SportCar: \"#/components/schemas/SportCar\"\n" +
-                "  oneOf:\n" +
-                "  - $ref: \"#/components/schemas/RaceCar\"\n" +
-                "  - $ref: \"#/components/schemas/SportCar\"\n" +
-                "RaceCar:\n" +
-                "  required:\n" +
-                "  - carMetaData\n" +
-                "  - id\n" +
-                "  type: object\n" +
-                "  allOf:\n" +
-                "  - $ref: \"#/components/schemas/Car\"\n" +
-                "  - type: object\n" +
-                "    properties:\n" +
-                "      id:\n" +
-                "        type: integer\n" +
-                "        format: int64\n" +
-                "      model:\n" +
-                "        type: string\n" +
-                "SportCar:\n" +
-                "  required:\n" +
-                "  - id\n" +
-                "  type: object\n" +
-                "  allOf:\n" +
-                "  - $ref: \"#/components/schemas/Car\"\n" +
-                "  - type: object\n" +
-                "    properties:\n" +
-                "      id:\n" +
-                "        type: integer\n" +
-                "        format: int64\n" +
-                "      model:\n" +
-                "        type: string\n";
+        String yaml = """
+                Car:
+                  required:
+                  - type
+                  type: object
+                  properties:
+                    carMetaData:
+                      type: string
+                    type:
+                      type: string
+                  discriminator:
+                    propertyName: type
+                    mapping:
+                      RaceCar: "#/components/schemas/RaceCar"
+                      SportCar: "#/components/schemas/SportCar"
+                  oneOf:
+                  - $ref: "#/components/schemas/RaceCar"
+                  - $ref: "#/components/schemas/SportCar"
+                RaceCar:
+                  required:
+                  - carMetaData
+                  - id
+                  type: object
+                  allOf:
+                  - $ref: "#/components/schemas/Car"
+                  - type: object
+                    properties:
+                      id:
+                        type: integer
+                        format: int64
+                      model:
+                        type: string
+                SportCar:
+                  required:
+                  - id
+                  type: object
+                  allOf:
+                  - $ref: "#/components/schemas/Car"
+                  - type: object
+                    properties:
+                      id:
+                        type: integer
+                        format: int64
+                      model:
+                        type: string
+                """;
 
         SerializationMatchers.assertEqualsToYaml(context.getDefinedModels(), yaml);
     }
@@ -96,48 +98,50 @@ public class Ticket3197Test extends SwaggerTestBase {
 
         final Schema model = myContext.resolve(new AnnotatedType(Car.class));
         assertNotNull(model);
-        String yaml = "Car:\n" +
-                "  required:\n" +
-                "  - type\n" +
-                "  type: object\n" +
-                "  properties:\n" +
-                "    carMetaData:\n" +
-                "      type: string\n" +
-                "    type:\n" +
-                "      type: string\n" +
-                "  discriminator:\n" +
-                "    propertyName: type\n" +
-                "    mapping:\n" +
-                "      RaceCar: \"#/components/schemas/RaceCar\"\n" +
-                "      SportCar: \"#/components/schemas/SportCar\"\n" +
-                "  oneOf:\n" +
-                "  - $ref: \"#/components/schemas/RaceCar\"\n" +
-                "  - $ref: \"#/components/schemas/SportCar\"\n" +
-                "RaceCar:\n" +
-                "  required:\n" +
-                "  - carMetaData\n" +
-                "  - id\n" +
-                "  type: object\n" +
-                "  properties:\n" +
-                "    id:\n" +
-                "      type: integer\n" +
-                "      format: int64\n" +
-                "    model:\n" +
-                "      type: string\n" +
-                "  allOf:\n" +
-                "  - $ref: \"#/components/schemas/Car\"\n" +
-                "SportCar:\n" +
-                "  required:\n" +
-                "  - id\n" +
-                "  type: object\n" +
-                "  properties:\n" +
-                "    id:\n" +
-                "      type: integer\n" +
-                "      format: int64\n" +
-                "    model:\n" +
-                "      type: string\n" +
-                "  allOf:\n" +
-                "  - $ref: \"#/components/schemas/Car\"\n";
+        String yaml = """
+                Car:
+                  required:
+                  - type
+                  type: object
+                  properties:
+                    carMetaData:
+                      type: string
+                    type:
+                      type: string
+                  discriminator:
+                    propertyName: type
+                    mapping:
+                      RaceCar: "#/components/schemas/RaceCar"
+                      SportCar: "#/components/schemas/SportCar"
+                  oneOf:
+                  - $ref: "#/components/schemas/RaceCar"
+                  - $ref: "#/components/schemas/SportCar"
+                RaceCar:
+                  required:
+                  - carMetaData
+                  - id
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      format: int64
+                    model:
+                      type: string
+                  allOf:
+                  - $ref: "#/components/schemas/Car"
+                SportCar:
+                  required:
+                  - id
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      format: int64
+                    model:
+                      type: string
+                  allOf:
+                  - $ref: "#/components/schemas/Car"
+                """;
 
         SerializationMatchers.assertEqualsToYaml(myContext.getDefinedModels(), yaml);
         ModelResolver.composedModelPropertiesAsSibling = false;

@@ -26,65 +26,66 @@ public class CallbackTest extends AbstractAnnotationTest {
         int start = openApiYAML.indexOf("/test:");
         int end = openApiYAML.length() - 1;
         String extractedYAML = openApiYAML.substring(start, end);
-        String expectedYAML = "/test:\n" +
-                "    post:\n" +
-                "      description: \"subscribes a client to updates relevant to the requestor's account,\\\n" +
-                "        \\ as identified by the input token.  The supplied url will be used as the\\\n" +
-                "        \\ delivery address for response payloads\"\n" +
-                "      operationId: subscribe\n" +
-                "      parameters:\n" +
-                "      - name: x-auth-token\n" +
-                "        in: header\n" +
-                "        schema:\n" +
-                "          type: string\n" +
-                "          description: the authentication token provided after initially authenticating\n" +
-                "            to the application\n" +
-                "          readOnly: true\n" +
-                "      - name: url\n" +
-                "        in: query\n" +
-                "        schema:\n" +
-                "          type: string\n" +
-                "          description: the URL to call with response data\n" +
-                "          readOnly: true\n" +
-                "      responses:\n" +
-                "        default:\n" +
-                "          description: test description\n" +
-                "          content:\n" +
-                "            '*/*':\n" +
-                "              schema:\n" +
-                "                $ref: \"#/components/schemas/SubscriptionResponse\"\n" +
-                "      callbacks:\n" +
-                "        subscription:\n" +
-                "          http://$request.query.url:\n" +
-                "            post:\n" +
-                "              description: payload data will be sent\n" +
-                "              parameters:\n" +
-                "              - name: subscriptionId\n" +
-                "                in: path\n" +
-                "                required: true\n" +
-                "                schema:\n" +
-                "                  maximum: 34\n" +
-                "                  minimum: 2\n" +
-                "                  type: string\n" +
-                "                  description: the generated UUID\n" +
-                "                  format: uuid\n" +
-                "                  readOnly: true\n" +
-                "              responses:\n" +
-                "                \"200\":\n" +
-                "                  description: Return this code if the callback was received and processed\n" +
-                "                    successfully\n" +
-                "                \"205\":\n" +
-                "                  description: Return this code to unsubscribe from future data updates\n" +
-                "                default:\n" +
-                "                  description: All other response codes will disable this callback\n" +
-                "                    subscription\n" +
-                "components:\n" +
-                "  schemas:\n" +
-                "    SubscriptionResponse:\n" +
-                "      type: object\n" +
-                "      properties:\n" +
-                "        subscriptionId:\n" +
-                "          type: string";
+        String expectedYAML = """
+                /test:
+                    post:
+                      description: "subscribes a client to updates relevant to the requestor's account,\\
+                        \\ as identified by the input token.  The supplied url will be used as the\\
+                        \\ delivery address for response payloads"
+                      operationId: subscribe
+                      parameters:
+                      - name: x-auth-token
+                        in: header
+                        schema:
+                          type: string
+                          description: the authentication token provided after initially authenticating
+                            to the application
+                          readOnly: true
+                      - name: url
+                        in: query
+                        schema:
+                          type: string
+                          description: the URL to call with response data
+                          readOnly: true
+                      responses:
+                        default:
+                          description: test description
+                          content:
+                            '*/*':
+                              schema:
+                                $ref: "#/components/schemas/SubscriptionResponse"
+                      callbacks:
+                        subscription:
+                          http://$request.query.url:
+                            post:
+                              description: payload data will be sent
+                              parameters:
+                              - name: subscriptionId
+                                in: path
+                                required: true
+                                schema:
+                                  maximum: 34
+                                  minimum: 2
+                                  type: string
+                                  description: the generated UUID
+                                  format: uuid
+                                  readOnly: true
+                              responses:
+                                "200":
+                                  description: Return this code if the callback was received and processed
+                                    successfully
+                                "205":
+                                  description: Return this code to unsubscribe from future data updates
+                                default:
+                                  description: All other response codes will disable this callback
+                                    subscription
+                components:
+                  schemas:
+                    SubscriptionResponse:
+                      type: object
+                      properties:
+                        subscriptionId:
+                          type: string""";
         assertEquals(extractedYAML, expectedYAML);
     }
 
@@ -155,15 +156,17 @@ public class CallbackTest extends AbstractAnnotationTest {
         int start = openApiYAML.indexOf("get:");
         int end = openApiYAML.length() - 1;
 
-        String expectedYAML = "get:\n" +
-                "      summary: Simple get operation\n" +
-                "      operationId: getWithNoParameters\n" +
-                "      responses:\n" +
-                "        \"200\":\n" +
-                "          description: voila!\n" +
-                "      callbacks:\n" +
-                "        testCallback1:\n" +
-                "          localhost:9080/airlines/reviews/{id}/1: {}";
+        String expectedYAML = """
+                get:
+                      summary: Simple get operation
+                      operationId: getWithNoParameters
+                      responses:
+                        "200":
+                          description: voila!
+                      callbacks:
+                        testCallback1:
+                          localhost:9080/airlines/reviews/{id}/1: {}\
+                """;
         String extractedYAML = openApiYAML.substring(start, end);
 
         assertEquals(expectedYAML, extractedYAML);
@@ -193,26 +196,27 @@ public class CallbackTest extends AbstractAnnotationTest {
         int start = openApiYAML.indexOf("get:");
         int end = openApiYAML.length() - 1;
 
-        String expectedYAML = "get:\n" +
-                "      summary: Simple get operation\n" +
-                "      operationId: getWithNoParameters\n" +
-                "      responses:\n" +
-                "        \"200\":\n" +
-                "          description: voila!\n" +
-                "      callbacks:\n" +
-                "        testCallback1:\n" +
-                "          http://www.url.com:\n" +
-                "            get:\n" +
-                "              summary: get all the reviews\n" +
-                "              operationId: getAllReviews\n" +
-                "              responses:\n" +
-                "                \"200\":\n" +
-                "                  description: successful operation\n" +
-                "                  content:\n" +
-                "                    application/json:\n" +
-                "                      schema:\n" +
-                "                        type: integer\n" +
-                "                        format: int32";
+        String expectedYAML = """
+                get:
+                      summary: Simple get operation
+                      operationId: getWithNoParameters
+                      responses:
+                        "200":
+                          description: voila!
+                      callbacks:
+                        testCallback1:
+                          http://www.url.com:
+                            get:
+                              summary: get all the reviews
+                              operationId: getAllReviews
+                              responses:
+                                "200":
+                                  description: successful operation
+                                  content:
+                                    application/json:
+                                      schema:
+                                        type: integer
+                                        format: int32""";
         String extractedYAML = openApiYAML.substring(start, end);
 
         assertEquals(expectedYAML, extractedYAML);
@@ -256,28 +260,30 @@ public class CallbackTest extends AbstractAnnotationTest {
         int start = openApiYAML.indexOf("get:");
         int end = openApiYAML.length() - 1;
 
-        String expectedYAML = "get:\n" +
-                "      summary: Simple get operation\n" +
-                "      operationId: getWithNoParameters\n" +
-                "      responses:\n" +
-                "        \"200\":\n" +
-                "          description: voila!\n" +
-                "      callbacks:\n" +
-                "        testCallback1:\n" +
-                "          http://www.url.com:\n" +
-                "            get:\n" +
-                "              summary: get all the reviews\n" +
-                "              operationId: getAllReviews\n" +
-                "              responses:\n" +
-                "                \"200\":\n" +
-                "                  description: successful operation\n" +
-                "                  content:\n" +
-                "                    application/json:\n" +
-                "                      schema:\n" +
-                "                        type: integer\n" +
-                "                        format: int32\n" +
-                "        testCallback2:\n" +
-                "          http://$request.query.url: {}";
+        String expectedYAML = """
+                get:
+                      summary: Simple get operation
+                      operationId: getWithNoParameters
+                      responses:
+                        "200":
+                          description: voila!
+                      callbacks:
+                        testCallback1:
+                          http://www.url.com:
+                            get:
+                              summary: get all the reviews
+                              operationId: getAllReviews
+                              responses:
+                                "200":
+                                  description: successful operation
+                                  content:
+                                    application/json:
+                                      schema:
+                                        type: integer
+                                        format: int32
+                        testCallback2:
+                          http://$request.query.url: {}\
+                """;
         String extractedYAML = openApiYAML.substring(start, end);
 
         assertEquals(expectedYAML, extractedYAML);
@@ -322,30 +328,32 @@ public class CallbackTest extends AbstractAnnotationTest {
         int start = openApiYAML.indexOf("get:");
         int end = openApiYAML.length() - 1;
 
-        String expectedYAML = "get:\n" +
-                "      summary: Simple get operation\n" +
-                "      operationId: getWithNoParameters\n" +
-                "      responses:\n" +
-                "        \"200\":\n" +
-                "          description: voila!\n" +
-                "      callbacks:\n" +
-                "        testCallback:\n" +
-                "          http://$requests.query.url: {}\n" +
-                "        testCallback1:\n" +
-                "          http://www.url.com:\n" +
-                "            get:\n" +
-                "              summary: get all the reviews\n" +
-                "              operationId: getAllReviews\n" +
-                "              responses:\n" +
-                "                \"200\":\n" +
-                "                  description: successful operation\n" +
-                "                  content:\n" +
-                "                    application/json:\n" +
-                "                      schema:\n" +
-                "                        type: integer\n" +
-                "                        format: int32\n" +
-                "        testCallback2:\n" +
-                "          http://$request.query.url: {}";
+        String expectedYAML = """
+                get:
+                      summary: Simple get operation
+                      operationId: getWithNoParameters
+                      responses:
+                        "200":
+                          description: voila!
+                      callbacks:
+                        testCallback:
+                          http://$requests.query.url: {}
+                        testCallback1:
+                          http://www.url.com:
+                            get:
+                              summary: get all the reviews
+                              operationId: getAllReviews
+                              responses:
+                                "200":
+                                  description: successful operation
+                                  content:
+                                    application/json:
+                                      schema:
+                                        type: integer
+                                        format: int32
+                        testCallback2:
+                          http://$request.query.url: {}\
+                """;
         String extractedYAML = openApiYAML.substring(start, end);
 
         assertEquals(expectedYAML, extractedYAML);
@@ -357,30 +365,32 @@ public class CallbackTest extends AbstractAnnotationTest {
         int start = openApiYAML.indexOf("get:");
         int end = openApiYAML.length() - 1;
 
-        String expectedYAML = "get:\n" +
-                "      summary: Simple get operation\n" +
-                "      operationId: getWithNoParameters\n" +
-                "      responses:\n" +
-                "        \"200\":\n" +
-                "          description: voila!\n" +
-                "      callbacks:\n" +
-                "        testCallback:\n" +
-                "          http://$requests.query.url: {}\n" +
-                "        testCallback1:\n" +
-                "          http://www.url.com:\n" +
-                "            get:\n" +
-                "              summary: get all the reviews\n" +
-                "              operationId: getAllReviews\n" +
-                "              responses:\n" +
-                "                \"200\":\n" +
-                "                  description: successful operation\n" +
-                "                  content:\n" +
-                "                    application/json:\n" +
-                "                      schema:\n" +
-                "                        type: integer\n" +
-                "                        format: int32\n" +
-                "        testCallback2:\n" +
-                "          http://$request.query.url: {}";
+        String expectedYAML = """
+                get:
+                      summary: Simple get operation
+                      operationId: getWithNoParameters
+                      responses:
+                        "200":
+                          description: voila!
+                      callbacks:
+                        testCallback:
+                          http://$requests.query.url: {}
+                        testCallback1:
+                          http://www.url.com:
+                            get:
+                              summary: get all the reviews
+                              operationId: getAllReviews
+                              responses:
+                                "200":
+                                  description: successful operation
+                                  content:
+                                    application/json:
+                                      schema:
+                                        type: integer
+                                        format: int32
+                        testCallback2:
+                          http://$request.query.url: {}\
+                """;
         String extractedYAML = openApiYAML.substring(start, end);
 
         assertEquals(expectedYAML, extractedYAML);

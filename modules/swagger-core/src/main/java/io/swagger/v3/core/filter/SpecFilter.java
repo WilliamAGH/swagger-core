@@ -330,9 +330,9 @@ public class SpecFilter {
             }
         }
 
-        if (schema instanceof ArraySchema &&
-                ((ArraySchema) schema).getItems() != null) {
-            addSchemaRef(((ArraySchema) schema).getItems(), referencedDefinitions);
+        if (schema instanceof ArraySchema arraySchema &&
+                arraySchema.getItems() != null) {
+            addSchemaRef(arraySchema.getItems(), referencedDefinitions);
         } else if (schema.getTypes() != null && schema.getTypes().contains("array") && schema.getItems() != null) {
             addSchemaRef(schema.getItems(), referencedDefinitions);
         } else {

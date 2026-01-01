@@ -20,8 +20,8 @@ public class SchemaSerializer extends JsonSerializer<Schema> implements Resolvab
 
     @Override
     public void resolve(SerializerProvider serializerProvider) throws JsonMappingException {
-        if (defaultSerializer instanceof ResolvableSerializer) {
-            ((ResolvableSerializer) defaultSerializer).resolve(serializerProvider);
+        if (defaultSerializer instanceof ResolvableSerializer serializer) {
+            serializer.resolve(serializerProvider);
         }
     }
 

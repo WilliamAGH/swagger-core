@@ -57,19 +57,21 @@ public class Ticket4239Test extends SwaggerTestBase {
 
         context.resolve(type);
 
-        SerializationMatchers.assertEqualsToYaml(context.getDefinedModels(), "A1_Output:\n" +
-            "  type: object\n" +
-            "  allOf:\n" +
-            "  - $ref: \"#/components/schemas/A_Output\"\n" +
-            "  - type: object\n" +
-            "    properties:\n" +
-            "      a1_out:\n" +
-            "        type: string\n" +
-            "A_Output:\n" +
-            "  type: object\n" +
-            "  properties:\n" +
-            "    a_out:\n" +
-            "      type: string\n");
+        SerializationMatchers.assertEqualsToYaml(context.getDefinedModels(), """
+            A1_Output:
+              type: object
+              allOf:
+              - $ref: "#/components/schemas/A_Output"
+              - type: object
+                properties:
+                  a1_out:
+                    type: string
+            A_Output:
+              type: object
+              properties:
+                a_out:
+                  type: string
+            """);
 
     }
 }

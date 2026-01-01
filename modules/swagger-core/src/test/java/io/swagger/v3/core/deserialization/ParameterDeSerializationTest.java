@@ -170,26 +170,27 @@ public class ParameterDeSerializationTest {
     @Test(description = "should serialize correctly typed numeric enums")
     public void testIssue1765() throws Exception {
         String yaml =
-                "openapi: '3.0.1'\n" +
-                        "paths:\n" +
-                        "  /test:\n" +
-                        "    get:\n" +
-                        "      parameters:\n" +
-                        "      - name: \"days\"\n" +
-                        "        in: \"path\"\n" +
-                        "        required: true\n" +
-                        "        schema:\n" +
-                        "          type: \"integer\"\n" +
-                        "          format: \"int32\"\n" +
-                        "          enum:\n" +
-                        "          - 1\n" +
-                        "          - 2\n" +
-                        "          - 3\n" +
-                        "          - 4\n" +
-                        "          - 5\n" +
-                        "      responses:\n" +
-                        "        default:\n" +
-                        "          description: great";
+                """
+                openapi: '3.0.1'
+                paths:
+                  /test:
+                    get:
+                      parameters:
+                      - name: "days"
+                        in: "path"
+                        required: true
+                        schema:
+                          type: "integer"
+                          format: "int32"
+                          enum:
+                          - 1
+                          - 2
+                          - 3
+                          - 4
+                          - 5
+                      responses:
+                        default:
+                          description: great""";
 
         OpenAPI swagger = Yaml.mapper().readValue(yaml, OpenAPI.class);
         SerializationMatchers.assertEqualsToYaml(swagger, yaml);

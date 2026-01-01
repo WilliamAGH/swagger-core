@@ -41,197 +41,198 @@ public class RequestBodyTest extends AbstractAnnotationTest {
     @Test(description = "Returns a request with one RequestBody and multiple parameters")
     public void oneRequestBodyMultipleParameters() throws IOException {
 
-        String expectedYAML = "openapi: 3.0.1\n" +
-                "paths:\n" +
-                "  /user:\n" +
-                "    put:\n" +
-                "      summary: Modify user\n" +
-                "      description: Modifying user.\n" +
-                "      operationId: methodWithRequestBodyWithoutAnnotation\n" +
-                "      requestBody:\n" +
-                "        content:\n" +
-                "          '*/*':\n" +
-                "            schema:\n" +
-                "              $ref: \"#/components/schemas/User\"\n" +
-                "      responses:\n" +
-                "        default:\n" +
-                "          description: default response\n" +
-                "          content:\n" +
-                "            '*/*': {}\n" +
-                "    post:\n" +
-                "      summary: Create user\n" +
-                "      description: This can only be done by the logged in user.\n" +
-                "      operationId: methodWithRequestBodyAndTwoParameters\n" +
-                "      parameters:\n" +
-                "      - name: name\n" +
-                "        in: query\n" +
-                "        schema:\n" +
-                "          type: string\n" +
-                "      - name: code\n" +
-                "        in: query\n" +
-                "        schema:\n" +
-                "          type: string\n" +
-                "      requestBody:\n" +
-                "        description: Created user object\n" +
-                "        content:\n" +
-                "          '*/*':\n" +
-                "            schema:\n" +
-                "              $ref: \"#/components/schemas/User\"\n" +
-                "        required: true\n" +
-                "      responses:\n" +
-                "        default:\n" +
-                "          description: default response\n" +
-                "          content:\n" +
-                "            '*/*': {}\n" +
-                "    delete:\n" +
-                "      summary: Delete user\n" +
-                "      description: This can only be done by the logged in user.\n" +
-                "      operationId: methodWithoutRequestBodyAndTwoParameters\n" +
-                "      parameters:\n" +
-                "      - name: name\n" +
-                "        in: query\n" +
-                "        schema:\n" +
-                "          type: string\n" +
-                "      - name: code\n" +
-                "        in: query\n" +
-                "        schema:\n" +
-                "          type: string\n" +
-                "      responses:\n" +
-                "        default:\n" +
-                "          description: default response\n" +
-                "          content:\n" +
-                "            '*/*': {}\n" +
-                "  /pet:\n" +
-                "    put:\n" +
-                "      summary: Modify pet\n" +
-                "      description: Modifying pet.\n" +
-                "      operationId: methodWithRequestBodyWithoutAnnotationAndTwoConsumes\n" +
-                "      requestBody:\n" +
-                "        content:\n" +
-                "          application/json:\n" +
-                "            schema:\n" +
-                "              $ref: \"#/components/schemas/User\"\n" +
-                "          application/xml:\n" +
-                "            schema:\n" +
-                "              $ref: \"#/components/schemas/User\"\n" +
-                "      responses:\n" +
-                "        default:\n" +
-                "          description: default response\n" +
-                "          content:\n" +
-                "            '*/*': {}\n" +
-                "    post:\n" +
-                "      summary: Create pet\n" +
-                "      description: Creating pet.\n" +
-                "      operationId: methodWithTwoRequestBodyWithoutAnnotationAndTwoConsumes\n" +
-                "      requestBody:\n" +
-                "        content:\n" +
-                "          application/json:\n" +
-                "            schema:\n" +
-                "              $ref: \"#/components/schemas/Pet\"\n" +
-                "          application/xml:\n" +
-                "            schema:\n" +
-                "              $ref: \"#/components/schemas/Pet\"\n" +
-                "      responses:\n" +
-                "        default:\n" +
-                "          description: default response\n" +
-                "          content:\n" +
-                "            '*/*': {}\n" +
-                "    delete:\n" +
-                "        summary: Delete pet\n" +
-                "        description: Deleting pet.\n" +
-                "        operationId: methodWithOneSimpleRequestBody\n" +
-                "        requestBody:\n" +
-                "          content:\n" +
-                "            application/json:\n" +
-                "              schema:\n" +
-                "                type: integer\n" +
-                "                format: int32\n" +
-                "            application/xml:\n" +
-                "              schema:\n" +
-                "                type: integer\n" +
-                "                format: int32\n" +
-                "        responses:\n" +
-                "          default:\n" +
-                "            description: default response\n" +
-                "            content:\n" +
-                "              '*/*': {}\n" +
-                "components:\n" +
-                "  schemas:\n" +
-                "    User:\n" +
-                "      type: object\n" +
-                "      properties:\n" +
-                "        id:\n" +
-                "          type: integer\n" +
-                "          format: int64\n" +
-                "        username:\n" +
-                "          type: string\n" +
-                "        firstName:\n" +
-                "          type: string\n" +
-                "        lastName:\n" +
-                "          type: string\n" +
-                "        email:\n" +
-                "          type: string\n" +
-                "        password:\n" +
-                "          type: string\n" +
-                "        phone:\n" +
-                "          type: string\n" +
-                "        userStatus:\n" +
-                "          type: integer\n" +
-                "          description: User Status\n" +
-                "          format: int32\n" +
-                "      xml:\n" +
-                "        name: User\n" +
-                "    Category:\n" +
-                "      type: object\n" +
-                "      properties:\n" +
-                "        id:\n" +
-                "          type: integer\n" +
-                "          format: int64\n" +
-                "        name:\n" +
-                "          type: string\n" +
-                "      xml:\n" +
-                "        name: Category\n" +
-                "    Tag:\n" +
-                "      type: object\n" +
-                "      properties:\n" +
-                "        id:\n" +
-                "          type: integer\n" +
-                "          format: int64\n" +
-                "        name:\n" +
-                "          type: string\n" +
-                "      xml:\n" +
-                "        name: Tag\n" +
-                "    Pet:\n" +
-                "      type: object\n" +
-                "      properties:\n" +
-                "        id:\n" +
-                "          type: integer\n" +
-                "          format: int64\n" +
-                "        category:\n" +
-                "          $ref: \"#/components/schemas/Category\"\n" +
-                "        name:\n" +
-                "          type: string\n" +
-                "        photoUrls:\n" +
-                "          type: array\n" +
-                "          xml:\n" +
-                "            wrapped: true\n" +
-                "          items:\n" +
-                "            type: string\n" +
-                "            xml:\n" +
-                "              name: photoUrl\n" +
-                "        tags:\n" +
-                "          type: array\n" +
-                "          xml:\n" +
-                "            wrapped: true\n" +
-                "          items:\n" +
-                "            $ref: \"#/components/schemas/Tag\"\n" +
-                "        status:\n" +
-                "          type: string\n" +
-                "          description: pet status in the store\n" +
-                "          enum:\n" +
-                "          - available,pending,sold\n" +
-                "      xml:\n" +
-                "        name: Pet";
+        String expectedYAML = """
+                openapi: 3.0.1
+                paths:
+                  /user:
+                    put:
+                      summary: Modify user
+                      description: Modifying user.
+                      operationId: methodWithRequestBodyWithoutAnnotation
+                      requestBody:
+                        content:
+                          '*/*':
+                            schema:
+                              $ref: "#/components/schemas/User"
+                      responses:
+                        default:
+                          description: default response
+                          content:
+                            '*/*': {}
+                    post:
+                      summary: Create user
+                      description: This can only be done by the logged in user.
+                      operationId: methodWithRequestBodyAndTwoParameters
+                      parameters:
+                      - name: name
+                        in: query
+                        schema:
+                          type: string
+                      - name: code
+                        in: query
+                        schema:
+                          type: string
+                      requestBody:
+                        description: Created user object
+                        content:
+                          '*/*':
+                            schema:
+                              $ref: "#/components/schemas/User"
+                        required: true
+                      responses:
+                        default:
+                          description: default response
+                          content:
+                            '*/*': {}
+                    delete:
+                      summary: Delete user
+                      description: This can only be done by the logged in user.
+                      operationId: methodWithoutRequestBodyAndTwoParameters
+                      parameters:
+                      - name: name
+                        in: query
+                        schema:
+                          type: string
+                      - name: code
+                        in: query
+                        schema:
+                          type: string
+                      responses:
+                        default:
+                          description: default response
+                          content:
+                            '*/*': {}
+                  /pet:
+                    put:
+                      summary: Modify pet
+                      description: Modifying pet.
+                      operationId: methodWithRequestBodyWithoutAnnotationAndTwoConsumes
+                      requestBody:
+                        content:
+                          application/json:
+                            schema:
+                              $ref: "#/components/schemas/User"
+                          application/xml:
+                            schema:
+                              $ref: "#/components/schemas/User"
+                      responses:
+                        default:
+                          description: default response
+                          content:
+                            '*/*': {}
+                    post:
+                      summary: Create pet
+                      description: Creating pet.
+                      operationId: methodWithTwoRequestBodyWithoutAnnotationAndTwoConsumes
+                      requestBody:
+                        content:
+                          application/json:
+                            schema:
+                              $ref: "#/components/schemas/Pet"
+                          application/xml:
+                            schema:
+                              $ref: "#/components/schemas/Pet"
+                      responses:
+                        default:
+                          description: default response
+                          content:
+                            '*/*': {}
+                    delete:
+                        summary: Delete pet
+                        description: Deleting pet.
+                        operationId: methodWithOneSimpleRequestBody
+                        requestBody:
+                          content:
+                            application/json:
+                              schema:
+                                type: integer
+                                format: int32
+                            application/xml:
+                              schema:
+                                type: integer
+                                format: int32
+                        responses:
+                          default:
+                            description: default response
+                            content:
+                              '*/*': {}
+                components:
+                  schemas:
+                    User:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          format: int64
+                        username:
+                          type: string
+                        firstName:
+                          type: string
+                        lastName:
+                          type: string
+                        email:
+                          type: string
+                        password:
+                          type: string
+                        phone:
+                          type: string
+                        userStatus:
+                          type: integer
+                          description: User Status
+                          format: int32
+                      xml:
+                        name: User
+                    Category:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          format: int64
+                        name:
+                          type: string
+                      xml:
+                        name: Category
+                    Tag:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          format: int64
+                        name:
+                          type: string
+                      xml:
+                        name: Tag
+                    Pet:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          format: int64
+                        category:
+                          $ref: "#/components/schemas/Category"
+                        name:
+                          type: string
+                        photoUrls:
+                          type: array
+                          xml:
+                            wrapped: true
+                          items:
+                            type: string
+                            xml:
+                              name: photoUrl
+                        tags:
+                          type: array
+                          xml:
+                            wrapped: true
+                          items:
+                            $ref: "#/components/schemas/Tag"
+                        status:
+                          type: string
+                          description: pet status in the store
+                          enum:
+                          - available,pending,sold
+                      xml:
+                        name: Pet""";
 
         compareAsYaml(RequestBodyTest.UserResource.class, expectedYAML);
     }
@@ -443,22 +444,24 @@ public class RequestBodyTest extends AbstractAnnotationTest {
     @Test(description = "Test file upload")
     public void testFileUploadOctetStream() throws IOException {
 
-        String expectedYAML = "openapi: 3.0.1\n" +
-                "paths:\n" +
-                "  /files/attach:\n" +
-                "    put:\n" +
-                "      operationId: putFile\n" +
-                "      requestBody:\n" +
-                "        content:\n" +
-                "          application/octet-stream:\n" +
-                "            schema:\n" +
-                "              type: string\n" +
-                "              format: binary\n" +
-                "      responses:\n" +
-                "        default:\n" +
-                "          description: default response\n" +
-                "          content:\n" +
-                "            application/json: {}";
+        String expectedYAML = """
+                openapi: 3.0.1
+                paths:
+                  /files/attach:
+                    put:
+                      operationId: putFile
+                      requestBody:
+                        content:
+                          application/octet-stream:
+                            schema:
+                              type: string
+                              format: binary
+                      responses:
+                        default:
+                          description: default response
+                          content:
+                            application/json: {}\
+                """;
 
         compareAsYaml(OctetStreamResource.class, expectedYAML);
     }
@@ -466,28 +469,30 @@ public class RequestBodyTest extends AbstractAnnotationTest {
     @Test(description = "Test urlencoded")
     public void testUrlEncoded() throws IOException {
 
-        String expectedYAML = "openapi: 3.0.1\n" +
-                "paths:\n" +
-                "  /users/add:\n" +
-                "    post:\n" +
-                "      operationId: addUser\n" +
-                "      requestBody:\n" +
-                "        content:\n" +
-                "          application/x-www-form-urlencoded:\n" +
-                "            schema:\n" +
-                "              type: object\n" +
-                "              properties:\n" +
-                "                id:\n" +
-                "                  type: string\n" +
-                "                name:\n" +
-                "                  type: string\n" +
-                "                gender:\n" +
-                "                  type: string\n" +
-                "      responses:\n" +
-                "        default:\n" +
-                "          description: default response\n" +
-                "          content:\n" +
-                "            application/json: {}";
+        String expectedYAML = """
+                openapi: 3.0.1
+                paths:
+                  /users/add:
+                    post:
+                      operationId: addUser
+                      requestBody:
+                        content:
+                          application/x-www-form-urlencoded:
+                            schema:
+                              type: object
+                              properties:
+                                id:
+                                  type: string
+                                name:
+                                  type: string
+                                gender:
+                                  type: string
+                      responses:
+                        default:
+                          description: default response
+                          content:
+                            application/json: {}\
+                """;
 
         compareAsYaml(UrlEncodedResource.class, expectedYAML);
     }
@@ -495,27 +500,29 @@ public class RequestBodyTest extends AbstractAnnotationTest {
     @Test(description = "Test multipart")
     public void testMultiPart() throws IOException {
 
-        String expectedYAML = "openapi: 3.0.1\n" +
-                "paths:\n" +
-                "  /files/upload:\n" +
-                "    post:\n" +
-                "      operationId: uploadFile\n" +
-                "      requestBody:\n" +
-                "        content:\n" +
-                "          multipart/form-data:\n" +
-                "            schema:\n" +
-                "              type: object\n" +
-                "              properties:\n" +
-                "                fileIdRenamed:\n" +
-                "                  type: string\n" +
-                "                fileRenamed:\n" +
-                "                  type: string\n" +
-                "                  format: binary\n" +
-                "      responses:\n" +
-                "        default:\n" +
-                "          description: default response\n" +
-                "          content:\n" +
-                "            application/json: {}\n";
+        String expectedYAML = """
+                openapi: 3.0.1
+                paths:
+                  /files/upload:
+                    post:
+                      operationId: uploadFile
+                      requestBody:
+                        content:
+                          multipart/form-data:
+                            schema:
+                              type: object
+                              properties:
+                                fileIdRenamed:
+                                  type: string
+                                fileRenamed:
+                                  type: string
+                                  format: binary
+                      responses:
+                        default:
+                          description: default response
+                          content:
+                            application/json: {}
+                """;
 
         compareAsYaml(MultiPartFileResource.class, expectedYAML);
     }

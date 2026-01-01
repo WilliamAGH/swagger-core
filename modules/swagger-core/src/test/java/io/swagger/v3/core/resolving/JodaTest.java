@@ -34,7 +34,7 @@ public class JodaTest extends SwaggerTestBase {
                 assertEquals(prop.getType(), "string");
                 assertEquals(prop.getFormat(), "date-time");
             } else {
-                fail(String.format("Unknown property '%s'", name));
+                fail("Unknown property '%s'".formatted(name));
             }
         }
     }
