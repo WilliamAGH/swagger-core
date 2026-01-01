@@ -1,6 +1,6 @@
 package io.swagger.v3.core.jackson;
 
-import com.fasterxml.jackson.databind.module.SimpleModule;
+import tools.jackson.databind.module.SimpleModule;
 
 import java.io.Serial;
 
